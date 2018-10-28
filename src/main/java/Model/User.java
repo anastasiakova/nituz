@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Objects;
 
-public class User {
+public class User implements ISQLable {
     private String username;
     private String pwd;
     private Date birthday;
@@ -15,21 +15,15 @@ public class User {
     private String lastName;
     private String city;
 
+
     private String tableFields = "tbl_users(username, pwd, birthday, privateName, lastName, city) VALUES(?,?,?,?,?,?)";
+    private String primaryKeyName = "username";
+    private String tableName = "tbl_users";
 
-    public static User readUserFromDB(String username, String pwd){
-        //if user exists in DB, construct it.
-        return null;
-    }
-
-    public static boolean deleteUserFromDB(String username, String pwd){
-        //if user exists in DB, delete it and return true. Else return false.
-        return true;
-    }
 
     public static String createUsersTableSQL(){
         return ("CREATE TABLE IF NOT EXISTS tbl_users (\n"
-                + " username text NOT NULL,\n"
+                + " username text NOT NULL PRIMARY KEY,\n"
                 + " pwd text NOT NULL,\n"
                 + " birthday text,\n"
                 + "	privateName text,\n"
@@ -61,20 +55,13 @@ public class User {
         this.city = city;
     }
 
-    public boolean updateUserOnDB(){
-        User currentlyOnDB = readUserFromDB(username, pwd);
-        if (!currentlyOnDB.equals(this))
-            //write changes to db
-            return true;
-        else
-            return false;
-
-    }
-
     public String getUsername() {
         return username;
     }
 
+    public String getPrimaryKey(){
+        return getUsername();
+    }
     public void setUsername(String username) {
         this.username = username;
     }
@@ -167,8 +154,18 @@ public class User {
         return tableFields;
     }
 
-    public String getUserFieldsSQLWithValues() {
+    public String getFieldsSQLWithValues() {
         return "username='" + this.getUsername() + "', pwd='" + this.getPwd() + "', birthday='" + this.getBirthday()
                 + "', privateName='" + this.getPrivateName() + "', lastName='" + this.getLastName() + "', city='" + this.getCity() + "'\n";
     }
+
+    public String getPrimaryKeyName() {
+        return primaryKeyName;
+    }
+
+    @Override
+    public String getTableName() {
+        return tableName;
+    }
+
 }
