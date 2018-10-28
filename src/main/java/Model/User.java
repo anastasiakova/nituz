@@ -166,4 +166,9 @@ public class User {
     public String getTableFields() {
         return tableFields;
     }
+
+    public String getUserFieldsSQLWithValues() {
+        return "username='" + this.getUsername() + "', pwd='" + this.getPwd() + "', birthday='" + this.getBirthday()
+                + "', privateName='" + this.getPrivateName() + "', lastName='" + this.getLastName() + "', city='" + this.getCity() + "'\n";
+    }
 }

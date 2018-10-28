@@ -10,7 +10,7 @@ public class workPlease {
         //shit.insertRecordToTable("tbl_users", myUser);
         User myUser = new User("toDelete", "sksksk", new Date(1990, 5, 2), "Yofi", "Tofi", "Nesher");
         shit.insertRecordToTable("tbl_users", myUser);
-        System.out.println(shit.selectFromTable("toDelete"));
-        shit.deleteRecordFromTable(myUser);
+        myUser.setPrivateName("yossi");
+        shit.updateRecord(myUser);
     }
 }

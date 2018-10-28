@@ -92,7 +92,20 @@ public class SQLModel {
 
         try (Connection conn = DriverManager.getConnection(_path);
              Statement stmt  = conn.createStatement();
-             ResultSet rs    = stmt.executeQuery(sql)){
+             ResultSet rs = stmt.executeQuery(sql)){
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateRecord(User user){
+        String sql = "UPDATE tbl_users\n";
+        sql+= "SET " + user.getUserFieldsSQLWithValues();
+        sql += "WHERE " + user.getPrimaryKey()  username = '" + user.getUsername() /*getPrimaryKey*/ + "';\n";
+
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
