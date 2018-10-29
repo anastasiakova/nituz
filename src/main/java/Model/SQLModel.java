@@ -57,9 +57,30 @@ public class SQLModel {
         }
     }
 
-    public String selectFromTable(String username){
+    public String selectFromTable(Tables table, String[] fields){
+        switch (table) {
+            case TBL_USERS:
+               return selectFromUsersTbl(fields);
+            default:
+                return "";
+        }
+    }
+
+    private String selectFromUsersTbl(String[] fields) {
         String sql = "SELECT * FROM tbl_users\n";
-        sql += "WHERE username = '" + username + "';\n";
+        sql += "WHERE ";
+        boolean notFirst = false;
+        for (int i = 0; i < UserTblFields.values().length; i++) {
+            if (fields[i] != "") {
+                if(notFirst){
+                    sql += "AND";
+                }
+                notFirst = true;
+                sql += UserTblFields.values()[i].toString().toLowerCase() + "='" + fields[i] + "'";
+            }
+        }
+        sql += ";";
+        System.out.println(sql);
         String res = "";
         try (Connection conn = DriverManager.getConnection(_path);
              Statement stmt  = conn.createStatement();

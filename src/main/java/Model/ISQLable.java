@@ -2,6 +2,10 @@ package Model;
 
 import java.sql.PreparedStatement;
 
+enum Tables {
+    TBL_USERS
+}
+
 public interface ISQLable {
     String getPrimaryKey();
     String getPrimaryKeyName();

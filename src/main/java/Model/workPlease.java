@@ -13,5 +13,7 @@ public class workPlease {
         shit.insertRecordToTable("tbl_users", myUser);
         myUser.setPrivateName("yossi");
         shit.updateRecord(myUser);
+        String[] aa = {"toDelete","","","","",""};
+        System.out.println( shit.selectFromTable(Tables.TBL_USERS,aa));
     }
 }
