@@ -24,6 +24,7 @@ public class SQLModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        createUsersTable();
     }
 
     public static SQLModel GetInstance() {
@@ -34,10 +35,10 @@ public class SQLModel {
         return _singaleDB;
     }
 
-    public void createTable() {
+    private void createUsersTable() {
         try (Connection conn = DriverManager.getConnection(_path);
              Statement stmt = conn.createStatement()) {
-            // create a new table
+            // create new Users table
             stmt.execute(User.createUsersTableSQL());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
