@@ -45,12 +45,18 @@ public class SQLModel {
         System.out.println("Succesfully added tbl_users!");
     }
 
-    public void insertRecordToTable(String table, ISQLable isqLable){
-        String sql = "INSERT INTO " + isqLable.getTableFields();
+    public void insertRecordToTable(String table, User abstractUser){
+        String sql = "INSERT INTO " + abstractUser.getTableFields();
 
         try (Connection conn = DriverManager.getConnection(_path);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            isqLable.insertRecordToTable(pstmt);
+            abstractUser.insertRecordToTable(pstmt);
+            /*pstmt.setString(2, abstractUser.getPwd());
+            pstmt.setString(1, abstractUser.getUsername());
+            pstmt.setString(3, abstractUser.getBirthday().toString());
+            pstmt.setString(4, abstractUser.getPrivateName());
+            pstmt.setString(5, abstractUser.getLastName());
+            pstmt.setString(6, abstractUser.getCity());*/
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -80,9 +86,9 @@ public class SQLModel {
         return res;
     }
 
-    public void deleteRecordFromTable(ISQLable isqLable){
-        String sql = "DELETE FROM " + isqLable.getTableName() + "\n";
-        sql += "WHERE " + isqLable.getPrimaryKeyName() + " = '" + isqLable.getPrimaryKey() /*getPrimaryKey*/ + "';\n";
+    public void deleteRecordFromTable(User user){
+        String sql = "DELETE FROM tbl_users\n";
+        sql += "WHERE username = '" + user.getUsername() /*getPrimaryKey*/ + "';\n";
 
         try (Connection conn = DriverManager.getConnection(_path);
              Statement stmt  = conn.createStatement();
@@ -92,10 +98,10 @@ public class SQLModel {
         }
     }
 
-    public void updateRecord(ISQLable isqLable){
-        String sql = "UPDATE " + isqLable.getTableName() + "\n";
-        sql+= "SET " + isqLable.getFieldsSQLWithValues();
-        sql += "WHERE " + isqLable.getPrimaryKeyName() + "='"  + isqLable.getPrimaryKey() /*getPrimaryKey*/ + "';\n";
+    public void updateRecord(User user){
+        String sql = "UPDATE tbl_users\n";
+        sql+= "SET " + user.getUserFieldsSQLWithValues();
+        //sql += "WHERE " + user.getPrimaryKey()  username = '" + user.getUsername() /*getPrimaryKey*/ + "';\n";
 
         try (Connection conn = DriverManager.getConnection(_path);
              Statement stmt  = conn.createStatement();
