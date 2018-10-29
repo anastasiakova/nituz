@@ -19,8 +19,8 @@
         </rowConstraints>
          <children>
             <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Search User" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Update User" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Delete User" />
+            <Button fx:id="btn_update" mnemonicParsing="false"  onAction="#updateWindow"  prefHeight="25.0" prefWidth="101.0" text="Update User" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+             <Button fx:id="btn_delete" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Delete User" onAction="#deleteWindow"/>
             <Button fx:id="btn_create" mnemonicParsing="false" prefHeight="25.0" onAction="#createWindow" prefWidth="103.0" text="Create User" GridPane.columnIndex="1" />
          </children>
       </GridPane>

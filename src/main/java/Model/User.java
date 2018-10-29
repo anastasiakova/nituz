@@ -5,14 +5,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Objects;
 
-enum UserTblFields {
-        USERNAME,
-        PWD,
-        BIRTHDAY,
-        PRIVATENAME,
-        LASTNAME,
-        CITY,
-        }
 
 public class User implements ISQLable {
     private String username;
