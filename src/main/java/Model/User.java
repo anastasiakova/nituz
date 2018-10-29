@@ -1,11 +1,18 @@
 package Model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Objects;
+
+enum UserTblFields {
+        USERNAME,
+        PWD,
+        BIRTHDAY,
+        PRIVATENAME,
+        LASTNAME,
+        CITY,
+        }
 
 public class User implements ISQLable {
     private String username;
@@ -16,20 +23,30 @@ public class User implements ISQLable {
     private String city;
 
 
-    private String tableFields = "tbl_users(username, pwd, birthday, privateName, lastName, city) VALUES(?,?,?,?,?,?)";
+
+
+    private String tableFields = "tbl_users("
+            + UserTblFields.USERNAME.toString().toLowerCase() + ", "
+            +  UserTblFields.PWD.toString().toLowerCase() + ", "
+            + UserTblFields.BIRTHDAY.toString().toLowerCase() + ", "
+            + UserTblFields.PRIVATENAME.toString().toLowerCase() +", "
+            + UserTblFields.LASTNAME.toString().toLowerCase() +", "
+            + UserTblFields.CITY.toString().toLowerCase()
+            + ") VALUES(?,?,?,?,?,?)";
+
     private String primaryKeyName = "username";
     private String tableName = "tbl_users";
 
 
     public static String createUsersTableSQL(){
-        return ("CREATE TABLE IF NOT EXISTS tbl_users (\n"
-                + " username text NOT NULL PRIMARY KEY,\n"
-                + " pwd text NOT NULL,\n"
-                + " birthday text,\n"
-                + "	privateName text,\n"
-                + "	lastName text,\n"
-                + "	city text\n"
-                + ");");
+        return ("CREATE TABLE IF NOT EXISTS tbl_users (\n" +
+        UserTblFields.USERNAME.toString().toLowerCase() + " text NOT NULL PRIMARY KEY,\n" +
+        UserTblFields.PWD.toString().toLowerCase()   + " pwd text NOT NULL,\n" +
+        UserTblFields.BIRTHDAY.toString().toLowerCase()   + " birthday text,\n" +
+        UserTblFields.PRIVATENAME.toString().toLowerCase()    + "	privateName text,\n" +
+        UserTblFields.LASTNAME.toString().toLowerCase()    + "	lastName text,\n" +
+        UserTblFields.CITY.toString().toLowerCase()    + "	city text\n" +
+        ");");
     }
 
     public static String dropUsersTableSQL(){
@@ -127,15 +144,14 @@ public class User implements ISQLable {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", birthday=" + birthday +
-                ", privateName='" + privateName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", city='" + city + '\'' +
+                UserTblFields.USERNAME.toString().toLowerCase() + "='" + username + "\'," +
+                UserTblFields.PWD.toString().toLowerCase() + "='" + pwd + "\'," +
+                UserTblFields.BIRTHDAY.toString().toLowerCase() + "='" + birthday + "\'," +
+                UserTblFields.PRIVATENAME.toString().toLowerCase() + "='" + privateName + "\'," +
+                UserTblFields.LASTNAME.toString().toLowerCase() + "='" + lastName + "\'," +
+                UserTblFields.CITY.toString().toLowerCase() + "='" + city + "\'," +
                 '}';
     }
-
 
     public void insertRecordToTable(PreparedStatement pstmt) {
         try {
@@ -155,8 +171,13 @@ public class User implements ISQLable {
     }
 
     public String getFieldsSQLWithValues() {
-        return "username='" + this.getUsername() + "', pwd='" + this.getPwd() + "', birthday='" + this.getBirthday()
-                + "', privateName='" + this.getPrivateName() + "', lastName='" + this.getLastName() + "', city='" + this.getCity() + "'\n";
+        return UserTblFields.USERNAME.toString().toLowerCase() + "='" + this.getUsername() +
+                "'," + UserTblFields.PWD.toString().toLowerCase() + "='" + this.getPwd() +
+                "'," + UserTblFields.BIRTHDAY.toString().toLowerCase() + "='" + this.getBirthday() +
+                "'," + UserTblFields.PRIVATENAME.toString().toLowerCase() + "='" + this.getPrivateName() +
+                "'," + UserTblFields.LASTNAME.toString().toLowerCase() + "='" + this.getLastName() +
+                "'," + UserTblFields.CITY.toString().toLowerCase() + "='" + this.getCity() +
+                "'\n";
     }
 
     public String getPrimaryKeyName() {
