@@ -78,4 +78,22 @@ public class MainController {
     }
 
 
+    public void searchWindow(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Search User User");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("/Sreach.fxml").openStream());
+            SeacrhController creatView = fxmlLoader.getController();
+            creatView.setSqlModel(sqlModel);
+            Scene scene = new Scene(root, 250, 220);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+            stage.show();
+        } catch (Exception e) {
+
+        }
+    }
+
+
 }

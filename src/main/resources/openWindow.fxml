@@ -26,7 +26,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Search User" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Button mnemonicParsing="false" prefHeight="25.0" onAction="#searchWindow" prefWidth="100.0" text="Search User" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <Button fx:id="btn_update" mnemonicParsing="false" onAction="#updateWindow" prefHeight="25.0" prefWidth="101.0" text="Update User" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                    <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#deleteWindow" prefHeight="25.0" prefWidth="101.0" text="Delete User" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Button fx:id="btn_create" mnemonicParsing="false" onAction="#createWindow" prefHeight="25.0" prefWidth="103.0" text="Create User" GridPane.rowIndex="3" />

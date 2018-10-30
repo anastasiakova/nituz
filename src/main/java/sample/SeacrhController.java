@@ -8,25 +8,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class SeacrhController {
-
     @FXML
-    private AnchorPane content;
-    public String ans;
+    //private AnchorPane content;
+    //public static String ans;
     public SQLModel sqlModel;
     @FXML
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button updateButton;
     public javafx.scene.control.TextField searchText;
-
-    public javafx.scene.control.TextField userText;
-
+    //public javafx.scene.control.TextField userText;
 
     public SeacrhController() {};
+
 
     public SeacrhController(SQLModel sqlModel) {
         this.sqlModel = sqlModel;
@@ -44,23 +43,26 @@ public class SeacrhController {
     }
 
     public void updateFormWindow(ActionEvent actionEvent) {
-        try {
-            String[]users = new String[UserTblFields.values().length];
-            users[0] = searchText.getText();
-            ans = sqlModel.selectFromTable(Tables.TBL_USERS,users);
-            Stage stage = new Stage();
-            stage.setTitle("Sreach User");
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent root = fxmlLoader.load(getClass().getResource("/Sreach.fxml").openStream());
-            UpdateFormController updateFormController = fxmlLoader.getController();
-            updateFormController.setSqlModel(sqlModel);
-            Scene scene = new Scene(root, 250, 220);
-            System.out.println(ans);
-            stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-            stage.show();
-        } catch (Exception e) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        String[]users = new String[UserTblFields.values().length];
+        users[0] = searchText.getText();
+        String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS,users);
+        String[]arrAns = ansSelect.split(",");
+        alert.setContentText("User detalis:\n\n"+
+                        "User Name: "+ arrAns[0]+"\n"
+                        +"Password: "+ arrAns[1].substring(1)
 
-        }
+                + "\nB-day: "+ arrAns[2].substring(1)
+                +"\nFirst Name: "+ arrAns[3].substring(1)
+                +"\nLast Name: "+ arrAns[4].substring(1)
+                +"\nCity: "+ arrAns[5].substring(1,arrAns[5].length()-2));
+
+        alert.show();
+
+
     }
+
+
+
+
 }
