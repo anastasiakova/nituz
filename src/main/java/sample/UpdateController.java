@@ -68,12 +68,12 @@ public class UpdateController {
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
             ViewForm.userText.setText(searchText.getText());
-            ViewForm.passText.setText(arrAns[1]);
-            ViewForm.fNameText.setText(arrAns[3]);
-            ViewForm.lNameText.setText(arrAns[4]);
+            ViewForm.passText.setText(arrAns[1].substring(1));
+            ViewForm.fNameText.setText(arrAns[3].substring(1));
+            ViewForm.lNameText.setText(arrAns[4].substring(1));
 
             //ViewForm.dateText.
-            ViewForm.cityText.setText(arrAns[5]);
+            ViewForm.cityText.setText(arrAns[5].substring(1,arrAns[5].length()-2));
                 stage.show();
             } catch (Exception e) {
 

@@ -73,11 +73,10 @@ public class UpdateFormController{
                     ,lNameText.getText(),cityText.getText());
             sqlModel.updateRecord(newUser);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Sucssecfully update! ");
+            alert.setContentText("User update successfully");
             alert.show();
-            //alert.wait(2);
-            alert.close();
-            //((Stage) closeButton.getScene().getWindow()).close();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
         }
 
         }
