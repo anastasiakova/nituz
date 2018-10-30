@@ -9,12 +9,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class UpdateController {
 
@@ -71,8 +79,12 @@ public class UpdateController {
             ViewForm.passText.setText(arrAns[1].substring(1));
             ViewForm.fNameText.setText(arrAns[3].substring(1));
             ViewForm.lNameText.setText(arrAns[4].substring(1));
+            String[]date = fromStringToDate(arrAns[2]).split("/");
+            //dateText.setValue(LocalDate.of(Integer.parseInt(date[3]),Integer.parseInt(date[2]),Integer.parseInt(date[1])));
+           // ViewForm.dateText
 
-            //ViewForm.dateText.
+
+
             ViewForm.cityText.setText(arrAns[5].substring(1,arrAns[5].length()-2));
                 stage.show();
             } catch (Exception e) {
@@ -80,5 +92,14 @@ public class UpdateController {
             }
 
 
+    }
+
+    private String fromStringToDate(String arrAn) throws ParseException {
+        String[]goodFormatDate = arrAn.split(" ");
+        Date date = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(goodFormatDate[2]);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int month = cal.get(Calendar.MONTH) +1;
+        return (goodFormatDate[3]+"/"+month +"/"+goodFormatDate[goodFormatDate.length-1]);
     }
 }

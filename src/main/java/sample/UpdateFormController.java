@@ -31,7 +31,10 @@ public class UpdateFormController{
     public javafx.scene.control.DatePicker dateText;
 
     @FXML private Label customerName;
-    void initialize() {};
+    void initialize() {
+        dateText.setValue(LocalDate.of(1,2,2000));
+
+    };
 
 
 
