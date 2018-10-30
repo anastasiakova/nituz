@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -17,18 +19,17 @@ import java.io.IOException;
 public class UpdateController {
 
     @FXML
-    private AnchorPane content;
-    public String ans;
+    //private AnchorPane content;
+    //public static String ans;
     public SQLModel sqlModel;
     @FXML
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button updateButton;
     public javafx.scene.control.TextField searchText;
-
-    public javafx.scene.control.TextField userText;
-
+    //public javafx.scene.control.TextField userText;
 
     public UpdateController() {};
+
 
     public UpdateController(SQLModel sqlModel) {
         this.sqlModel = sqlModel;
@@ -46,23 +47,38 @@ public class UpdateController {
     }
 
     public void updateFormWindow(ActionEvent actionEvent) {
+        String[]users = new String[UserTblFields.values().length];
+        users[0] = searchText.getText();
+        String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS,users);
+        String[]arrAns = ansSelect.split(",");
+        if(ansSelect == "") {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("User does not exist in the system! ");
+            alert.show();
+        }
+
         try {
-            String[]users = new String[UserTblFields.values().length];
-            users[0] = searchText.getText();
-            ans = sqlModel.selectFromTable(Tables.TBL_USERS,users);
             Stage stage = new Stage();
-            stage.setTitle("UpdateForm User");
+            stage.setTitle("Update User");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("/UpdateForm.fxml").openStream());
-            UpdateFormController updateFormController = fxmlLoader.getController();
-            updateFormController.setSqlModel(sqlModel);
-            Scene scene = new Scene(root, 250, 220);
-            System.out.println(ans);
+            UpdateFormController ViewForm = fxmlLoader.getController();
+            ViewForm.setSqlModel(sqlModel);
+            Scene scene = new Scene(root, 400, 550);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-            stage.show();
-        } catch (Exception e) {
+            ViewForm.userText.setText(searchText.getText());
+            ViewForm.passText.setText(arrAns[1]);
+            ViewForm.fNameText.setText(arrAns[3]);
+            ViewForm.lNameText.setText(arrAns[4]);
 
-        }
+            //ViewForm.dateText.
+            ViewForm.cityText.setText(arrAns[5]);
+                stage.show();
+            } catch (Exception e) {
+
+            }
+
+
     }
 }

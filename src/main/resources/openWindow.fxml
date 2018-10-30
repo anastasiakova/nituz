@@ -7,8 +7,10 @@
 
 <GridPane alignment="center" hgap="10" prefHeight="191.0" prefWidth="331.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.MainController">
    <children>
-      <GridPane prefHeight="209.0" prefWidth="200.0" GridPane.rowIndex="1">
+      <GridPane prefHeight="181.0" prefWidth="353.0" GridPane.rowIndex="1">
         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -18,10 +20,10 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Search User" GridPane.rowIndex="2" />
-            <Button fx:id="btn_update" mnemonicParsing="false"  onAction="#updateWindow"  prefHeight="25.0" prefWidth="101.0" text="Update User" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-             <Button fx:id="btn_delete" mnemonicParsing="false" prefHeight="25.0" prefWidth="101.0" text="Delete User" onAction="#deleteWindow"/>
-            <Button fx:id="btn_create" mnemonicParsing="false" prefHeight="25.0" onAction="#createWindow" prefWidth="103.0" text="Create User" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Search User" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="btn_update" mnemonicParsing="false" onAction="#updateWindow" prefHeight="25.0" prefWidth="101.0" text="Update User" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+             <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#deleteWindow" prefHeight="25.0" prefWidth="101.0" text="Delete User" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="btn_create" mnemonicParsing="false" onAction="#createWindow" prefHeight="25.0" prefWidth="103.0" text="Create User" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

@@ -25,7 +25,7 @@ public class Main extends Application {
         view.setSqlModel(sqlModel);
 
 
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, 500, 275));
         primaryStage.show();
 
 
