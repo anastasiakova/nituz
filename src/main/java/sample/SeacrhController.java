@@ -47,17 +47,25 @@ public class SeacrhController {
         String[]users = new String[UserTblFields.values().length];
         users[0] = searchText.getText();
         String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS,users);
-        String[]arrAns = ansSelect.split(",");
-        alert.setContentText("User detalis:\n\n"+
-                        "User Name: "+ arrAns[0]+"\n"
-                        +"Password: "+ arrAns[1].substring(1)
 
-                + "\nB-day: "+ arrAns[2].substring(1)
-                +"\nFirst Name: "+ arrAns[3].substring(1)
-                +"\nLast Name: "+ arrAns[4].substring(1)
-                +"\nCity: "+ arrAns[5].substring(1,arrAns[5].length()-2));
+        if(ansSelect == "") {
+            Alert alert1 = new Alert(Alert.AlertType.ERROR);
+            alert1.setContentText("User does not exist in the system! ");
+            alert1.show();
+        }
+        else {
+            String[] arrAns = ansSelect.split(",");
+            alert.setContentText("User detalis:\n\n" +
+                    "User Name: " + arrAns[0] + "\n"
+                    + "Password: " + arrAns[1].substring(1)
 
-        alert.show();
+                    + "\nB-day: " + arrAns[2].substring(1)
+                    + "\nFirst Name: " + arrAns[3].substring(1)
+                    + "\nLast Name: " + arrAns[4].substring(1)
+                    + "\nCity: " + arrAns[5].substring(1, arrAns[5].length() - 2));
+
+            alert.show();
+        }
 
 
     }
