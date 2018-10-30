@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -28,11 +31,12 @@ public class UpdateFormController{
     public javafx.scene.control.TextField fNameText;
     public javafx.scene.control.TextField cityText;
     public javafx.scene.control.TextField lNameText;
-    public javafx.scene.control.DatePicker dateText;
+    //public javafx.scene.control.DatePicker dateText;
+    public javafx.scene.control.TextField dd;
+    public javafx.scene.control.TextField mm;
+    public javafx.scene.control.TextField yyyy;
 
-    @FXML private Label customerName;
     void initialize() {
-        dateText.setValue(LocalDate.of(1,2,2000));
 
     };
 
@@ -58,31 +62,40 @@ public class UpdateFormController{
 
     public void updateFormWindow(ActionEvent actionEvent) {
     }
-    public void updateButtonAction() throws InterruptedException {
-        LocalDate localDate = dateText.getValue();
-        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-        Date date = Date.from(instant);
+    public void updateButtonAction() throws InterruptedException, ParseException {
 
-        Calendar calendar  = Calendar.getInstance();
-        calendar.add(Calendar.YEAR, -18);
-        Date d1 = calendar.getTime();
-        if(date.after(d1)) {
+        if (dd == null || mm == null || yyyy == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Your'e too young to register! ");
+            alert.setContentText("Your'e must put a birth date! ");
             alert.show();
-        }
-        else{
-            ISQLable newUser = new User(userText.getText(),passText.getText(),date,fNameText.getText()
-                    ,lNameText.getText(),cityText.getText());
-            sqlModel.updateRecord(newUser);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("User update successfully");
-            alert.show();
-            Stage stage = (Stage) closeButton.getScene().getWindow();
-            stage.close();
-        }
+        } else {
+            //LocalDate localDate = dateText.getValue();
+            //Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+            //Date date = Date.from(instant);
+            DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String dateAsString = dd.getText() + "/" + mm.getText() + "/" + yyyy.getText();
+            Date date = sourceFormat.parse(dateAsString);
+            System.out.println(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, -18);
+            Date d1 = calendar.getTime();
+            if (date.after(d1)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Your'e too young to register! ");
+                alert.show();
+
+            } else {
+                ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
+                        , lNameText.getText(), cityText.getText());
+                sqlModel.updateRecord(newUser);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("User update successfully");
+                alert.show();
+                Stage stage = (Stage) closeButton.getScene().getWindow();
+                stage.close();
+            }
 
         }
 
-
+    }
     }

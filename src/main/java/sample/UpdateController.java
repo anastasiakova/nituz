@@ -15,10 +15,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.text.View;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,6 +36,9 @@ public class UpdateController {
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button updateButton;
     public javafx.scene.control.TextField searchText;
+    public javafx.scene.control.TextField dd;
+    public javafx.scene.control.TextField mm;
+    public javafx.scene.control.TextField yyyy;
     //public javafx.scene.control.TextField userText;
 
     public UpdateController() {};
@@ -80,7 +85,14 @@ public class UpdateController {
             ViewForm.fNameText.setText(arrAns[3].substring(1));
             ViewForm.lNameText.setText(arrAns[4].substring(1));
             String[]date = fromStringToDate(arrAns[2]).split("/");
-            //dateText.setValue(LocalDate.of(Integer.parseInt(date[3]),Integer.parseInt(date[2]),Integer.parseInt(date[1])));
+            ViewForm.dd.setText(date[0]);
+            ViewForm.mm.setText(date[1]);
+            ViewForm.yyyy.setText(date[2]);
+
+
+
+            //ViewForm.dateText.setValue(LocalDate.of(Integer.parseInt(date[3]),Integer.parseInt(date[2]),Integer.parseInt(date[1])));
+            //System.out.println(ViewForm.dateText.getValue());
            // ViewForm.dateText
 
 
