@@ -30,11 +30,7 @@
                   <Button fx:id="btn_update" mnemonicParsing="false" onAction="#updateWindow" prefHeight="25.0" prefWidth="101.0" text="Update User" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                    <Button fx:id="btn_delete" mnemonicParsing="false" onAction="#deleteWindow" prefHeight="25.0" prefWidth="101.0" text="Delete User" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Button fx:id="btn_create" mnemonicParsing="false" onAction="#createWindow" prefHeight="25.0" prefWidth="103.0" text="Create User" GridPane.rowIndex="3" />
-                  <ImageView fitHeight="229.0" fitWidth="243.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                     <image>
-                        <Image url="logo.png" />
-                     </image>
-                  </ImageView>
+
                </children>
             </GridPane>
          </children>
