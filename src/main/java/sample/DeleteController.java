@@ -3,6 +3,7 @@ package sample;
 import Model.ISQLable;
 import Model.SQLModel;
 import Model.User;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 
@@ -35,6 +36,12 @@ public class DeleteController {
         ISQLable userToDelete = new User(userText.getText(),null,null,null
                 ,null,null);
         sqlModel.deleteRecordFromTable(userToDelete);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("User deleted successfully");
+        alert.show();
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 
 

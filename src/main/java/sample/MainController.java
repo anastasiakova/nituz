@@ -68,7 +68,7 @@ public class MainController {
             Parent root = fxmlLoader.load(getClass().getResource("/Update.fxml").openStream());
             UpdateController creatView = fxmlLoader.getController();
             creatView.setSqlModel(sqlModel);
-            Scene scene = new Scene(root, 400, 420);
+            Scene scene = new Scene(root, 250, 220);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
             stage.show();

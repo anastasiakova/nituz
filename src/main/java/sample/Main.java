@@ -26,6 +26,7 @@ public class Main extends Application {
 
 
         primaryStage.setScene(new Scene(root, 500, 275));
+        primaryStage.getScene().getStylesheets().add("/openWindowCss.css");
         primaryStage.show();
 
 

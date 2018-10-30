@@ -1,9 +1,6 @@
 package sample;
 
-import Model.ISQLable;
-import Model.SQLModel;
-import Model.Tables;
-import Model.User;
+import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -67,6 +64,14 @@ public class CreateController {
             ISQLable newUser = new User(userText.getText(),passText.getText(),date,fNameText.getText()
                     ,lNameText.getText(),cityText.getText());
             sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(),newUser);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            String[]users = new String[UserTblFields.values().length];
+            users[0] = userText.getText();
+            String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS,users);
+            alert.setContentText("User created successfully!\nsaved detalis:\n"+ansSelect);
+            alert.show();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
         }
 
 

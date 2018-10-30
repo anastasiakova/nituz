@@ -55,7 +55,7 @@
                         <TextField fx:id="passText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="fNameText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <Label text="Birth Date" GridPane.rowIndex="2" />
-                        <DatePicker fx:id="dateText" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <DatePicker fx:id="dateText" promptText="01-01-1991" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Label text="First Name" GridPane.rowIndex="3" />
                         <Label text="Last Name" GridPane.rowIndex="4" />
                         <Label text="City" GridPane.rowIndex="5" />
