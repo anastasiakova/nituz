@@ -64,35 +64,49 @@ public class UpdateFormController{
     }
     public void updateButtonAction() throws InterruptedException, ParseException {
 
-        if (dd == null || mm == null || yyyy == null) {
+        if (dd == null || dd.getText().equals("") ||
+            mm == null || mm.getText().equals("")||
+            yyyy == null || yyyy.getText().equals("")) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Your'e must put a birth date! ");
+            alert.setContentText("No birthday date entered. A birthday is required.");
             alert.show();
         } else {
             //LocalDate localDate = dateText.getValue();
             //Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
             //Date date = Date.from(instant);
             DateFormat sourceFormat = new SimpleDateFormat("dd/MM/yyyy");
+            sourceFormat.setLenient(false);
             String dateAsString = dd.getText() + "/" + mm.getText() + "/" + yyyy.getText();
-            Date date = sourceFormat.parse(dateAsString);
-            System.out.println(date);
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.YEAR, -18);
-            Date d1 = calendar.getTime();
-            if (date.after(d1)) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("Your'e too young to register! ");
-                alert.show();
 
-            } else {
-                ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
-                        , lNameText.getText(), cityText.getText());
-                sqlModel.updateRecord(newUser);
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("User update successfully");
+            try {
+                Date date = sourceFormat.parse(dateAsString);
+                System.out.println(date);
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.YEAR, -18);
+                Date d1 = calendar.getTime();
+                if (date.after(d1)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setContentText("Your'e too young to register! ");
+                    alert.show();
+
+                } else {
+                    ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
+                            , lNameText.getText(), cityText.getText());
+                    sqlModel.updateRecord(newUser);
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("User updated successfully.");
+                    alert.show();
+                    Stage stage = (Stage) closeButton.getScene().getWindow();
+                    stage.close();
+                }
+            }catch (ParseException e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Invalid date. Please insert a valid date.");
                 alert.show();
-                Stage stage = (Stage) closeButton.getScene().getWindow();
-                stage.close();
+            }catch (IllegalArgumentException e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Invalid date. Please insert a valid date.");
+                alert.show();
             }
 
         }
