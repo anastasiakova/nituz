@@ -14,8 +14,8 @@ public class CreateController {
         ISQLable newUser = new User(username, pwd, birthday, privateName, lastName, city, bankAcount, creditCard, id);
         sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
     }
-    public String getUserCreatedMassage(String userText,Boolean withPssword){
-        return new SearchController().getMassageAfterChange(userText,withPssword);
+    public String getUserCreatedMassage(String userText,Boolean withPassword){
+        return new SearchController().getMassageAfterChange(userText,withPassword);
     }
 
 }

@@ -88,7 +88,7 @@ public class Create {
 //                        + "\nFirst Name: " + arrAns[3].substring(1)
 //                        + "\nLast Name: " + arrAns[4].substring(1)
 //                        + "\nCity: " + arrAns[5].substring(1, arrAns[5].length() - 2));
-                alert.setContentText(createController.getUserCreatedMassage(userText.getText(),true));
+                alert.setContentText("User Created:\n\n" + createController.getUserCreatedMassage(userText.getText(),true));
                 alert.show();
                 Stage stage = (Stage) closeButton.getScene().getWindow();
                 stage.close();
