@@ -61,19 +61,19 @@ public class SQLModel {
     public String selectFromTable(Tables table, String[] fields){
         switch (table) {
             case TBL_USERS:
-                return selectFromUsersTbl("TBL_USERS", fields, "userFields");
+                return selectFromTbl("TBL_USERS", fields, "userFields");
             case TBL_REQUESTS:
-                return selectFromUsersTbl("TBL_REQUESTS", fields, "requestTblFields");
+                return selectFromTbl("TBL_REQUESTS", fields, "requestTblFields");
             case TBL_VACATIONS:
-                return selectFromUsersTbl("TBL_VACATIONS", fields, "vacationFields");
+                return selectFromTbl("TBL_VACATIONS", fields, "vacationFields");
             case TBL_PAYMENTS:
-                return selectFromUsersTbl("TBL_PAYMENTS", fields, "paymentsTblFields");
+                return selectFromTbl("TBL_PAYMENTS", fields, "paymentsTblFields");
             default:
                 return "";
         }
     }
 
-    private String selectFromUsersTbl(String table, String[] fields, String tblFields) {
+    private String selectFromTbl(String table, String[] fields, String tblFields) {
         String sql = "SELECT * FROM ";
         sql += table.toLowerCase() + "\n";
         sql += "WHERE ";
@@ -98,11 +98,6 @@ public class SQLModel {
             while (rs.next()) {
                 for (int i = 1 ; i <= TblFields.enumDict.get(tblFields).size(); i++){
                     res += rs.getString(i) + ", ";
-//                    res += rs.getString(2) + ", ";
-//                    res += rs.getString(3) + ", ";
-//                    res += rs.getString(4) + ", ";
-//                    res += rs.getString(5) + ", ";
-//                    res += rs.getString(6) + ". ";
                 }
             }
         } catch (SQLException e) {
