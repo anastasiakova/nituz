@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Payments implements ISQLable {
-//need to know the the other user bank ditails
     private static Integer _paymentId = 0;
 
     private String _aprovedRequest;
@@ -42,10 +41,10 @@ public class Payments implements ISQLable {
     }
 
     private String tableFields = tableName + "("
-            + TblFields.paymentsTblFields.PAYMENT_ID.name().toLowerCase() + ", "
-            + TblFields.paymentsTblFields.REQUEST_ID.name().toLowerCase() + ", "
-            + TblFields.paymentsTblFields.TIMESTAMP.name().toLowerCase() + ", "
-            + TblFields.paymentsTblFields.STATUS.name().toLowerCase()
+            + TblFields.enumDict.get("paymentsTblFields").get(0) + ", "
+            + TblFields.enumDict.get("paymentsTblFields").get(1) + ", "
+            + TblFields.enumDict.get("paymentsTblFields").get(2) + ", "
+            + TblFields.enumDict.get("paymentsTblFields").get(3)
             + ") VALUES(?,?,?,?)";
 
     public String get_id() {
@@ -92,10 +91,10 @@ public class Payments implements ISQLable {
 
     @Override
     public String getFieldsSQLWithValues() {
-        return TblFields.paymentsTblFields.PAYMENT_ID.name().toLowerCase() + "='" + this.get_id() +
-                "'," + TblFields.paymentsTblFields.REQUEST_ID.name().toLowerCase() + "='" + this.get_aprovedRequest() +
-                "'," + TblFields.paymentsTblFields.TIMESTAMP.name().toLowerCase() + "='" + this.get_date() +
-                "'," + TblFields.paymentsTblFields.STATUS.name().toLowerCase() + "='" + this.get_status() +
+        return TblFields.enumDict.get("paymentsTblFields").get(0) + "='" + this.get_id() +
+                "'," + TblFields.enumDict.get("paymentsTblFields").get(1) + "='" + this.get_aprovedRequest() +
+                "'," + TblFields.enumDict.get("paymentsTblFields").get(2) + "='" + this.get_date() +
+                "'," + TblFields.enumDict.get("paymentsTblFields").get(3) + "='" + this.get_status() +
                 "'\n";
     }
 
@@ -117,13 +116,13 @@ public class Payments implements ISQLable {
 
     public static String createPaymentsTableSQL(){
         return ("CREATE TABLE IF NOT EXISTS tbl_payments (\n" +
-                TblFields.paymentsTblFields.PAYMENT_ID.name().toLowerCase() + " NOT NULL PRIMARY KEY,\n" +
-                TblFields.paymentsTblFields.REQUEST_ID.name().toLowerCase()   + " text NOT NULL,\n" +
-                TblFields.paymentsTblFields.TIMESTAMP.name().toLowerCase()   + " text NOT NULL,\n" +
-                TblFields.paymentsTblFields.STATUS.name().toLowerCase()    + " text NOT NULL,\n" +
+                TblFields.enumDict.get("paymentsTblFields").get(0) + " NOT NULL PRIMARY KEY,\n" +
+                TblFields.enumDict.get("paymentsTblFields").get(1)   + " text NOT NULL,\n" +
+                TblFields.enumDict.get("paymentsTblFields").get(2)   + " text NOT NULL,\n" +
+                TblFields.enumDict.get("paymentsTblFields").get(3)    + " text NOT NULL,\n" +
                 ");");
     }
-    
+
     public String getPayMentFieldsSQL(){
         return "VALUES (" + get_id() +
                 ", " + get_aprovedRequest() +
