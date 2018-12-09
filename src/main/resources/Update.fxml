@@ -23,7 +23,7 @@
             <AnchorPane prefHeight="164.0" prefWidth="245.0">
                 <children>
                     <Label alignment="CENTER" layoutY="14.0" prefHeight="21.0" prefWidth="245.0" text="Enter your Username here:" />
-                    <TextField fx:id="searchText" layoutX="23.0" layoutY="50.0" prefHeight="31.0" prefWidth="200.0" />
+                    <TextField fx:id="updataText" layoutX="23.0" layoutY="50.0" prefHeight="31.0" prefWidth="200.0" />
                     <Button fx:id="updateButton" layoutX="53.0" layoutY="103.0" mnemonicParsing="false" text="search"  onAction="#updateFormWindow" />
                     <Button fx:id="closeButton" layoutX="143.0" layoutY="103.0" mnemonicParsing="false" text="Close" onAction="#closeButtonAction"/>
                 </children>

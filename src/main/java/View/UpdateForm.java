@@ -26,6 +26,9 @@ public class UpdateForm {
     public javafx.scene.control.TextField fNameText;
     public javafx.scene.control.TextField cityText;
     public javafx.scene.control.TextField lNameText;
+    public javafx.scene.control.TextField bankAcountNumber;
+    public javafx.scene.control.TextField creditCardNumber;
+    public javafx.scene.control.TextField idNumber;
     //public javafx.scene.control.DatePicker dateText;
     public javafx.scene.control.TextField dd;
     public javafx.scene.control.TextField mm;
@@ -90,9 +93,9 @@ public class UpdateForm {
                     alert.show();
 
                 } else {
-                    ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
-                            , lNameText.getText(), cityText.getText());
-                    sqlModel.updateRecord(newUser);
+                    this.updateFormController.UpdateUser(userText.getText(), passText.getText(), date, fNameText.getText()
+                            , lNameText.getText(), cityText.getText(), bankAcountNumber.getText(),
+                            creditCardNumber.getText(),idNumber.getText());
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setContentText("User updated successfully.");
                     alert.show();
