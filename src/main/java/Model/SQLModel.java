@@ -61,23 +61,30 @@ public class SQLModel {
     public String selectFromTable(Tables table, String[] fields){
         switch (table) {
             case TBL_USERS:
-                return selectFromUsersTbl(fields);
+                return selectFromUsersTbl("TBL_USERS", fields, "userFields");
+            case TBL_REQUESTS:
+                return selectFromUsersTbl("TBL_REQUESTS", fields, "requestTblFields");
+            case TBL_VACATIONS:
+                return selectFromUsersTbl("TBL_VACATIONS", fields, "vacationFields");
+            case TBL_PAYMENTS:
+                return selectFromUsersTbl("TBL_PAYMENTS", fields, "paymentsTblFields");
             default:
                 return "";
         }
     }
 
-    private String selectFromUsersTbl(String[] fields) {
-        String sql = "SELECT * FROM tbl_users\n";
+    private String selectFromUsersTbl(String table, String[] fields, String tblFields) {
+        String sql = "SELECT * FROM ";
+        sql += table.toLowerCase() + "\n";
         sql += "WHERE ";
         boolean notFirst = false;
-        for (int i = 0; i < TblFields.userFields.values().length; i++) {
+        for (int i = 0; i < TblFields.enumDict.get(tblFields).size(); i++) {
             if (fields[i] != "" && fields[i]!= null) {
                 if(notFirst){
                     sql += " AND ";
                 }
                 notFirst = true;
-                sql += TblFields.userFields.values()[i].toString().toLowerCase() + "='" + fields[i] + "'";
+                sql += TblFields.enumDict.get(tblFields).get(i) + "='" + fields[i] + "'";
             }
         }
         sql += ";";
@@ -89,12 +96,14 @@ public class SQLModel {
 
             // loop through the result set
             while (rs.next()) {
-                res += rs.getString(1) + ", ";
-                res += rs.getString(2) + ", ";
-                res += rs.getString(3) + ", ";
-                res += rs.getString(4) + ", ";
-                res += rs.getString(5) + ", ";
-                res += rs.getString(6) + ". ";
+                for (int i = 1 ; i <= TblFields.enumDict.get(tblFields).size(); i++){
+                    res += rs.getString(i) + ", ";
+//                    res += rs.getString(2) + ", ";
+//                    res += rs.getString(3) + ", ";
+//                    res += rs.getString(4) + ", ";
+//                    res += rs.getString(5) + ", ";
+//                    res += rs.getString(6) + ". ";
+                }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
