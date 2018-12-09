@@ -36,8 +36,8 @@ public class Vacation implements ISQLable {
             + TblFields.enumDict.get("vacationFields").get(9) + ", " //vacation_type
             + TblFields.enumDict.get("vacationFields").get(10) + ", " //vacation_status
             + TblFields.enumDict.get("vacationFields").get(11) + ", " //sleeping_arragements
-            + TblFields.enumDict.get("vacationFields").get(12) + ", " //owner_id
-            + ") VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            + TblFields.enumDict.get("vacationFields").get(12)  //owner_id
+            + ") VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 
 
@@ -84,7 +84,7 @@ public class Vacation implements ISQLable {
                 TblFields.enumDict.get("vacationFields").get(9) + " text,\n" + //vacation_type
                 TblFields.enumDict.get("vacationFields").get(10) + " text NOT NULL,\n" + //vacation_status
                 TblFields.enumDict.get("vacationFields").get(11) + " text NOT NULL,\n" + //sleeping_arrangements
-                TblFields.enumDict.get("vacationFields").get(12) + " text NOT NULL,\n" + //owner_id
+                TblFields.enumDict.get("vacationFields").get(12) + " text NOT NULL\n" + //owner_id
                 ");");
     }
 

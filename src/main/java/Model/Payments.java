@@ -119,7 +119,7 @@ public class Payments implements ISQLable {
                 TblFields.enumDict.get("paymentsTblFields").get(0) + " NOT NULL PRIMARY KEY,\n" +
                 TblFields.enumDict.get("paymentsTblFields").get(1)   + " text NOT NULL,\n" +
                 TblFields.enumDict.get("paymentsTblFields").get(2)   + " text NOT NULL,\n" +
-                TblFields.enumDict.get("paymentsTblFields").get(3)    + " text NOT NULL,\n" +
+                TblFields.enumDict.get("paymentsTblFields").get(3)    + " text NOT NULL\n" +
                 ");");
     }
 

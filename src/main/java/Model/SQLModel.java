@@ -25,6 +25,9 @@ public class SQLModel {
             System.out.println(e.getMessage());
         }
         createUsersTable();
+        createRequestsTable();
+        createVactionsTable();
+        createPaymentsTable();
     }
 
     public static SQLModel GetInstance() {
@@ -44,6 +47,39 @@ public class SQLModel {
             System.out.println(e.getMessage());
         }
         System.out.println("Succesfully added tbl_users!");
+    }
+
+    private void createRequestsTable() {
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt = conn.createStatement()) {
+            // create new Users table
+            stmt.execute(Request.createRequestsTableSQL());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Succesfully added tbl_requests!");
+    }
+
+    private void createVactionsTable() {
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt = conn.createStatement()) {
+            // create new Users table
+            stmt.execute(Vacation.createVacationsTableSQL());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Succesfully added tbl_vacations!");
+    }
+
+    private void createPaymentsTable() {
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt = conn.createStatement()) {
+            // create new Users table
+            stmt.execute(Payments.createPaymentsTableSQL());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Succesfully added tbl_payments!");
     }
 
     public void insertRecordToTable(String table, ISQLable isqLable){
@@ -130,4 +166,6 @@ public class SQLModel {
             System.out.println(e.getMessage());
         }
     }
+
+
 }

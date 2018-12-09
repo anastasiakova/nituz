@@ -26,7 +26,7 @@ public class Request implements ISQLable {
             + TblFields.enumDict.get("requestTblFields").get(1) + ", "
             + TblFields.enumDict.get("requestTblFields").get(2) + ", "
             + TblFields.enumDict.get("requestTblFields").get(3) + ", "
-            + TblFields.enumDict.get("requestTblFields").get(4) + ", "
+            + TblFields.enumDict.get("requestTblFields").get(4)
             + ") VALUES(?,?,?,?,?)";
 
 
@@ -36,7 +36,7 @@ public class Request implements ISQLable {
                 TblFields.enumDict.get("requestTblFields").get(1) + " text NOT NULL,\n" +
                 TblFields.enumDict.get("requestTblFields").get(2) + " text NOT NULL,\n" +
                 TblFields.enumDict.get("requestTblFields").get(3) + " text NOT NULL,\n" +
-                TblFields.enumDict.get("requestTblFields").get(4) + " text NOT NULL,\n" +
+                TblFields.enumDict.get("requestTblFields").get(4) + " text NOT NULL\n" +
                 ");");
     }
 
@@ -119,7 +119,7 @@ public class Request implements ISQLable {
                 TblFields.enumDict.get("requestTblFields").get(1) + "='" + r_buyerID + "\'," +
                 TblFields.enumDict.get("requestTblFields").get(2) + "='" + r_seller + "\'," +
                 TblFields.enumDict.get("requestTblFields").get(3) + "='" + vacationID + "\'," +
-                TblFields.enumDict.get("requestTblFields").get(4) + "='" + r_answer + "\'," +
+                TblFields.enumDict.get("requestTblFields").get(4) + "='" + r_answer +
                 '}';
     }
 
