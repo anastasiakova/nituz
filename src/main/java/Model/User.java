@@ -13,18 +13,21 @@ public class User implements ISQLable {
     private String privateName;
     private String lastName;
     private String city;
-
-
-
+    private String bankAcount;
+    private String creditCard;
+    private String id;
 
     private String tableFields = "tbl_users("
-            + TblFields.userFields.USERNAME.toString().toLowerCase() + ", "
-            +  TblFields.userFields.PWD.toString().toLowerCase() + ", "
-            + TblFields.userFields.BIRTHDAY.toString().toLowerCase() + ", "
-            + TblFields.userFields.PRIVATENAME.toString().toLowerCase() +", "
-            + TblFields.userFields.LASTNAME.toString().toLowerCase() +", "
-            + TblFields.userFields.CITY.toString().toLowerCase()
-            + ") VALUES(?,?,?,?,?,?)";
+            + TblFields.enumDict.get("userFields").get(0) + ", "//user name
+            + TblFields.enumDict.get("userFields").get(1) + ", "//pwd
+            + TblFields.enumDict.get("userFields").get(2) + ", "//birthday
+            + TblFields.enumDict.get("userFields").get(3) +", "//private name
+            + TblFields.enumDict.get("userFields").get(4) +", "//last name
+            + TblFields.enumDict.get("userFields").get(5)//city
+            + TblFields.enumDict.get("userFields").get(6) + ", "//bank
+            + TblFields.enumDict.get("userFields").get(7) + ", "//credit card
+            + TblFields.enumDict.get("userFields").get(8)//id
+            + ") VALUES(?,?,?,?,?,?,?,?,?)";
 
     private String primaryKeyName = "username";
     private String tableName = "tbl_users";
@@ -32,12 +35,12 @@ public class User implements ISQLable {
 
     public static String createUsersTableSQL(){
         return ("CREATE TABLE IF NOT EXISTS tbl_users (\n" +
-        TblFields.userFields.USERNAME.toString().toLowerCase() + " text NOT NULL PRIMARY KEY,\n" +
-        TblFields.userFields.PWD.toString().toLowerCase()   + " pwd text NOT NULL,\n" +
-        TblFields.userFields.BIRTHDAY.toString().toLowerCase()   + " birthday text,\n" +
-        TblFields.userFields.PRIVATENAME.toString().toLowerCase()    + "	privateName text,\n" +
-        TblFields.userFields.LASTNAME.toString().toLowerCase()    + "	lastName text,\n" +
-        TblFields.userFields.CITY.toString().toLowerCase()    + "	city text\n" +
+                TblFields.enumDict.get("userFields").get(0) + " text NOT NULL PRIMARY KEY,\n" +
+                TblFields.enumDict.get("userFields").get(0) + " pwd text NOT NULL,\n" +
+                TblFields.enumDict.get("userFields").get(0) + " birthday text,\n" +
+                TblFields.enumDict.get("userFields").get(0) + "	privateName text,\n" +
+                TblFields.enumDict.get("userFields").get(0) + "	lastName text,\n" +
+                TblFields.enumDict.get("userFields").get(0) + "	city text\n" +
         ");");
     }
 
