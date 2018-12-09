@@ -33,5 +33,12 @@ public class TblFields {
                 SLEEPING_ARRANGEMENTS
         }
 
+        static enum paymentsTblFields{
+                PAYMENT_ID,
+                REQUEST_ID,
+                TIMESTAMP,
+                STATUS
+        }
+
 }
 
