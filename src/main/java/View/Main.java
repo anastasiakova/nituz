@@ -16,8 +16,6 @@ public class Main extends Application {
         Parent root = fxmlControl.load(getClass().getResource(("/openWindow.fxml")).openStream());
         primaryStage.setTitle("VACATION 4 U ");
         MainView view = fxmlControl.getController();
-        view.setController(sqlModel);
-
 
         primaryStage.setScene(new Scene(root, 500, 275));
         primaryStage.getScene().getStylesheets().add("/openWindowCss.css");
