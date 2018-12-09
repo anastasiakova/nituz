@@ -3,6 +3,7 @@ package View;
 import Controller.CreateController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.Instant;
@@ -25,6 +26,9 @@ public class Create {
     public javafx.scene.control.TextField cityText;
     public javafx.scene.control.TextField lNameText;
     public javafx.scene.control.DatePicker dateText;
+    public javafx.scene.control.TextField bankAccountNumber;
+    public javafx.scene.control.TextField creditCardNumber;
+    public TextField idNumber;
 
     public Create() {};
 
@@ -58,24 +62,37 @@ public class Create {
             alert.show();
         }
         else {
-            LocalDate localDate = dateText.getValue();
-            Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-            Date date = Date.from(instant);
-
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.YEAR, -18);
-            Date d1 = calendar.getTime();
-            if (date.after(d1)) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("Your'e too young to register! ");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            if(!bankAccountNumber.getText().matches("\\d*")) {
+                alert.setContentText("Your'e must put numbers in bank acount! ");
                 alert.show();
-            } else {
+            }
+            else if(!creditCardNumber.getText().matches("\\d*")) {
+                alert.setContentText("Your'e must put numbers in credit! ");
+                alert.show();
+            }
+            else if(!idNumber.getText().matches("\\d*")) {
+                alert.setContentText("Your'e must put a numbers in id! ");
+                alert.show();
+            }
+            else {
+                LocalDate localDate = dateText.getValue();
+                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+                Date date = Date.from(instant);
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.YEAR, -18);
+                Date d1 = calendar.getTime();
+                if (date.after(d1)) {
+                    alert.setContentText("Your'e too young to register! ");
+                    alert.show();
+                } else {
 //               ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
 //                        , lNameText.getText(), cityText.getText());
 //                sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
-                this.createController.CreateUser(userText.getText(), passText.getText(), date, fNameText.getText()
-                        , lNameText.getText(), cityText.getText(),"","","");//TODO should be fields for that
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    this.createController.CreateUser(userText.getText(), passText.getText(), date, fNameText.getText()
+                            , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(), creditCardNumber.getText(), idNumber.getText());//TODO should be fields for that
+                    Alert alertI = new Alert(Alert.AlertType.INFORMATION);
 //                String[] users = new String[TblFields.values().length];
 //                users[0] = userText.getText();
 //                String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS, users);
@@ -88,10 +105,11 @@ public class Create {
 //                        + "\nFirst Name: " + arrAns[3].substring(1)
 //                        + "\nLast Name: " + arrAns[4].substring(1)
 //                        + "\nCity: " + arrAns[5].substring(1, arrAns[5].length() - 2));
-                alert.setContentText("User Created:\n\n" + createController.getUserCreatedMassage(userText.getText(),true));
-                alert.show();
-                Stage stage = (Stage) closeButton.getScene().getWindow();
-                stage.close();
+                    alertI.setContentText("User Created:\n\n" + createController.getUserCreatedMassage(userText.getText(), true));
+                    alertI.show();
+                    Stage stage = (Stage) closeButton.getScene().getWindow();
+                    stage.close();
+                }
             }
         }
 
