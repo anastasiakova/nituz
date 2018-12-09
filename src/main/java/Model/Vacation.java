@@ -20,7 +20,7 @@ public class Vacation implements ISQLable {
     private VacationSleepingArrangements _vacationSleepingArrangements;
     private String _ownerID;
 
-    private String primaryKeyName = "vacationID";
+    private String primaryKeyName = "vacation_id";
     private String tableName = "tbl_vacations";
 
     private String tableFields = tableName + "("
@@ -225,7 +225,6 @@ public class Vacation implements ISQLable {
                 "'," + TblFields.enumDict.get("vacationFields").get(10) + "='" + this.get_vacationStatus() +
                 "'," + TblFields.enumDict.get("vacationFields").get(11) + "='" + this.get_vacationSleepingArrangements() +
                 "'," + TblFields.enumDict.get("vacationFields").get(12) + "='" + this.get_ownerID() +
-
                 "'\n";
     }
 
