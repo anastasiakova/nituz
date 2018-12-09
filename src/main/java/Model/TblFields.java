@@ -18,5 +18,20 @@ public class TblFields {
                 vacationID,
         }
 
+        static enum vacationFields{
+                VACATION_ID,
+                START_DATE,
+                END_DATE,
+                DESTINATION,
+                AVIATION_COMPANY,
+                NUM_OF_TICKETS,
+                TICKET_TYPE,
+                BAGGAGE,
+                ROUND_TRIP,
+                VACATION_TYPE,
+                VACATION_STATUS,
+                SLEEPING_ARRANGEMENTS
+        }
+
 }
 
