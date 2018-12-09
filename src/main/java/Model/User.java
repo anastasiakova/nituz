@@ -36,11 +36,14 @@ public class User implements ISQLable {
     public static String createUsersTableSQL(){
         return ("CREATE TABLE IF NOT EXISTS tbl_users (\n" +
                 TblFields.enumDict.get("userFields").get(0) + " text NOT NULL PRIMARY KEY,\n" +
-                TblFields.enumDict.get("userFields").get(0) + " pwd text NOT NULL,\n" +
-                TblFields.enumDict.get("userFields").get(0) + " birthday text,\n" +
-                TblFields.enumDict.get("userFields").get(0) + "	privateName text,\n" +
-                TblFields.enumDict.get("userFields").get(0) + "	lastName text,\n" +
-                TblFields.enumDict.get("userFields").get(0) + "	city text\n" +
+                TblFields.enumDict.get("userFields").get(1) + " text NOT NULL,\n" +
+                TblFields.enumDict.get("userFields").get(2) + " text,\n" +
+                TblFields.enumDict.get("userFields").get(3) + "	text,\n" +
+                TblFields.enumDict.get("userFields").get(4) + "	text,\n" +
+                TblFields.enumDict.get("userFields").get(5) + "	text\n" +
+                TblFields.enumDict.get("userFields").get(6) + "	text\n" +
+                TblFields.enumDict.get("userFields").get(7) + "	text\n" +
+                TblFields.enumDict.get("userFields").get(8) + "	text\n" +
         ");");
     }
 
@@ -55,17 +58,24 @@ public class User implements ISQLable {
                 ", " + privateName +
                 ", " + lastName +
                 ", " + city +
+                ", " + bankAcount +
+                ", " + creditCard +
+                ", " + id +
                 ");";
     }
 
-    public User(String username, String pwd, Date birthday, String privateName, String lastName, String city) {
+    public User(String username, String pwd, Date birthday, String privateName, String lastName, String city, String bankAcount, String creditCard, String id) {
         this.username = username;
         this.pwd = pwd;
         this.birthday = birthday;
         this.privateName = privateName;
         this.lastName = lastName;
         this.city = city;
+        this.bankAcount = bankAcount;
+        this.creditCard = creditCard;
+        this.id = id;
     }
+
 
     public String getUsername() {
         return username;
@@ -118,6 +128,17 @@ public class User implements ISQLable {
         this.city = city;
     }
 
+    public String getBankAcount() {
+        return bankAcount;
+    }
+
+    public String getCreditCard() {
+        return creditCard;
+    }
+
+    public String getId() {
+        return id;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -128,25 +149,33 @@ public class User implements ISQLable {
                 Objects.equals(getBirthday(), user.getBirthday()) &&
                 Objects.equals(getPrivateName(), user.getPrivateName()) &&
                 Objects.equals(getLastName(), user.getLastName()) &&
-                Objects.equals(getCity(), user.getCity());
+                Objects.equals(getCity(), user.getCity())&&
+                Objects.equals(getBankAcount(), user.getBankAcount())&&
+                Objects.equals(getCreditCard(), user.getCreditCard())&&
+                Objects.equals(getId(), user.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUsername(), getPwd(), getBirthday(), getPrivateName(), getLastName(), getCity());
+        return Objects.hash(getUsername(), getPwd(), getBirthday(), getPrivateName(), getLastName(), getCity(),getBankAcount(),getCreditCard(),getId());
     }
 
     @Override
     public String toString() {
         return "User{" +
-                TblFields.userFields.USERNAME.toString().toLowerCase() + "='" + username + "\'," +
-                TblFields.userFields.PWD.toString().toLowerCase() + "='" + pwd + "\'," +
-                TblFields.userFields.BIRTHDAY.toString().toLowerCase() + "='" + birthday + "\'," +
-                TblFields.userFields.PRIVATENAME.toString().toLowerCase() + "='" + privateName + "\'," +
-                TblFields.userFields.LASTNAME.toString().toLowerCase() + "='" + lastName + "\'," +
-                TblFields.userFields.CITY.toString().toLowerCase() + "='" + city + "\'," +
+                TblFields.enumDict.get("userFields").get(0) + "='" + username + "\'," +
+                TblFields.enumDict.get("userFields").get(1) + "='" + pwd + "\'," +
+                TblFields.enumDict.get("userFields").get(2) + "='" + birthday + "\'," +
+                TblFields.enumDict.get("userFields").get(3) + "='" + privateName + "\'," +
+                TblFields.enumDict.get("userFields").get(4) + "='" + lastName + "\'," +
+                TblFields.enumDict.get("userFields").get(5) + "='" + city + "\'," +
+                TblFields.enumDict.get("userFields").get(6) + "='" + bankAcount + "\'," +
+                TblFields.enumDict.get("userFields").get(7) + "='" + creditCard + "\'," +
+                TblFields.enumDict.get("userFields").get(8) + "='" + id + "\'," +
                 '}';
     }
+
+
 
     public void insertRecordToTable(PreparedStatement pstmt) {
         try {
@@ -156,6 +185,9 @@ public class User implements ISQLable {
             pstmt.setString(4, this.getPrivateName());
             pstmt.setString(5, this.getLastName());
             pstmt.setString(6, this.getCity());
+            pstmt.setString(7, this.getBankAcount());
+            pstmt.setString(8, this.getCreditCard());
+            pstmt.setString(9, this.getId());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -166,12 +198,15 @@ public class User implements ISQLable {
     }
 
     public String getFieldsSQLWithValues() {
-        return TblFields.userFields.USERNAME.toString().toLowerCase() + "='" + this.getUsername() +
-                "'," + TblFields.userFields.PWD.toString().toLowerCase() + "='" + this.getPwd() +
-                "'," + TblFields.userFields.BIRTHDAY.toString().toLowerCase() + "='" + this.getBirthday() +
-                "'," + TblFields.userFields.PRIVATENAME.toString().toLowerCase() + "='" + this.getPrivateName() +
-                "'," + TblFields.userFields.LASTNAME.toString().toLowerCase() + "='" + this.getLastName() +
-                "'," + TblFields.userFields.CITY.toString().toLowerCase() + "='" + this.getCity() +
+        return TblFields.enumDict.get("userFields").get(0) + "='" + this.getUsername() +
+                "'," + TblFields.enumDict.get("userFields").get(1) + "='" + this.getPwd() +
+                "'," + TblFields.enumDict.get("userFields").get(2) + "='" + this.getBirthday() +
+                "'," + TblFields.enumDict.get("userFields").get(3) + "='" + this.getPrivateName() +
+                "'," + TblFields.enumDict.get("userFields").get(4) + "='" + this.getLastName() +
+                "'," + TblFields.enumDict.get("userFields").get(5) + "='" + this.getCity() +
+                "'," + TblFields.enumDict.get("userFields").get(6) + "='" + this.getBankAcount() +
+                "'," + TblFields.enumDict.get("userFields").get(7) + "='" + this.getCreditCard() +
+                "'," + TblFields.enumDict.get("userFields").get(8) + "='" + this.getId() +
                 "'\n";
     }
 
