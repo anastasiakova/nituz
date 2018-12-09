@@ -11,27 +11,36 @@ import java.util.Calendar;
 
 public class Payments implements ISQLable {
 //need to know the the other user bank ditails
-    private static int _requestId = 0;
+    private static Integer _paymentId = 0;
 
-    private Request _aprovedRequest;
-    private Integer _id;
+    private String _aprovedRequest;
+    private String _id;
     private String _date;
     private String primaryKeyName = "payment_id";
-    private String tableName = "tbl_payment";
-
+    private String tableName = "tbl_payments";
     private Status _status;
+
     private enum Status {
         inProgress,
         Canceled,
         Sucssesful
     };
-    public Payments (Request aprovedRequest){
+
+    public Payments (String aprovedRequest){
         this._aprovedRequest = aprovedRequest;
-        _requestId++;
-        this._id = _requestId;
+        _paymentId++;
+        this._id = _paymentId.toString();
         this._date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         this._status = Status.inProgress;
     }
+
+    public Payments(String id, String request, String date, int status) {
+        this._id = id;
+        this._aprovedRequest = request;
+        this._date = date;
+        this._status = Status.values()[status];
+    }
+
     private String tableFields = tableName + "("
             + TblFields.paymentsTblFields.PAYMENT_ID.name().toLowerCase() + ", "
             + TblFields.paymentsTblFields.REQUEST_ID.name().toLowerCase() + ", "
@@ -39,8 +48,16 @@ public class Payments implements ISQLable {
             + TblFields.paymentsTblFields.STATUS.name().toLowerCase()
             + ") VALUES(?,?,?,?)";
 
+    public String get_id() {
+        return _id;
+    }
+
     public String get_date() {
         return _date;
+    }
+
+    public String get_aprovedRequest() {
+        return _aprovedRequest;
     }
 
     public Status get_status() {
@@ -49,7 +66,7 @@ public class Payments implements ISQLable {
 
     @Override
     public String getPrimaryKey() {
-        return _id.toString();
+        return _id;
     }
 
     @Override
@@ -60,23 +77,26 @@ public class Payments implements ISQLable {
     @Override
     public void insertRecordToTable(PreparedStatement pstmt) {
         try {
-            pstmt.setString(1, this.getPrimaryKey());
-            pstmt.setString(2, this._aprovedRequest.getPrimaryKey());
+            pstmt.setString(1, this.get_id());
+            pstmt.setString(2, this.get_aprovedRequest());
             pstmt.setString(3, this.get_date());
             pstmt.setString(4, this.get_status().name());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
-
     @Override
     public String getTableFields() {
-        return null;
+        return tableFields;
     }
 
     @Override
     public String getFieldsSQLWithValues() {
-        return null;
+        return TblFields.paymentsTblFields.PAYMENT_ID.name().toLowerCase() + "='" + this.get_id() +
+                "'," + TblFields.paymentsTblFields.REQUEST_ID.name().toLowerCase() + "='" + this.get_aprovedRequest() +
+                "'," + TblFields.paymentsTblFields.TIMESTAMP.name().toLowerCase() + "='" + this.get_date() +
+                "'," + TblFields.paymentsTblFields.STATUS.name().toLowerCase() + "='" + this.get_status() +
+                "'\n";
     }
 
     @Override
@@ -93,5 +113,22 @@ public class Payments implements ISQLable {
             this._status = Status.Sucssesful;
             //change TBL
         }
+    }
+
+    public static String createPaymentsTableSQL(){
+        return ("CREATE TABLE IF NOT EXISTS tbl_payments (\n" +
+                TblFields.paymentsTblFields.PAYMENT_ID.name().toLowerCase() + " NOT NULL PRIMARY KEY,\n" +
+                TblFields.paymentsTblFields.REQUEST_ID.name().toLowerCase()   + " text NOT NULL,\n" +
+                TblFields.paymentsTblFields.TIMESTAMP.name().toLowerCase()   + " text NOT NULL,\n" +
+                TblFields.paymentsTblFields.STATUS.name().toLowerCase()    + " text NOT NULL,\n" +
+                ");");
+    }
+    
+    public String getPayMentFieldsSQL(){
+        return "VALUES (" + get_id() +
+                ", " + get_aprovedRequest() +
+                ", " + get_date() +
+                ", " + get_status() +
+                ");";
     }
 }
