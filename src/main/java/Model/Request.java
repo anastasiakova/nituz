@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 // we need to check for equal request- the same buyer, seller and vecID !!!!
-public class Request implements ISQLable{
+public class Request implements ISQLable {
     private static int counter = 1;
     private String r_ID;
     private String r_buyerID;
@@ -14,36 +14,37 @@ public class Request implements ISQLable{
     private String vacationID;
     private String primaryKeyName = "r_ID";
     private String tableName = "tbl_requests";
-    private enum ansStatus{
+
+    private enum ansStatus {
         confirmed,
         pending,
         rejected
     }
 
     private String tableFields = "tbl_requests("
-            + TblFields.requestTblFields.r_ID.toString().toLowerCase() + ", "
-            + TblFields.requestTblFields.r_buyerID.toString().toLowerCase() + ", "
-            + TblFields.requestTblFields.r_sellerID.toString().toLowerCase() + ", "
-            + TblFields.requestTblFields.vacationID.toString().toLowerCase() + ", "
-            + TblFields.requestTblFields.r_answer.toString().toLowerCase() + ", "
+            + TblFields.enumDict.get("requestTblFields").get(0) + ", "
+            + TblFields.enumDict.get("requestTblFields").get(1) + ", "
+            + TblFields.enumDict.get("requestTblFields").get(2) + ", "
+            + TblFields.enumDict.get("requestTblFields").get(3) + ", "
+            + TblFields.enumDict.get("requestTblFields").get(4) + ", "
             + ") VALUES(?,?,?,?,?)";
 
 
-    public static String createRequestsTableSQL(){
+    public static String createRequestsTableSQL() {
         return ("CREATE TABLE IF NOT EXISTS tbl_requests (\n" +
-                TblFields.requestTblFields.r_ID.toString().toLowerCase() + " text NOT NULL PRIMARY KEY,\n" +
-                TblFields.requestTblFields.r_buyerID.toString().toLowerCase()   + " text NOT NULL,\n" +
-                TblFields.requestTblFields.r_sellerID.toString().toLowerCase()   + " text NOT NULL,\n" +
-                TblFields.requestTblFields.vacationID.toString().toLowerCase()    + " text NOT NULL,\n" +
-                TblFields.requestTblFields.r_answer.toString().toLowerCase()    + "	text NOT NULL,\n" +
+                TblFields.enumDict.get("requestTblFields").get(0) + " text NOT NULL PRIMARY KEY,\n" +
+                TblFields.enumDict.get("requestTblFields").get(1) + " text NOT NULL,\n" +
+                TblFields.enumDict.get("requestTblFields").get(2) + " text NOT NULL,\n" +
+                TblFields.enumDict.get("requestTblFields").get(3) + " text NOT NULL,\n" +
+                TblFields.enumDict.get("requestTblFields").get(4) + " text NOT NULL,\n" +
                 ");");
     }
 
-    public static String dropUsersTableSQL(){
+    public static String dropUsersTableSQL() {
         return "DROP TABLE IF EXISTS tbl_requests;";
     }
 
-    public String getRequestsFieldsSQL(){
+    public String getRequestsFieldsSQL() {
         return "VALUES (" + r_ID +
                 ", " + r_buyerID +
                 ", " + r_seller +
@@ -62,8 +63,8 @@ public class Request implements ISQLable{
         this.vacationID = vacationID;
     }
 
-    public void upateAnswer(boolean isConfirmed){
-        if(isConfirmed)
+    public void upateAnswer(boolean isConfirmed) {
+        if (isConfirmed)
             this.r_answer = ansStatus.confirmed.toString();
         else
             this.r_answer = ansStatus.rejected.toString();
@@ -99,11 +100,11 @@ public class Request implements ISQLable{
 
     @Override
     public String getFieldsSQLWithValues() {
-        return TblFields.requestTblFields.r_ID.toString().toLowerCase() + "='" + this.getR_ID() +
-                "'," + TblFields.requestTblFields.r_buyerID.toString().toLowerCase() + "='" + this.getR_buyerID() +
-                "'," + TblFields.requestTblFields.r_sellerID.toString().toLowerCase() + "='" + this.getR_seller() +
-                "'," + TblFields.requestTblFields.vacationID.toString().toLowerCase() + "='" + this.getVacationID() +
-                "'," + TblFields.requestTblFields.r_answer.toString().toLowerCase() + "='" + this.getR_answer() +
+        return TblFields.enumDict.get("requestTblFields").get(0) + "='" + this.getR_ID() +
+                "'," + TblFields.enumDict.get("requestTblFields").get(1) + "='" + this.getR_buyerID() +
+                "'," + TblFields.enumDict.get("requestTblFields").get(2) + "='" + this.getR_seller() +
+                "'," + TblFields.enumDict.get("requestTblFields").get(3) + "='" + this.getVacationID() +
+                "'," + TblFields.enumDict.get("requestTblFields").get(4) + "='" + this.getR_answer() +
                 "'\n";
     }
 
@@ -114,18 +115,19 @@ public class Request implements ISQLable{
 
     public String toString() {
         return "Request{" +
-                TblFields.requestTblFields.r_ID.toString().toLowerCase() + "='" + r_ID + "\'," +
-                TblFields.requestTblFields.r_buyerID.toString().toLowerCase() + "='" + r_buyerID + "\'," +
-                TblFields.requestTblFields.r_sellerID.toString().toLowerCase() + "='" + r_seller + "\'," +
-                TblFields.requestTblFields.vacationID.toString().toLowerCase() + "='" + vacationID + "\'," +
-                TblFields.requestTblFields.r_answer.toString().toLowerCase() + "='" + r_answer + "\'," +
+                TblFields.enumDict.get("requestTblFields").get(0) + "='" + r_ID + "\'," +
+                TblFields.enumDict.get("requestTblFields").get(1) + "='" + r_buyerID + "\'," +
+                TblFields.enumDict.get("requestTblFields").get(2) + "='" + r_seller + "\'," +
+                TblFields.enumDict.get("requestTblFields").get(3) + "='" + vacationID + "\'," +
+                TblFields.enumDict.get("requestTblFields").get(4) + "='" + r_answer + "\'," +
                 '}';
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-       Request r = (Request) o;
+        Request r = (Request) o;
         return Objects.equals(getR_ID(), r.getR_ID()) &&
                 Objects.equals(getR_buyerID(), r.getR_buyerID()) &&
                 Objects.equals(getR_seller(), r.getR_seller()) &&
