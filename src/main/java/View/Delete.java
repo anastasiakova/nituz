@@ -35,11 +35,12 @@ public class Delete {
         this.deleteController = deleteController;
     }
 
-    public void deleteButtonAction(){
-        ISQLable userToDelete = new User(userText.getText(),null,null,null
-                ,null,null);
-        sqlModel.deleteRecordFromTable(userToDelete);
-
+    public void deleteUserButtonAction(){
+        String username = userText.getText();
+        this.deleteController.deleteUser(username);
+//        ISQLable userToDelete = new User(username, null,null,null,null,
+//                null,null,null,null);
+        //sqlModel.deleteRecordFromTable(userToDelete);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("User deleted successfully");
         alert.show();
