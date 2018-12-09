@@ -26,7 +26,7 @@ public class UpdateForm {
     public javafx.scene.control.TextField fNameText;
     public javafx.scene.control.TextField cityText;
     public javafx.scene.control.TextField lNameText;
-    public javafx.scene.control.TextField bankAcountNumber;
+    public javafx.scene.control.TextField bankAccountNumber;
     public javafx.scene.control.TextField creditCardNumber;
     public javafx.scene.control.TextField idNumber;
     //public javafx.scene.control.DatePicker dateText;
@@ -66,14 +66,27 @@ public class UpdateForm {
     public void updateFormWindow(ActionEvent actionEvent) {
     }
     public void updateButtonAction() throws InterruptedException, ParseException {
-
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         if (dd == null || dd.getText().equals("") ||
             mm == null || mm.getText().equals("")||
             yyyy == null || yyyy.getText().equals("")) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
+
             alert.setContentText("No birthday date entered. A birthday is required.");
             alert.show();
-        } else {
+        }
+           else if(!bankAccountNumber.getText().matches("\\d*")) {
+                alert.setContentText("Your'e must put numbers in bank acount! ");
+                alert.show();
+            }
+            else if(!creditCardNumber.getText().matches("\\d*")) {
+                alert.setContentText("Your'e must put numbers in credit! ");
+                alert.show();
+            }
+            else if(!idNumber.getText().matches("\\d*")) {
+                alert.setContentText("Your'e must put a numbers in id! ");
+                alert.show();
+            }
+         else {
             //LocalDate localDate = dateText.getValue();
             //Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
             //Date date = Date.from(instant);
@@ -88,26 +101,23 @@ public class UpdateForm {
                 calendar.add(Calendar.YEAR, -18);
                 Date d1 = calendar.getTime();
                 if (date.after(d1)) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setContentText("Your'e too young to register! ");
                     alert.show();
 
                 } else {
                     this.updateFormController.UpdateUser(userText.getText(), passText.getText(), date, fNameText.getText()
-                            , lNameText.getText(), cityText.getText(), bankAcountNumber.getText(),
+                            , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(),
                             creditCardNumber.getText(),idNumber.getText());
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("User updated successfully.");
-                    alert.show();
+                    Alert alertI = new Alert(Alert.AlertType.INFORMATION);
+                    alertI.setContentText("User updated successfully.");
+                    alertI.show();
                     Stage stage = (Stage) closeButton.getScene().getWindow();
                     stage.close();
                 }
             }catch (ParseException e){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setContentText("Invalid date. Please insert a valid date.");
                 alert.show();
             }catch (IllegalArgumentException e){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setContentText("Invalid date. Please insert a valid date.");
                 alert.show();
             }
