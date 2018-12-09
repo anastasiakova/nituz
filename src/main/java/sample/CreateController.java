@@ -1,14 +1,10 @@
 package sample;
 
 import Model.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-import java.awt.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -70,7 +66,7 @@ public class CreateController {
                         , lNameText.getText(), cityText.getText());
                 sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                String[] users = new String[UserTblFields.values().length];
+                String[] users = new String[TblFields.values().length];
                 users[0] = userText.getText();
                 String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS, users);
                 String[] arrAns = ansSelect.split(",");

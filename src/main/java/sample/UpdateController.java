@@ -2,26 +2,19 @@ package sample;
 
 import Model.SQLModel;
 import Model.Tables;
-import Model.UserTblFields;
+import Model.TblFields;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.text.View;
-import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -60,7 +53,7 @@ public class UpdateController {
     }
 
     public void updateFormWindow(ActionEvent actionEvent) {
-        String[]users = new String[UserTblFields.values().length];
+        String[]users = new String[TblFields.values().length];
         users[0] = searchText.getText();
         String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS,users);
         String[]arrAns = ansSelect.split(",");

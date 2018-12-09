@@ -71,13 +71,13 @@ public class SQLModel {
         String sql = "SELECT * FROM tbl_users\n";
         sql += "WHERE ";
         boolean notFirst = false;
-        for (int i = 0; i < UserTblFields.values().length; i++) {
+        for (int i = 0; i < TblFields.values().length; i++) {
             if (fields[i] != "" && fields[i]!= null) {
                 if(notFirst){
                     sql += " AND ";
                 }
                 notFirst = true;
-                sql += UserTblFields.values()[i].toString().toLowerCase() + "='" + fields[i] + "'";
+                sql += TblFields.values()[i].toString().toLowerCase() + "='" + fields[i] + "'";
             }
         }
         sql += ";";
