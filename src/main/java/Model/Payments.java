@@ -29,7 +29,7 @@ public class Payments implements ISQLable {
         this._aprovedRequest = aprovedRequest;
         _paymentId++;
         this._id = _paymentId.toString();
-        this._date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        this._date = new SimpleDateFormat("dd/mm/yyy-HH:mm:ss").format(Calendar.getInstance().getTime());
         this._status = Status.inProgress;
     }
 
@@ -116,7 +116,7 @@ public class Payments implements ISQLable {
 
     public static String createPaymentsTableSQL(){
         return ("CREATE TABLE IF NOT EXISTS tbl_payments (\n" +
-                TblFields.enumDict.get("paymentsTblFields").get(0) + " NOT NULL PRIMARY KEY,\n" +
+                TblFields.enumDict.get("paymentsTblFields").get(0) + " text NOT NULL PRIMARY KEY,\n" +
                 TblFields.enumDict.get("paymentsTblFields").get(1)   + " text NOT NULL,\n" +
                 TblFields.enumDict.get("paymentsTblFields").get(2)   + " text NOT NULL,\n" +
                 TblFields.enumDict.get("paymentsTblFields").get(3)    + " text NOT NULL\n" +
