@@ -1,24 +1,23 @@
-package sample;
+package View;
 
-import Model.ISQLable;
-import Model.SQLModel;
-import Model.User;
+import Controller.DeleteController;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-
-
-public class DeleteController {
-
-    public SQLModel sqlModel;
+public class Delete {
+    public DeleteController deleteController;
+    //public SQLModel sqlModel;
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button deleteButton;
     public javafx.scene.control.TextField userText;
 
-    public DeleteController() {}
+    public Delete() {}
 
-    public DeleteController(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public Delete(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public Delete(DeleteController deleteController) {
+        this.deleteController = deleteController;
     }
 
     public void closeButtonAction(){
@@ -28,8 +27,12 @@ public class DeleteController {
         stage.close();
     }
 
-    public void setSqlModel(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public void setSqlModel(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public void setController(DeleteController deleteController)
+    {
+        this.deleteController = deleteController;
     }
 
     public void deleteButtonAction(){

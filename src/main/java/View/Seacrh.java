@@ -1,29 +1,32 @@
-package sample;
+package View;
 
-import Model.SQLModel;
-import Model.Tables;
-import Model.TblFields;
+import Controller.SearchController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
-public class SeacrhController {
+public class Seacrh {
     @FXML
     //private AnchorPane content;
     //public static String ans;
-    public SQLModel sqlModel;
+    //public SQLModel sqlModel;
+    public SearchController searchController;
     @FXML
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button updateButton;
     public javafx.scene.control.TextField searchText;
     //public javafx.scene.control.TextField userText;
 
-    public SeacrhController() {};
+    public Seacrh() {};
 
 
-    public SeacrhController(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public Seacrh(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public Seacrh(SearchController searchController) {
+
+        this.searchController = searchController;
     }
 
     public void closeButtonAction(){
@@ -33,8 +36,12 @@ public class SeacrhController {
         stage.close();
     }
 
-    public void setSqlModel(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public void setSqlModel(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public void setController(SearchController searchController)
+    {
+        this.searchController = searchController;
     }
 
     public void updateFormWindow(ActionEvent actionEvent) {
