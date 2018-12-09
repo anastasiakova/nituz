@@ -16,7 +16,7 @@ public class TblFields {
         enumDict.put("requestTblFields", enumList);
         enumList = Arrays.asList("vacation_id", "start_date", "end_date", "destination", "aviation_company",
                 "num_of_tickets", "ticket_type", "baggage", "round_trip", "vacation_type",
-                "vacation_status", "sleeping_arrangements");
+                "vacation_status", "sleeping_arrangements", "owner_id");
         enumDict.put("vacationFields", enumList);
         enumList = Arrays.asList("payment_id", "request_id", "timestamp", "status");
         enumDict.put("paymentsTblFields", enumList);
