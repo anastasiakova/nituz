@@ -1,8 +1,6 @@
-package sample;
+package View;
 
-import Model.SQLModel;
-import Model.Tables;
-import Model.TblFields;
+import Controller.UpdateController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,12 +17,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class UpdateController {
+public class Update {
 
     @FXML
     //private AnchorPane content;
     //public static String ans;
-    public SQLModel sqlModel;
+   // public SQLModel sqlModel;
+    public UpdateController updateController;
     @FXML
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button updateButton;
@@ -34,11 +33,14 @@ public class UpdateController {
     public javafx.scene.control.TextField yyyy;
     //public javafx.scene.control.TextField userText;
 
-    public UpdateController() {};
+    public Update() {};
 
-
-    public UpdateController(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public Update(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public Update(UpdateController updateController)
+    {
+        this.updateController = updateController;
     }
 
     public void closeButtonAction(){
@@ -48,8 +50,12 @@ public class UpdateController {
         stage.close();
     }
 
-    public void setSqlModel(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public void setSqlModel(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public void setController(UpdateController updateController) {
+
+        this.updateController = updateController;
     }
 
     public void updateFormWindow(ActionEvent actionEvent) {
@@ -68,8 +74,8 @@ public class UpdateController {
             stage.setTitle("Update User");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("/UpdateForm.fxml").openStream());
-            UpdateFormController ViewForm = fxmlLoader.getController();
-            ViewForm.setSqlModel(sqlModel);
+            UpdateForm ViewForm = fxmlLoader.getController();
+            ViewForm.setController(sqlModel);
             Scene scene = new Scene(root, 400, 550);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes

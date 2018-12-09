@@ -1,27 +1,22 @@
-package sample;
+package View;
 
-import Model.*;
+import Controller.UpdateFormController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
-public class UpdateFormController{
+public class UpdateForm {
 
 
-    public SQLModel sqlModel;
+   // public SQLModel sqlModel;
+    public UpdateFormController updateFormController;
     @FXML
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button updateButton;
@@ -40,12 +35,13 @@ public class UpdateFormController{
 
     };
 
-
-
     //public String shit=ans;
-    public UpdateFormController() {};
-    public UpdateFormController(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+    public UpdateForm() {};
+//    public UpdateForm(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public UpdateForm(UpdateFormController updateFormController) {
+        this.updateFormController = updateFormController;
     }
 
     public void closeButtonAction(){
@@ -56,8 +52,12 @@ public class UpdateFormController{
         stage.close();
     }
 
-    public void setSqlModel(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public void setSqlModel(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public void setController(UpdateFormController updateFormController)
+    {
+        this.updateFormController = updateFormController;
     }
 
     public void updateFormWindow(ActionEvent actionEvent) {

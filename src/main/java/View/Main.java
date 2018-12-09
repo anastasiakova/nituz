@@ -1,17 +1,11 @@
-package sample;
+package View;
 
 import Model.SQLModel;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 
 public class Main extends Application {
 
@@ -21,8 +15,8 @@ public class Main extends Application {
         FXMLLoader fxmlControl = new FXMLLoader();
         Parent root = fxmlControl.load(getClass().getResource(("/openWindow.fxml")).openStream());
         primaryStage.setTitle("VACATION 4 U ");
-        MainController view = fxmlControl.getController();
-        view.setSqlModel(sqlModel);
+        MainView view = fxmlControl.getController();
+        view.setController(sqlModel);
 
 
         primaryStage.setScene(new Scene(root, 500, 275));

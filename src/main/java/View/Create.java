@@ -1,6 +1,6 @@
-package sample;
+package View;
 
-import Model.*;
+import Controller.CreateController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
@@ -11,9 +11,10 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
-public class CreateController {
+public class Create {
 
-    public SQLModel sqlModel;
+    //public SQLModel sqlModel;
+    public CreateController createController;
     @FXML
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button createButton;
@@ -25,10 +26,13 @@ public class CreateController {
     public javafx.scene.control.TextField lNameText;
     public javafx.scene.control.DatePicker dateText;
 
-    public CreateController() {};
+    public Create() {};
 
-    public CreateController(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public Create(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+    public Create(CreateController createController) {
+        this.createController = createController;
     }
 
     public void closeButtonAction(){
@@ -38,8 +42,12 @@ public class CreateController {
         stage.close();
     }
 
-    public void setSqlModel(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
+//    public void setSqlModel(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
+
+    public void setCreateController(CreateController createController) {
+        this.createController = createController;
     }
 
     public void createButtonAction(){
@@ -62,14 +70,14 @@ public class CreateController {
                 alert.setContentText("Your'e too young to register! ");
                 alert.show();
             } else {
-                ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
-                        , lNameText.getText(), cityText.getText());
-                sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
+//               ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
+//                        , lNameText.getText(), cityText.getText());
+//                sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                String[] users = new String[TblFields.values().length];
-                users[0] = userText.getText();
-                String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS, users);
-                String[] arrAns = ansSelect.split(",");
+//                String[] users = new String[TblFields.values().length];
+//                users[0] = userText.getText();
+//                String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS, users);
+//                String[] arrAns = ansSelect.split(",");
                 alert.setContentText("User Created:\n\n" +
                         "User Name: " + arrAns[0] + "\n"
                         + "Password: " + arrAns[1].substring(1)

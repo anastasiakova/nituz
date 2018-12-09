@@ -1,6 +1,6 @@
-package sample;
+package View;
 
-import Model.SQLModel;
+import Controller.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,17 +10,18 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class MainController {
-    public SQLModel sqlModel;
+public class MainView {
+    //public SQLModel sqlModel;
+    public MainView(){
+    };
 
-    public MainController(){};
-    public MainController(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
-    }
+//    public MainView(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
 
-    public void setSqlModel(SQLModel sqlModel) {
-        this.sqlModel = sqlModel;
-    }
+//    public void setSqlModel(SQLModel sqlModel) {
+//        this.sqlModel = sqlModel;
+//    }
 
     public javafx.scene.control.Button btn_create;
     public javafx.scene.control.Button btn_update;
@@ -33,8 +34,8 @@ public class MainController {
             stage.setTitle("Create User");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("/Create.fxml").openStream());
-            CreateController creatView = fxmlLoader.getController();
-            creatView.setSqlModel(sqlModel);
+            Create creatView = fxmlLoader.getController();
+            creatView.setCreateController(new CreateController());
             Scene scene = new Scene(root, 270, 420);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
@@ -49,8 +50,8 @@ public class MainController {
             stage.setTitle("Delete User");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("/Delete.fxml").openStream());
-            DeleteController deleteView = fxmlLoader.getController();
-            deleteView.setSqlModel(sqlModel);
+            Delete deleteView = fxmlLoader.getController();
+            deleteView.setController(new DeleteController());
             Scene scene = new Scene(root, 250, 220);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
@@ -66,8 +67,8 @@ public class MainController {
             stage.setTitle("Update User");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("/Update.fxml").openStream());
-            UpdateController creatView = fxmlLoader.getController();
-            creatView.setSqlModel(sqlModel);
+            Update creatView = fxmlLoader.getController();
+            creatView.setController(new UpdateController());
             Scene scene = new Scene(root, 250, 220);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
@@ -84,8 +85,8 @@ public class MainController {
             stage.setTitle("Search User User");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("/Sreach.fxml").openStream());
-            SeacrhController creatView = fxmlLoader.getController();
-            creatView.setSqlModel(sqlModel);
+            Seacrh creatView = fxmlLoader.getController();
+            creatView.setController(new SearchController());
             Scene scene = new Scene(root, 250, 220);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
