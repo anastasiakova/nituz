@@ -73,19 +73,22 @@ public class Create {
 //               ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
 //                        , lNameText.getText(), cityText.getText());
 //                sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
+                this.createController.CreateUser(userText.getText(), passText.getText(), date, fNameText.getText()
+                        , lNameText.getText(), cityText.getText(),"","","");//TODO should be fields for that
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 //                String[] users = new String[TblFields.values().length];
 //                users[0] = userText.getText();
 //                String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS, users);
 //                String[] arrAns = ansSelect.split(",");
-                alert.setContentText("User Created:\n\n" +
-                        "User Name: " + arrAns[0] + "\n"
-                        + "Password: " + arrAns[1].substring(1)
-
-                        + "\nB-day: " + arrAns[2].substring(1)
-                        + "\nFirst Name: " + arrAns[3].substring(1)
-                        + "\nLast Name: " + arrAns[4].substring(1)
-                        + "\nCity: " + arrAns[5].substring(1, arrAns[5].length() - 2));
+//                alert.setContentText("User Created:\n\n" +
+//                        "User Name: " + arrAns[0] + "\n"
+//                        + "Password: " + arrAns[1].substring(1)
+//
+//                        + "\nB-day: " + arrAns[2].substring(1)
+//                        + "\nFirst Name: " + arrAns[3].substring(1)
+//                        + "\nLast Name: " + arrAns[4].substring(1)
+//                        + "\nCity: " + arrAns[5].substring(1, arrAns[5].length() - 2));
+                alert.setContentText(createController.getUserCreatedMassage(userText.getText()));
                 alert.show();
                 Stage stage = (Stage) closeButton.getScene().getWindow();
                 stage.close();
