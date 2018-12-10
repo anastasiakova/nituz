@@ -95,32 +95,55 @@ public class SQLModel {
     }
 
     public String selectFromTable(Tables table, String[] fields){
+        boolean shouldGetAll = false;
+        return selectFromTable(table, fields, shouldGetAll);
+    }
+
+    public String selecetAllFromTable(Tables table){
+        boolean shouldGetAll = true;
         switch (table) {
             case TBL_USERS:
-                return selectFromTbl("TBL_USERS", fields, "userFields");
+                return selectFromTbl("TBL_USERS", null, "userFields", shouldGetAll);
             case TBL_REQUESTS:
-                return selectFromTbl("TBL_REQUESTS", fields, "requestTblFields");
+                return selectFromTbl("TBL_REQUESTS", null, "requestTblFields", shouldGetAll);
             case TBL_VACATIONS:
-                return selectFromTbl("TBL_VACATIONS", fields, "vacationFields");
+                return selectFromTbl("TBL_VACATIONS", null, "vacationFields", shouldGetAll);
             case TBL_PAYMENTS:
-                return selectFromTbl("TBL_PAYMENTS", fields, "paymentsTblFields");
+                return selectFromTbl("TBL_PAYMENTS", null, "paymentsTblFields", shouldGetAll);
             default:
                 return "";
         }
     }
 
-    private String selectFromTbl(String table, String[] fields, String tblFields) {
+    public String selectFromTable(Tables table, String[] fields, boolean shouldGetAll){
+        switch (table) {
+            case TBL_USERS:
+                return selectFromTbl("TBL_USERS", fields, "userFields", shouldGetAll);
+            case TBL_REQUESTS:
+                return selectFromTbl("TBL_REQUESTS", fields, "requestTblFields", shouldGetAll);
+            case TBL_VACATIONS:
+                return selectFromTbl("TBL_VACATIONS", fields, "vacationFields", shouldGetAll);
+            case TBL_PAYMENTS:
+                return selectFromTbl("TBL_PAYMENTS", fields, "paymentsTblFields", shouldGetAll);
+            default:
+                return "";
+        }
+    }
+
+    private String selectFromTbl(String table, String[] fields, String tblFields, boolean shouldGetAll) {
         String sql = "SELECT * FROM ";
         sql += table.toLowerCase() + "\n";
-        sql += "WHERE ";
-        boolean notFirst = false;
-        for (int i = 0; i < TblFields.enumDict.get(tblFields).size(); i++) {
-            if (fields[i] != "" && fields[i]!= null) {
-                if(notFirst){
-                    sql += " AND ";
+        if(!shouldGetAll) {
+            sql += "WHERE ";
+            boolean notFirst = false;
+            for (int i = 0; i < TblFields.enumDict.get(tblFields).size(); i++) {
+                if (fields[i] != "" && fields[i] != null) {
+                    if (notFirst) {
+                        sql += " AND ";
+                    }
+                    notFirst = true;
+                    sql += TblFields.enumDict.get(tblFields).get(i) + "='" + fields[i] + "'";
                 }
-                notFirst = true;
-                sql += TblFields.enumDict.get(tblFields).get(i) + "='" + fields[i] + "'";
             }
         }
         sql += ";";
@@ -135,6 +158,7 @@ public class SQLModel {
                 for (int i = 1 ; i <= TblFields.enumDict.get(tblFields).size(); i++){
                     res += rs.getString(i) + ", ";
                 }
+                res += '\n';
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
