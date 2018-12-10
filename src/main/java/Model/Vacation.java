@@ -333,5 +333,24 @@ public class Vacation implements ISQLable {
         return _ownerID;
     }
     //</editor-fold>
+
+    @Override
+    public String toString() {
+        return "Vacation{" +
+                "_vacationID='" + _vacationID + '\'' +
+                ", __startDate=" + __startDate +
+                ", _endDate=" + _endDate +
+                ", _destination='" + _destination + '\'' +
+                ", _aviationCompany='" + _aviationCompany + '\'' +
+                ", _numOfTickets=" + _numOfTickets +
+                ", _ticketType=" + _ticketType +
+                ", _isBaggageIncluded=" + _isBaggageIncluded +
+                ", _isRoundTrip=" + _isRoundTrip +
+                ", _vacationType=" + _vacationType +
+                ", _vacationStatus=" + _vacationStatus +
+                ", _vacationSleepingArrangements=" + _vacationSleepingArrangements +
+                ", _ownerID='" + _ownerID + '\'' +
+                '}';
+    }
 }
 
