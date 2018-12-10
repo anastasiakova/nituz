@@ -63,6 +63,14 @@ public class Request implements ISQLable {
         this.vacationID = vacationID;
     }
 
+    public Request(String r_ID, String r_buyerID, String r_seller, String r_answer, String vacationID) {
+        this.r_ID = r_ID;
+        this.r_buyerID = r_buyerID;
+        this.r_seller = r_seller;
+        this.r_answer = r_answer;
+        this.vacationID = vacationID;
+    }
+
     public void upateAnswer(boolean isConfirmed) {
         if (isConfirmed)
             this.r_answer = ansStatus.confirmed.toString();
