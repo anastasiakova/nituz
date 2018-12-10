@@ -19,6 +19,7 @@ public class Payments implements ISQLable {
     private String tableName = "tbl_payments";
     private Status _status;
 
+
     private enum Status {
         inProgress,
         Canceled,

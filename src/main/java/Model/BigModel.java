@@ -2,16 +2,13 @@ package Model;
 
 public class BigModel {
 
-//
-//    public void ChangePaymentStatus(Boolean isCancel){
-//        if(isCancel) {
-//            this._status = Payments.Status.Canceled;
-//            //change TBL
-//        }
-//        else{
-//            this._status = Payments.Status.Sucssesful;
-//            //change TBL
-//        }
-//    }
+    public static void CreatePaymentAndUpdateVacation(Payments newPayment){
+        SQLModel sql = SQLModel.GetInstance();
+        //sql.insertRecordToTable(Tables.TBL_PAYMENTS.toString().toLowerCase(), newPayment);
+        String approvedReqId = newPayment.get_aprovedRequest();
+        Request
+    }
 
+    public static void CreateRequestAndUpdateVacation(Request newRequest) {
+    }
 }

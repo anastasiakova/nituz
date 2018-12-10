@@ -12,6 +12,8 @@ public class Main {
                                         2, Vacation.TicketType.ADULT, false, true, Vacation.VacationType.URBAN,
                 Vacation.VacationStatus.FOR_SALE, Vacation.VacationSleepingArrangements.NA, "Oren");
         ins.insertRecordToTable(vacation.getTableName(), vacation);
+        vacation.set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
+        ins.updateRecord(vacation);
 
 
     }
