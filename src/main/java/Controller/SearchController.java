@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.SQLModel;
-import Model.Tables;
-import Model.TblFields;
-import Model.Vacation;
+import Model.*;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +8,7 @@ import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SearchController {
 
@@ -57,6 +55,8 @@ public class SearchController {
         }
         return FXCollections.observableList(vacations);
     }
+
+
 
     public boolean isLoginValid(String username, String pwd) {
         String[] fields = new String[TblFields.enumDict.get("userFields").size()];

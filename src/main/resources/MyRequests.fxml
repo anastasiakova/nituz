@@ -25,13 +25,13 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TableView fx:id="Table" prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="reqTable" prefHeight="200.0" prefWidth="600.0">
                <columns>
-                  <TableColumn fx:id="destenation" prefWidth="116.0" text="destenation " />
+                  <TableColumn fx:id="destination" prefWidth="116.0" text="destination " />
                   <TableColumn fx:id="startDate" prefWidth="106.0" text="start date " />
                   <TableColumn fx:id="endDate" prefWidth="129.0" text="end date " />
                   <TableColumn fx:id="sallerUserName" prefWidth="130.0" text="saller username " />
-                  <TableColumn fx:id="answer" minWidth="0.0" prefWidth="118.0" text="answer "/>
+                  <TableColumn fx:id="answer" minWidth="0.0" prefWidth="118.0" text="answer " />
                </columns>
             </TableView>
             <Label prefHeight="27.0" prefWidth="600.0" text="Requests for my vacations">
@@ -39,9 +39,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TableView prefHeight="200.0" prefWidth="200.0">
+            <TableView fx:id="reqForMeTable" prefHeight="200.0" prefWidth="200.0">
               <columns>
-                 <TableColumn fx:id="myVecDestenation" prefWidth="113.0" text="destenation " />
+                 <TableColumn fx:id="myVecDestination" prefWidth="113.0" text="destination " />
                  <TableColumn fx:id="myVecStartDate" prefWidth="102.0" text="start date " />
                  <TableColumn fx:id="myVecEndDate" prefWidth="125.0" text="end date " />
                  <TableColumn fx:id="buyerUserName" prefWidth="119.0" text="buyer username " />
