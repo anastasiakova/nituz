@@ -1,33 +1,52 @@
 package View;
 
 import Controller.*;
+import Model.Vacation;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
-public class MainView {
-    //public SQLModel sqlModel;
-    public MainView(){
-    };
+import javafx.scene.control.ListView;
 
-//    public MainView(SQLModel sqlModel) {
-//        this.sqlModel = sqlModel;
-//    }
+import java.util.Date;
+import java.util.Observable;
 
-//    public void setSqlModel(SQLModel sqlModel) {
-//        this.sqlModel = sqlModel;
-//    }
+import Model.Vacation;
+
+
+public class openWindowsController {
+    public openWindowsController(){ };
+
 
     public javafx.scene.control.Button btn_create;
-    public javafx.scene.control.Button btn_update;
+    public javafx.scene.control.TableColumn<Vacation,String> startDate;
+    public javafx.scene.control.TableColumn<Vacation,String> endDate;
+    public javafx.scene.control.TableColumn<Vacation,String> destination;
+    public javafx.scene.control.TableColumn<Vacation,String> aviationCompany;
+    public javafx.scene.control.TableColumn<Vacation,String> numOfTickets;
+    public javafx.scene.control.TableColumn<Vacation,String> ticketType;
+    public javafx.scene.control.TableColumn<Vacation,String> isBaggageIncluded;
+    public javafx.scene.control.TableColumn<Vacation,String> isRoundTrip;
+    public javafx.scene.control.TableColumn<Vacation,String> vacationType;
+    public javafx.scene.control.TableColumn<Vacation,String> vacationStatus;
+    public javafx.scene.control.TableColumn<Vacation,String> vacationSleepingArrangements;
+    public javafx.scene.control.TableColumn<Vacation,String> ownerID;
 
 
-
+    public void init() {
+        startDate.setCellFactory(new PropertyValueFactory<Vacation,String>(("__startDate")));
+    }
     public void createWindow(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
