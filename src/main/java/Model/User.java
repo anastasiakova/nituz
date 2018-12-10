@@ -70,6 +70,7 @@ public class User implements ISQLable {
         this.bankAcount = bankAcount;
         this.id = id;
     }
+
     public User(String[] searcheUser) {
         this.username = searcheUser[0];
         this.pwd = searcheUser[1];

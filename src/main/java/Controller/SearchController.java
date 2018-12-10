@@ -44,7 +44,7 @@ public class SearchController {
             }
         }
     }
-    public void getAllAvailableVacations(){
+    public List<Vacation> getAllAvailableVacations(){
         String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
         fields[10] = Vacation.VacationStatus.FOR_SALE.name().toLowerCase();
 
@@ -53,11 +53,7 @@ public class SearchController {
         for (int i = 0; i < allVacationsStr.length ; i++) {
             vacations.add(new Vacation(allVacationsStr[i]));
         }
-//        for (String vacation: allVacationsStr ) {
-//            vacations.add(new Vacation(vacation));
-//        }
-        System.out.println(vacations);
-        //return vacations;
+        return vacations;
     }
 
     public boolean isLoginValid(String username, String pwd) {
