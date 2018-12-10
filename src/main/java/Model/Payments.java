@@ -27,29 +27,24 @@ public class Payments implements ISQLable {
     };
 
     public Payments (String aprovedRequest){
-        String[] splited = aprovedRequest.split(", ");
-        if(splited.length != 1){
-            this._id = splited[0];
-            this._aprovedRequest = splited[1];
-            this._date = splited[2];
-            this._status = Status.valueOf(splited[3]);
+        this(aprovedRequest.split(", ")) ;
+    }
+
+    public Payments(String[] searchedPayment) {
+        if(searchedPayment.length != 1){
+            this._id = searchedPayment[0];
+            this._aprovedRequest = searchedPayment[1];
+            this._date = searchedPayment[2];
+            this._status = Status.valueOf(searchedPayment[3].toUpperCase());
         }
         else{
-            this._aprovedRequest = aprovedRequest;
+            this._aprovedRequest = searchedPayment[0];
             _paymentId++;
             this._id = _paymentId.toString();
             this._date = new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(Calendar.getInstance().getTime());
             this._status = Status.inProgress;
         }
     }
-
-    public Payments(String id, String request, String date, String status) {
-        this._id = id;
-        this._aprovedRequest = request;
-        this._date = date;
-        this._status = Status.valueOf(status);
-    }
-
 
     private String tableFields = tableName + "("
             + TblFields.enumDict.get("paymentsTblFields").get(0) + ", "

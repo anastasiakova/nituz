@@ -118,14 +118,11 @@ public class Vacation implements ISQLable {
         count++;
         this._vacationID = String.valueOf(count);
     }
-    public Vacation(String vacation){
-        String[] serchedVacation = vacation.split(", ");
-         new Vacation(serchedVacation[0],serchedVacation[1],serchedVacation[2],
-                serchedVacation[3],serchedVacation[4],serchedVacation[5],serchedVacation[6],
-                serchedVacation[7],serchedVacation[8],serchedVacation[9],serchedVacation[10],
-                serchedVacation[11],serchedVacation[12]);
+    public Vacation(String vacation) {
+        this(vacation.split(", "));
     }
-    public Vacation(Date __startDate, Date _endDate,
+
+    public Vacation(Date __startDate , Date _endDate,
                     String _destination, String _aviationCompany,
                     int _numOfTickets, TicketType _ticketType,
                     boolean _isBaggageIncluded, boolean _isRoundTrip,
@@ -172,31 +169,25 @@ public class Vacation implements ISQLable {
         this._vacationSleepingArrangements = _vacationSleepingArrangements;
         this._ownerID = _ownerID;
     }
-    public Vacation(String _vacationID, String __startDate,
-                    String _endDate, String _destination,
-                    String _aviationCompany, String _numOfTickets,
-                    String  _ticketType, String _isBaggageIncluded,
-                    String _isRoundTrip, String _vacationType,
-                    String _vacationStatus, String _vacationSleepingArrangements,
-                    String _ownerID) {
+    public Vacation(String []serchedVacation ) {
         DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
+        this._vacationID = serchedVacation[0];
         try {
-            this.__startDate = formatter.parse(__startDate);
-            this._endDate = formatter.parse(_endDate);
+            this.__startDate = formatter.parse(serchedVacation[1]);
+            this._endDate = formatter.parse(serchedVacation[2]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        this._vacationID = _vacationID;
-        this._destination = _destination;
-        this._aviationCompany = _aviationCompany;
-        this._numOfTickets = Integer.parseInt(_numOfTickets);
-        this._ticketType = TicketType.valueOf(_ticketType);
-        this._isBaggageIncluded = Boolean.valueOf(_isBaggageIncluded);
-        this._isRoundTrip = Boolean.valueOf(_isRoundTrip);
-        this._vacationType = VacationType.valueOf(_vacationType);
-        this._vacationStatus = VacationStatus.valueOf(_vacationStatus);
-        this._vacationSleepingArrangements = VacationSleepingArrangements.valueOf(_vacationSleepingArrangements);
-        this._ownerID = _ownerID;
+        this._destination = serchedVacation[3];
+        this._aviationCompany =  serchedVacation[4];
+        this._numOfTickets = Integer.parseInt(serchedVacation[5]);
+        this._ticketType = TicketType.valueOf(serchedVacation[6].toUpperCase());
+        this._isBaggageIncluded = Boolean.valueOf(serchedVacation[7]);
+        this._isRoundTrip = Boolean.valueOf(serchedVacation[8]);
+        this._vacationType = VacationType.valueOf(serchedVacation[9].toUpperCase());
+        this._vacationStatus = VacationStatus.valueOf(serchedVacation[10].toUpperCase());
+        this._vacationSleepingArrangements = VacationSleepingArrangements.valueOf(serchedVacation[11].toUpperCase());
+        this._ownerID = serchedVacation[12];
     }
 
     public Vacation(Date __startDate, Date _endDate,

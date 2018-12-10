@@ -12,7 +12,7 @@ public class DeleteController {
     }
 
     public void deleteUser(String username){
-        ISQLable userToDelete = new User(username, "","","","",
+        ISQLable userToDelete = new User(username, "",null,"","",
                 "","","","");
         sqlModel.deleteRecordFromTable(userToDelete);
     }

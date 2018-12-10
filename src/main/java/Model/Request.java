@@ -63,17 +63,15 @@ public class Request implements ISQLable {
         this.vacationID = vacationID;
     }
 
-    public Request(String r_ID, String r_buyerID, String r_seller, String vacationID, String r_answer) {
-        this.r_ID = r_ID;
-        this.r_buyerID = r_buyerID;
-        this.r_seller = r_seller;
-        this.r_answer = r_answer;
-        this.vacationID = vacationID;
+    public Request(String[] searchedRequest) {
+        this.r_ID = searchedRequest[0];
+        this.r_buyerID = searchedRequest[1];
+        this.r_seller = searchedRequest[2];
+        this.r_answer = searchedRequest[3];
+        this.vacationID = searchedRequest[4];
     }
     public Request(String request){
-        String[] serchedRequest = request.split(", ");
-        new Request(serchedRequest[0],serchedRequest[1],serchedRequest[2],
-                serchedRequest[3],serchedRequest[4]);
+       this(request.split(", "));
     }
 
     public void upateAnswer(boolean isConfirmed) {
