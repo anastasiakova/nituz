@@ -11,7 +11,7 @@ public class SQLModel {
 
     private SQLModel() {
         Path currentPath = Paths.get("");
-
+        TblFields.init();
         this._path = "jdbc:sqlite:" + currentPath.toAbsolutePath().toString() + "\\dataBase.db";
         try (Connection conn = DriverManager.getConnection(this._path)) {
             if (conn != null) {

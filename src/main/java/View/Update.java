@@ -34,10 +34,7 @@ public class Update {
     public javafx.scene.control.TextField yyyy;
     //public javafx.scene.control.TextField userText;
 
-    public Update() {
-    }
-
-    ;
+    public Update() { };
 
     //    public Update(SQLModel sqlModel) {
 //        this.sqlModel = sqlModel;

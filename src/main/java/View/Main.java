@@ -11,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        SQLModel sqlModel = SQLModel.GetInstance();
+//        SQLModel sqlModel = SQLModel.GetInstance();
         FXMLLoader fxmlControl = new FXMLLoader();
         Parent root = fxmlControl.load(getClass().getResource(("/openWindow.fxml")).openStream());
         primaryStage.setTitle("VACATION 4 U ");

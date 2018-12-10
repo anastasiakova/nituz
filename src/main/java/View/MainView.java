@@ -63,6 +63,7 @@ public class MainView {
 
     public void updateWindow(ActionEvent actionEvent) {
         try {
+            System.out.println("shit");
             Stage stage = new Stage();
             stage.setTitle("Update User");
             FXMLLoader fxmlLoader = new FXMLLoader();
