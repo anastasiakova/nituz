@@ -79,7 +79,7 @@ public class BigModel {
 
         public static ObservableList<VactaionAndRequest> getRequestedVacation(String logedInUsername){
             String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
-            fields[1] = logedInUsername;
+            fields[2] = logedInUsername;
             fields[4] = "pending";
             String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
             List<VactaionAndRequest> vactaionAndRequests = new ArrayList<>();
