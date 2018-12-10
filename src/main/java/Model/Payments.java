@@ -34,11 +34,11 @@ public class Payments implements ISQLable {
         this._status = Status.inProgress;
     }
 
-    public Payments(String id, String request, String date, int status) {
+    public Payments(String id, String request, String date, String status) {
         this._id = id;
         this._aprovedRequest = request;
         this._date = date;
-        this._status = Status.values()[status];
+        this._status = Status.valueOf(status);
     }
 
     private String tableFields = tableName + "("

@@ -75,7 +75,24 @@ public class User implements ISQLable {
         this.creditCard = creditCard;
         this.id = id;
     }
+    public User(String username, String pwd, String birthday, String privateName, String lastName, String city, String bankAcount, String creditCard, String id) {
+        this.username = username;
+        this.pwd = pwd;
+        this.birthday = new Date(birthday);
+        this.privateName = privateName;
+        this.lastName = lastName;
+        this.city = city;
+        this.bankAcount = bankAcount;
+        this.creditCard = creditCard;
+        this.id = id;
+    }
 
+    public User(String user){
+        String[] serchedUser = user.split(",");
+        new User(serchedUser[0],serchedUser[1],serchedUser[2],
+                serchedUser[3],serchedUser[4],serchedUser[5],serchedUser[6],
+                serchedUser[7],serchedUser[8]);
+    }
 
     public String getUsername() {
         return username;

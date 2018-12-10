@@ -113,7 +113,13 @@ public class Vacation implements ISQLable {
         count++;
         this._vacationID = String.valueOf(count);
     }
-
+    public Vacation(String vacation){
+        String[] serchedVacation = vacation.split(",");
+         new Vacation(serchedVacation[0],serchedVacation[1],serchedVacation[2],
+                serchedVacation[3],serchedVacation[4],serchedVacation[5],serchedVacation[6],
+                serchedVacation[7],serchedVacation[8],serchedVacation[9],serchedVacation[10],
+                serchedVacation[11],serchedVacation[12]);
+    }
     public Vacation(Date __startDate, Date _endDate,
                     String _destination, String _aviationCompany,
                     int _numOfTickets, TicketType _ticketType,
@@ -159,6 +165,28 @@ public class Vacation implements ISQLable {
         this._vacationType = _vacationType;
         this._vacationStatus = _vacationStatus;
         this._vacationSleepingArrangements = _vacationSleepingArrangements;
+        this._ownerID = _ownerID;
+    }
+    public Vacation(String _vacationID, String __startDate,
+                    String _endDate, String _destination,
+                    String _aviationCompany, String _numOfTickets,
+                    String  _ticketType, String _isBaggageIncluded,
+                    String _isRoundTrip, String _vacationType,
+                    String _vacationStatus, String _vacationSleepingArrangements,
+                    String _ownerID) {
+
+        this._vacationID = _vacationID;
+        this.__startDate = new Date(__startDate);
+        this._endDate = new Date(_endDate);
+        this._destination = _destination;
+        this._aviationCompany = _aviationCompany;
+        this._numOfTickets = Integer.valueOf(_numOfTickets);
+        this._ticketType = TicketType.valueOf(_ticketType);
+        this._isBaggageIncluded = Boolean.valueOf(is_isBaggageIncluded());
+        this._isRoundTrip = Boolean.valueOf(_isRoundTrip);
+        this._vacationType = VacationType.valueOf(_vacationType);
+        this._vacationStatus = VacationStatus.valueOf(_vacationStatus);
+        this._vacationSleepingArrangements = VacationSleepingArrangements.valueOf(_vacationSleepingArrangements);
         this._ownerID = _ownerID;
     }
 

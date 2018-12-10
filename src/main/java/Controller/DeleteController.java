@@ -12,8 +12,8 @@ public class DeleteController {
     }
 
     public void deleteUser(String username){
-        ISQLable userToDelete = new User(username, null,null,null,null,
-                null,null,null,null);
+        ISQLable userToDelete = new User(username, "","","","",
+                "","","","");
         sqlModel.deleteRecordFromTable(userToDelete);
     }
 

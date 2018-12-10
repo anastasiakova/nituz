@@ -16,7 +16,6 @@ public class UpdateController {
         String[]users = new String[TblFields.enumDict.get("userFields").size()];
         users[0] = username;
         String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS,users);
-        String[]arrAns = ansSelect.split(",");
         if(ansSelect == "") {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("User does not exist in the system! ");
