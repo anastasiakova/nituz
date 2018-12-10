@@ -3,6 +3,11 @@ package Controller;
 import Model.SQLModel;
 import Model.Tables;
 import Model.TblFields;
+import Model.Vacation;
+import javafx.scene.control.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchController {
 
@@ -37,6 +42,18 @@ public class SearchController {
                         + "\nCity: " + arrAns[5].substring(1, arrAns[5].length() - 2);
             }
         }
+    }
+    public List<Vacation> getAllAvailableVacations(){
+        String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
+        fields[10] = Vacation.VacationStatus.FOR_SALE.name().toLowerCase();
+
+        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
+        List<Vacation> vacations = new ArrayList<Vacation>();
+        for (String vacation: allVacationsStr
+             ) {
+            vacations.add(new Vacation(vacation));
+        }
+        return vacations;
     }
 }
 
