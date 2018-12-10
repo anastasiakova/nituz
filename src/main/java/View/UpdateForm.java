@@ -37,16 +37,10 @@ public class UpdateForm {
     void initialize() {
 
     };
-
-    //public String shit=ans;
     public UpdateForm() {};
-//    public UpdateForm(SQLModel sqlModel) {
-//        this.sqlModel = sqlModel;
-//    }
     public UpdateForm(UpdateFormController updateFormController) {
         this.updateFormController = updateFormController;
     }
-
     public void closeButtonAction(){
         // get a handle to the stage
         //System.out.println(shit);
@@ -55,9 +49,6 @@ public class UpdateForm {
         stage.close();
     }
 
-//    public void setSqlModel(SQLModel sqlModel) {
-//        this.sqlModel = sqlModel;
-//    }
     public void setController(UpdateFormController updateFormController)
     {
         this.updateFormController = updateFormController;
@@ -76,10 +67,6 @@ public class UpdateForm {
         }
            else if(!bankAccountNumber.getText().matches("\\d*")) {
                 alert.setContentText("Your'e must put numbers in bank acount! ");
-                alert.show();
-            }
-            else if(!creditCardNumber.getText().matches("\\d*")) {
-                alert.setContentText("Your'e must put numbers in credit! ");
                 alert.show();
             }
             else if(!idNumber.getText().matches("\\d*")) {

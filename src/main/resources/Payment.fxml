@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="319.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Payment">
+   <children>
+      <TabPane prefHeight="410.0" prefWidth="336.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Credit Card">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="271.0" prefWidth="336.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="18.0" prefHeight="49.0" prefWidth="235.0" text="Pay by Credit Card:" textAlignment="CENTER" AnchorPane.rightAnchor="56.0">
+                           <font>
+                              <Font name="Calibri Bold" size="29.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="93.0" layoutY="252.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Pay Now" />
+                        <GridPane layoutX="25.0" layoutY="81.0" prefHeight="142.0" prefWidth="286.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.20001220703125" minWidth="10.0" prefWidth="110.20001220703125" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.79998779296875" minWidth="10.0" prefWidth="175.79998779296875" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Card number:">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font></Label>
+                              <TextField GridPane.columnIndex="1" />
+                              <Label text="Expired date:" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <Label prefHeight="27.0" prefWidth="55.0" text="CVV:" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <Label text="Owner ID:" GridPane.columnIndex="0" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font></Label>
+                              <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.59997940063477" minWidth="10.0" prefWidth="49.4000244140625" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.39997558593751" minWidth="10.0" prefWidth="126.39997558593751" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="42.0" text="mm" />
+                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="42.0" text="yy" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                              <TextField maxWidth="-Infinity" prefWidth="42.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="PayPal">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="10.0" layoutY="96.0" prefHeight="82.0" prefWidth="308.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.0" minWidth="10.0" prefWidth="114.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="222.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="21.0" prefWidth="119.0" text="User Name:">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font></Label>
+                              <TextField GridPane.columnIndex="1" />
+                              <Label text="Password:" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="Calibri" size="15.0" />
+                                 </font></Label>
+                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Label alignment="CENTER" layoutX="24.0" layoutY="24.0" prefHeight="43.0" prefWidth="286.0" text="Pay With PayPal:">
+                           <font>
+                              <Font name="Calibri Bold" size="29.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="95.0" layoutY="196.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Pay Now" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
