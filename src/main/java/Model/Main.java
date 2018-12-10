@@ -12,8 +12,13 @@ public class Main {
                                         2, Vacation.TicketType.ADULT, false, true, Vacation.VacationType.URBAN,
                 Vacation.VacationStatus.FOR_SALE, Vacation.VacationSleepingArrangements.NA, "Oren");
         ins.insertRecordToTable(vacation.getTableName(), vacation);
+        ins.insertRecordToTable(vacation.getTableName(), new Vacation(new Date(), new Date(), "Berlin", "Easyjet",
+                2, Vacation.TicketType.ADULT, false, true, Vacation.VacationType.URBAN,
+                Vacation.VacationStatus.FOR_SALE, Vacation.VacationSleepingArrangements.NA, "Oren"));
         vacation.set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
         ins.updateRecord(vacation);
+        String[] nu = new String[TblFields.enumDict.get("vacationFields").size()];
+        String st = ins.selectFromTable(Tables.TBL_VACATIONS, nu, true);
 
 
     }

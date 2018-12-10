@@ -44,9 +44,14 @@ public class openWindowsController {
     public javafx.scene.control.TableColumn<Vacation,String> vacationStatus;
     public javafx.scene.control.TableColumn<Vacation,String> vacationSleepingArrangements;
     public javafx.scene.control.TableColumn<Vacation,String> ownerID;
+    public Boolean isLoggedIn = new Boolean(false);
+    public Login childController;
 
 
     public void init() {
+        childController.setParentController(this);
+
+
         startDate.setCellValueFactory(new PropertyValueFactory<Vacation,String>("__startDate"));
         endDate.setCellValueFactory(new PropertyValueFactory<Vacation,String>("__endDate"));
         destination.setCellValueFactory(new PropertyValueFactory<Vacation,String>("__destination"));
@@ -129,6 +134,24 @@ public class openWindowsController {
             Parent root = fxmlLoader.load(getClass().getResource("/Sreach.fxml").openStream());
             Seacrh creatView = fxmlLoader.getController();
             creatView.setController(new SearchController());
+            Scene scene = new Scene(root, 250, 220);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+            stage.show();
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void logInWindow(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Log In");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("/Login.fxml").openStream());
+            Login log = fxmlLoader.getController();
+            log.setController(new SearchController());
+
             Scene scene = new Scene(root, 250, 220);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes

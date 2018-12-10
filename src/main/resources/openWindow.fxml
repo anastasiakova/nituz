@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane prefHeight="620.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.openWindowsController">
    <children>
       <VBox prefHeight="228.0" prefWidth="957.0">
@@ -28,7 +29,7 @@
                   <Font name="System Bold Italic" size="42.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Buy it!" textAlignment="JUSTIFY" textFill="#3f1f8a">
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Buy it!"  onAction="#logInWindow" textAlignment="JUSTIFY" textFill="#3f1f8a">
                <font>
                   <Font name="Calibri Bold" size="22.0" />
                </font>

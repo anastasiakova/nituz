@@ -59,5 +59,13 @@ public class SearchController {
         System.out.println(vacations);
         //return vacations;
     }
+
+    public boolean isLoginValid(String username, String pwd) {
+        String[] fields = new String[TblFields.enumDict.get("userFields").size()];
+        fields[0] = username;
+        fields[1] = pwd;
+        String ans = sqlModel.selectFromTable(Tables.TBL_USERS, fields);
+        return  (ans.length() != 0);
+    }
 }
 
