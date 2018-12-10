@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Random;
 
 public class SearchController {
@@ -56,7 +57,13 @@ public class SearchController {
         return FXCollections.observableList(vacations);
     }
 
+    public ObservableList<VactaionAndRequest> getMyRequests(){
+        return BigModel.getRequestsPerUser(DeleteController.currentlyLoggedInUserID);
+    }
 
+    public ObservableList<VactaionAndRequest> getToAnswerRequests(){
+        return BigModel.getRequestedVacation(DeleteController.currentlyLoggedInUserID);
+    }
 
     public boolean isLoginValid(String username, String pwd) {
         String[] fields = new String[TblFields.enumDict.get("userFields").size()];
