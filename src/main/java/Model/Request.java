@@ -70,6 +70,11 @@ public class Request implements ISQLable {
         this.r_answer = r_answer;
         this.vacationID = vacationID;
     }
+    public Request(String request){
+        String[] serchedRequest = request.split(",");
+        new Request(serchedRequest[0],serchedRequest[1],serchedRequest[2],
+                serchedRequest[3],serchedRequest[4]);
+    }
 
     public void upateAnswer(boolean isConfirmed) {
         if (isConfirmed)

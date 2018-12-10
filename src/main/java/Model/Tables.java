@@ -5,5 +5,4 @@ public enum Tables {
     TBL_REQUESTS,
     TBL_PAYMENTS,
     TBL_VACATIONS
-
 }
