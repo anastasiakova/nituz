@@ -147,8 +147,8 @@ public class SQLModel {
         sql += "WHERE " + isqLable.getPrimaryKeyName() + " = '" + isqLable.getPrimaryKey() /*getPrimaryKey*/ + "';\n";
 
         try (Connection conn = DriverManager.getConnection(_path);
-             Statement stmt  = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)){
+             Statement stmt  = conn.createStatement()){
+            stmt.executeUpdate(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -160,8 +160,8 @@ public class SQLModel {
         sql += "WHERE " + isqLable.getPrimaryKeyName() + "='"  + isqLable.getPrimaryKey() /*getPrimaryKey*/ + "';\n";
 
         try (Connection conn = DriverManager.getConnection(_path);
-             Statement stmt  = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)){
+             Statement stmt  = conn.createStatement()){
+                stmt.executeUpdate(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
