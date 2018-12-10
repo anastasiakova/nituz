@@ -5,6 +5,8 @@ import Model.Tables;
 import Model.TblFields;
 import Model.Vacation;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
@@ -44,16 +46,16 @@ public class SearchController {
             }
         }
     }
-    public List<Vacation> getAllAvailableVacations(){
+    public ObservableList<Vacation> getAllAvailableVacations(){
         String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
         fields[10] = Vacation.VacationStatus.FOR_SALE.name().toLowerCase();
 
         String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
         List<Vacation> vacations = new ArrayList<Vacation>();
-        for (int i = 0; i < allVacationsStr.length ; i++) {
+        for (int i = 0; i < allVacationsStr.length & allVacationsStr[0] != "" ; i++) {
             vacations.add(new Vacation(allVacationsStr[i]));
         }
-        return vacations;
+        return FXCollections.observableList(vacations);
     }
 
     public boolean isLoginValid(String username, String pwd) {
