@@ -63,7 +63,7 @@ public class Request implements ISQLable {
         this.vacationID = vacationID;
     }
 
-    public Request(String r_ID, String r_buyerID, String r_seller, String r_answer, String vacationID) {
+    public Request(String r_ID, String r_buyerID, String r_seller, String vacationID, String r_answer) {
         this.r_ID = r_ID;
         this.r_buyerID = r_buyerID;
         this.r_seller = r_seller;
@@ -166,5 +166,9 @@ public class Request implements ISQLable {
 
     public String getVacationID() {
         return vacationID;
+    }
+
+    public void setR_answer(String r_answer) {
+        this.r_answer = r_answer;
     }
 }
