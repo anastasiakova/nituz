@@ -1,7 +1,12 @@
 package Model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Vacation implements ISQLable {
@@ -114,7 +119,7 @@ public class Vacation implements ISQLable {
         this._vacationID = String.valueOf(count);
     }
     public Vacation(String vacation){
-        String[] serchedVacation = vacation.split(",");
+        String[] serchedVacation = vacation.split(", ");
          new Vacation(serchedVacation[0],serchedVacation[1],serchedVacation[2],
                 serchedVacation[3],serchedVacation[4],serchedVacation[5],serchedVacation[6],
                 serchedVacation[7],serchedVacation[8],serchedVacation[9],serchedVacation[10],
@@ -174,15 +179,19 @@ public class Vacation implements ISQLable {
                     String _isRoundTrip, String _vacationType,
                     String _vacationStatus, String _vacationSleepingArrangements,
                     String _ownerID) {
-
+        DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
+        try {
+            this.__startDate = formatter.parse(__startDate);
+            this._endDate = formatter.parse(_endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         this._vacationID = _vacationID;
-        this.__startDate = new Date(__startDate);
-        this._endDate = new Date(_endDate);
         this._destination = _destination;
         this._aviationCompany = _aviationCompany;
-        this._numOfTickets = Integer.valueOf(_numOfTickets);
+        this._numOfTickets = Integer.parseInt(_numOfTickets);
         this._ticketType = TicketType.valueOf(_ticketType);
-        this._isBaggageIncluded = Boolean.valueOf(is_isBaggageIncluded());
+        this._isBaggageIncluded = Boolean.valueOf(_isBaggageIncluded);
         this._isRoundTrip = Boolean.valueOf(_isRoundTrip);
         this._vacationType = VacationType.valueOf(_vacationType);
         this._vacationStatus = VacationStatus.valueOf(_vacationStatus);

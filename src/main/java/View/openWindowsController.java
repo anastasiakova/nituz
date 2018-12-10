@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.Observable;
 
 import Model.Vacation;
+import Controller.SearchController;
 
 
 public class openWindowsController {
@@ -30,6 +31,7 @@ public class openWindowsController {
 
 
     public javafx.scene.control.Button btn_create;
+    public javafx.scene.control.TableView<Vacation> vacTable;
     public javafx.scene.control.TableColumn<Vacation,String> startDate;
     public javafx.scene.control.TableColumn<Vacation,String> endDate;
     public javafx.scene.control.TableColumn<Vacation,String> destination;
@@ -45,7 +47,27 @@ public class openWindowsController {
 
 
     public void init() {
-        startDate.setCellFactory(new PropertyValueFactory<Vacation,String>(("__startDate")));
+        startDate.setCellValueFactory(new PropertyValueFactory<Vacation,String>("__startDate"));
+        endDate.setCellValueFactory(new PropertyValueFactory<Vacation,String>("__endDate"));
+        destination.setCellValueFactory(new PropertyValueFactory<Vacation,String>("__destination"));
+        aviationCompany.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_aviationCompany"));
+        numOfTickets.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_numOfTickets"));
+        ticketType.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_ticketType"));
+        isBaggageIncluded.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_isBaggageIncluded"));
+        isRoundTrip.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_isRoundTrip"));
+        vacationType.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_vacationType"));
+        vacationStatus.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_vacationStatus"));
+        vacationSleepingArrangements.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_vacationSleepingArrangements"));
+        ownerID.setCellValueFactory(new PropertyValueFactory<Vacation,String>("_ownerID"));
+
+        SearchController listOfVactions = new SearchController();
+        Vacation vacation = new Vacation(new Date(), new Date(), "Vienna", "el al",
+                2, Vacation.TicketType.ADULT, false, true, Vacation.VacationType.URBAN,
+                Vacation.VacationStatus.FOR_SALE, Vacation.VacationSleepingArrangements.NA, "Oren");
+        listOfVactions.getAllAvailableVacations();
+//        vacTable.setItems(data);
+
+
     }
     public void createWindow(ActionEvent actionEvent) {
         try {

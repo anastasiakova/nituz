@@ -71,7 +71,7 @@ public class Request implements ISQLable {
         this.vacationID = vacationID;
     }
     public Request(String request){
-        String[] serchedRequest = request.split(",");
+        String[] serchedRequest = request.split(", ");
         new Request(serchedRequest[0],serchedRequest[1],serchedRequest[2],
                 serchedRequest[3],serchedRequest[4]);
     }

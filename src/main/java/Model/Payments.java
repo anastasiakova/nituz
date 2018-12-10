@@ -27,7 +27,7 @@ public class Payments implements ISQLable {
     };
 
     public Payments (String aprovedRequest){
-        String[] splited = aprovedRequest.split(",");
+        String[] splited = aprovedRequest.split(", ");
         if(splited.length != 1){
             this._id = splited[0];
             this._aprovedRequest = splited[1];
@@ -38,7 +38,7 @@ public class Payments implements ISQLable {
             this._aprovedRequest = aprovedRequest;
             _paymentId++;
             this._id = _paymentId.toString();
-            this._date = new SimpleDateFormat("dd/mm/yyy-HH:mm:ss").format(Calendar.getInstance().getTime());
+            this._date = new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(Calendar.getInstance().getTime());
             this._status = Status.inProgress;
         }
     }
@@ -70,8 +70,8 @@ public class Payments implements ISQLable {
         return _aprovedRequest;
     }
 
-    public Status get_status() {
-        return _status;
+    public String get_status() {
+        return _status.name().toLowerCase();
     }
 
     @Override
@@ -90,7 +90,7 @@ public class Payments implements ISQLable {
             pstmt.setString(1, this.get_id());
             pstmt.setString(2, this.get_aprovedRequest());
             pstmt.setString(3, this.get_date());
-            pstmt.setString(4, this.get_status().name());
+            pstmt.setString(4, this.get_status());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
