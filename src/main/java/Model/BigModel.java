@@ -3,7 +3,10 @@ package Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class BigModel {
@@ -50,36 +53,49 @@ public class BigModel {
         }
     }
     //users requests
-    public ObservableList<Request> getRequestsPerUser(String logedInUsername){
+    public ObservableList<VactaionAndRequest> getRequestsPerUser(String logedInUsername) {
         String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
         fields[1] = logedInUsername;
         String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
         List<VactaionAndRequest> vactaionAndRequests = new ArrayList<>();
-        for (int i = 0; i < allRequests.length & allRequests[0] != "" ; i++) {
-          Request req = new Request(allRequests[i]);
-          String vecationID = req.getVacationID();
-           fields = new String[TblFields.enumDict.get("vacationFields").size()];
-           fields[0] = vecationID;
-           fields[10] = Vacation.VacationStatus.IN_PROGRESS.name();
-           String reqVacation = SQLModel.GetInstance().selectFromTable(Tables.TBL_VACATIONS, fields);
-           if(reqVacation != ""){
-               Vacation vac = new Vacation(reqVacation);
-               vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(),vac.get_endDate(), vac.get_destination(),vac.))
-           }
+        for (int i = 0; i < allRequests.length & allRequests[0] != ""; i++) {
+            Request req = new Request(allRequests[i]);
+            String vecationID = req.getVacationID();
+            fields = new String[TblFields.enumDict.get("vacationFields").size()];
+            fields[0] = vecationID;
+            fields[10] = Vacation.VacationStatus.IN_PROGRESS.name();
+            String reqVacation = SQLModel.GetInstance().selectFromTable(Tables.TBL_VACATIONS, fields);
+            if (reqVacation != "") {
+                Vacation vac = new Vacation(reqVacation);
+                DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
+                vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(vac.get__startDate()),
+                        new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(vac.get_endDate()), vac.get_destination(), logedInUsername, req.getR_answer()));
+            }
+
         }
-
-
+        return FXCollections.observableList(vactaionAndRequests);
     }
 
-    public ObservableList<Vacation> getRequestedVacation(String logedInUsername){
-        String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
-        fields[12] = logedInUsername;
 
-        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
-        List<Vacation> vacations = new ArrayList<Vacation>();
-        for (int i = 0; i < allVacationsStr.length & allVacationsStr[0] != "" ; i++) {
-            vacations.add(new Vacation(allVacationsStr[i]));
-        }
-        return FXCollections.observableList(vacations);
+        public ObservableList<VactaionAndRequest> getRequestedVacation(String logedInUsername){
+            String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
+            fields[1] = logedInUsername;
+            fields[4] = "pending";
+            String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
+            List<VactaionAndRequest> vactaionAndRequests = new ArrayList<>();
+            for (int i = 0; i < allRequests.length & allRequests[0] != ""; i++) {
+                Request req = new Request(allRequests[i]);
+                String vecationID = req.getVacationID();
+                fields = new String[TblFields.enumDict.get("vacationFields").size()];
+                fields[0] = vecationID;
+                String reqVacation = SQLModel.GetInstance().selectFromTable(Tables.TBL_VACATIONS, fields);
+                if (reqVacation != "") {
+                    Vacation vac = new Vacation(reqVacation);
+                    DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
+                    vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(vac.get__startDate()),
+                            new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(vac.get_endDate()), vac.get_destination(), logedInUsername, req.getR_answer()));
+                }
+            }
+            return FXCollections.observableList(vactaionAndRequests);
     }
 }

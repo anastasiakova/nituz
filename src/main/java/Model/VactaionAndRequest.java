@@ -8,7 +8,7 @@ public class VactaionAndRequest {
     String userName;
     String answer;
 
-    public VactaionAndRequest(){String startDate, String endDate, String destination, String userName, String answer}{
+    public VactaionAndRequest(String startDate, String endDate, String destination, String userName, String answer){
         this.startDate = startDate;
         this.endDate = endDate;
         this.destination = destination;
