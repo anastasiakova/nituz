@@ -5,7 +5,9 @@ import Model.SQLModel;
 import Model.User;
 
 public class DeleteController {
+    public static String currentlyLoggedInUserID = ""; //TODO find a better solution!
     SQLModel sqlModel;
+
 
     public DeleteController(){
         this.sqlModel = SQLModel.GetInstance();
@@ -16,6 +18,4 @@ public class DeleteController {
                 "","","");
         sqlModel.deleteRecordFromTable(userToDelete);
     }
-
-
 }
