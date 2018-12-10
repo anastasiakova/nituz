@@ -15,7 +15,7 @@ public class UpdateFormController {
     public void UpdateUser(String username, String pwd, Date birthday, String privateName, String lastName,
                       String city, String bankAcount, String creditCard, String id){
         ISQLable newUser = new User(username, pwd, birthday, privateName
-                , lastName, city, bankAcount, creditCard, id);
+                , lastName, city, bankAcount, id);
         sqlModel.updateRecord(newUser);
     }
 

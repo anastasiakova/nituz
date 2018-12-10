@@ -11,7 +11,7 @@ public class CreateController {
     }
 
     public void CreateUser(String username, String pwd, Date birthday, String privateName, String lastName, String city, String bankAcount, String creditCard, String id){
-        ISQLable newUser = new User(username, pwd, birthday, privateName, lastName, city, bankAcount, creditCard, id);
+        ISQLable newUser = new User(username, pwd, birthday, privateName, lastName, city, bankAcount, id);
         sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
     }
     public String getUserCreatedMassage(String userText,Boolean withPassword){

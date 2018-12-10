@@ -19,6 +19,9 @@ public class Main {
         ins.updateRecord(vacation);
         String[] nu = new String[TblFields.enumDict.get("vacationFields").size()];
         String st = ins.selectFromTable(Tables.TBL_VACATIONS, nu, true);
+        /*username", "pwd", "birthday", "privatename",
+                "lastname", "city", "bankacount","id"*/
+        User user = new User("nu", "nu", new Date(), "saar", "guttman", "Nesher", "2435234", "sasaa");
 
 
     }

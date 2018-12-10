@@ -9,7 +9,7 @@ public class TblFields {
     public static void init() {
         List<String> enumList = new ArrayList<String>();
         enumList = Arrays.asList("username", "pwd", "birthday", "privatename",
-                "lastname", "city", "bankacount","creditcard" ,"id");
+                "lastname", "city", "bankacount","id");
         enumDict.put("userFields", enumList);
         enumList = Arrays.asList("r_id", "r_buyerid", "r_sellerid", "vacationid",
                 "r_answer");
