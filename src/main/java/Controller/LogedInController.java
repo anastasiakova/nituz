@@ -148,8 +148,7 @@ public class LogedInController {
 
     public void CreatePaymentAndUpdateVacation(String aprovedRequestId){
         Payments newPayment = new Payments(aprovedRequestId);
-
-        newPayment.get_Request().setR_answer("Approved");
+        newPayment.get_Request().setR_answer("approved");
         newPayment.get_Request().setPayment(newPayment);
         loged.UpdateMyRequsts(newPayment.get_Request());
         sqlModel.updateRecord(newPayment.get_Request());
