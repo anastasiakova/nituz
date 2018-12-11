@@ -11,7 +11,8 @@ public class Request implements ISQLable {
     private String r_buyerID;
     private String r_seller;
     private String r_answer;
-    private String vacationID;
+    //private String vacationID;
+    private Vacation vacation;
     private String primaryKeyName = "r_ID";
     private String tableName = "tbl_requests";
 
@@ -48,7 +49,7 @@ public class Request implements ISQLable {
         return "VALUES (" + r_ID +
                 ", " + r_buyerID +
                 ", " + r_seller +
-                ", " + vacationID +
+                ", " + getVacationID() +
                 ", " + r_answer +
                 ");";
     }
@@ -60,7 +61,7 @@ public class Request implements ISQLable {
         this.r_buyerID = r_buyer;
         this.r_seller = r_seller;
         this.r_answer = ansStatus.pending.toString();
-        this.vacationID = vacationID;
+        setVacation(vacationID);
     }
 
     public Request(String[] searchedRequest) {
@@ -68,7 +69,7 @@ public class Request implements ISQLable {
         this.r_buyerID = searchedRequest[1];
         this.r_seller = searchedRequest[2];
         this.r_answer = searchedRequest[3];
-        this.vacationID = searchedRequest[4];
+        setVacation(searchedRequest[4]);
     }
     public Request(String request){
        this(request.split(", "));
@@ -129,7 +130,7 @@ public class Request implements ISQLable {
                 TblFields.enumDict.get("requestTblFields").get(0) + "='" + r_ID + "\'," +
                 TblFields.enumDict.get("requestTblFields").get(1) + "='" + r_buyerID + "\'," +
                 TblFields.enumDict.get("requestTblFields").get(2) + "='" + r_seller + "\'," +
-                TblFields.enumDict.get("requestTblFields").get(3) + "='" + vacationID + "\'," +
+                TblFields.enumDict.get("requestTblFields").get(3) + "='" + getVacationID() + "\'," +
                 TblFields.enumDict.get("requestTblFields").get(4) + "='" + r_answer +
                 '}';
     }
@@ -168,10 +169,17 @@ public class Request implements ISQLable {
     }
 
     public String getVacationID() {
-        return vacationID;
+        return vacation.get_vacationID();
     }
 
     public void setR_answer(String r_answer) {
         this.r_answer = r_answer;
+    }
+
+    private void setVacation(String vacationID){
+        String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
+        fields[0] = vacationID;
+        String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
+        this.vacation = new Vacation(allRequests[0]);
     }
 }
