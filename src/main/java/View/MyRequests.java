@@ -63,6 +63,21 @@ public class MyRequests {
     }
 
     public void reject(ActionEvent actionEvent) {
+        if(!reqTable.getSelectionModel().getSelectedCells().isEmpty()){
+            TablePosition pos = reqTable.getSelectionModel().getSelectedCells().get(0);
+            int row = pos.getRow();
+// Item here is the table view type:
+            VactaionAndRequest item = reqTable.getItems().get(row);
+            TableColumn col = pos.getTableColumn();
+// this gives the value in the selected cell:
+            //String data = (String) col.getCellObservableValue(item).getValue();
+            logedInController.UpdateRequest("rejected",item.getReqID());
+            initialize();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("You need to peek vacation first");
+        }
 
     }
 
