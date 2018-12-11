@@ -2,7 +2,9 @@ package Model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -15,6 +17,9 @@ public class User implements ISQLable {
     private String city;
     private String bankAcount;
     private String id;
+
+    private List<Request> myRequests;
+    private List<Request> requestsForMe;
 
     private String tableFields = "tbl_users("
             + TblFields.enumDict.get("userFields").get(0) + ", "//user name
@@ -69,6 +74,8 @@ public class User implements ISQLable {
         this.city = city;
         this.bankAcount = bankAcount;
         this.id = id;
+        setMyRequests(username);
+        setRequestsForMe(username);
     }
 
     public User(String[] searcheUser) {
@@ -115,6 +122,14 @@ public class User implements ISQLable {
 
     public String getPrivateName() {
         return privateName;
+    }
+
+    public List<Request> getMyRequests() {
+        return myRequests;
+    }
+
+    public List<Request> getRequestsForMe() {
+        return requestsForMe;
     }
 
     public void setPrivateName(String privateName) {
@@ -178,8 +193,6 @@ public class User implements ISQLable {
                 '}';
     }
 
-
-
     public void insertRecordToTable(PreparedStatement pstmt) {
         try {
             pstmt.setString(1, this.getUsername());
@@ -220,4 +233,39 @@ public class User implements ISQLable {
         return tableName;
     }
 
+    public static void CreateRequestAndUpdateVacation(Request newRequest) {
+        //create request
+        SQLModel sql = SQLModel.GetInstance();
+        sql.insertRecordToTable(Tables.TBL_REQUESTS.name().toLowerCase(),newRequest);
+        //update vacation
+        String[] fields = {newRequest.getR_ID(),newRequest.getR_seller(),"","","","",
+                "","","","","","",""};
+        String vacation = sql.selectFromTable(Tables.TBL_VACATIONS,fields);
+        if(vacation!=""){
+            Vacation forUpdate = new Vacation(vacation);
+            forUpdate.set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
+            sql.updateRecord(forUpdate);
+        }
+    }
+
+    private void setMyRequests(String username) {
+        myRequests = new ArrayList<>();
+        String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
+        fields[1] = username;
+        String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
+        for (int i = 0; i < allRequests.length & allRequests[0] != ""; i++) {
+            myRequests.add(new Request(allRequests[i]));
+        }
+    }
+
+    private void setRequestsForMe(String username){
+        requestsForMe = new ArrayList<>();
+        String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
+        fields[2] = username;
+        fields[4] = "pending";
+        String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
+        for (int i = 0; i < allRequests.length & allRequests[0] != ""; i++) {
+           requestsForMe.add(new Request(allRequests[i]));
+        }
+    }
 }
