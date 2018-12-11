@@ -193,4 +193,8 @@ public class LogedInController {
                  _vacationSleepingArrangements, loged.getUsername());
         sqlModel.insertRecordToTable(Tables.TBL_VACATIONS.toString().toLowerCase(), newVacation);
     }
+
+    public  void LogOut(){
+        loged = null;
+    }
 }
