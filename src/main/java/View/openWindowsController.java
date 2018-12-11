@@ -88,9 +88,9 @@ public class openWindowsController {
         isBaggageIncluded.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_isBaggageIncluded"));
         isRoundTrip.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_isRoundTrip"));
         vacationType.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_vacationType"));
-        vacationStatus.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_vacationStatus"));
+        //vacationStatus.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_vacationStatus"));
         vacationSleepingArrangements.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_vacationSleepingArrangements"));
-        ownerID.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_ownerID"));
+        //ownerID.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_ownerID"));
 
         SearchController listOfVactions = new SearchController();
         ObservableList<Vacation> data = listOfVactions.getAllAvailableVacations();
@@ -109,15 +109,6 @@ public class openWindowsController {
 
             loginSuccessful = searchController.isLoginValid(userText.getText(), passText.getText());
             if (loginSuccessful) {
-
-//                isOk=true;
-//                FXMLLoader fxmlControl = new FXMLLoader();
-//                Parent lognView = FXMLLoader.load(getClass().getResource("/openWindow.fxml"));
-//                Scene userView = new Scene(lognView);
-//                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-//                window.setScene(userView);
-//
-//                window.show();
                 loginButtonsMaker(event);
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -148,6 +139,15 @@ public class openWindowsController {
         this.t4.setVisible(false);
     }
 
+    public void openCreateVactionWindow(ActionEvent event) throws IOException {
+        FXMLLoader fxmlControl = new FXMLLoader();
+        Parent root = fxmlControl.load(getClass().getResource("/CreateVacation.fxml"));
+        Stage primaryStage = new Stage();
+        primaryStage.setTitle("Create New Vaction");
+        primaryStage.setScene(new Scene(root, 500, 520));
+        primaryStage.getScene().getStylesheets().add("/subWindowsCss.css");
+        primaryStage.show();
+    }
     public void logOut() {
         this.searchController = new SearchController();
         this.resetButton.setVisible(true);

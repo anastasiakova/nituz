@@ -64,15 +64,15 @@
                       <TableColumn fx:id="startDate" prefWidth="75.0" text="startDate " />
                       <TableColumn fx:id="endDate" prefWidth="75.0" text="endDate " />
                         <TableColumn fx:id="destination" prefWidth="75.0" text="destination " />
-                        <TableColumn fx:id="aviationCompany" prefWidth="75.0" text="aviationCompany " />
-                        <TableColumn fx:id="numOfTickets" prefWidth="75.0" text="numOfTickets " />
-                        <TableColumn fx:id="ticketType" prefWidth="75.0" text="ticketType " />
-                        <TableColumn fx:id="isBaggageIncluded" prefWidth="75.0" text="isBaggageIncluded " />
-                        <TableColumn fx:id="isRoundTrip" prefWidth="75.0" text="isRoundTrip " />
-                        <TableColumn fx:id="vacationType" prefWidth="75.0" text="vacationType " />
-                        <TableColumn fx:id="vacationStatus" prefWidth="75.0" text="vacationStatus " />
-                        <TableColumn fx:id="vacationSleepingArrangements" prefWidth="75.0" text="vacationSleepingArrangements " />
-                        <TableColumn fx:id="ownerID" prefWidth="75.0" text="ownerID " />
+                        <TableColumn fx:id="aviationCompany" prefWidth="112.0" text="aviationCompany " />
+                        <TableColumn fx:id="numOfTickets" prefWidth="96.0" text="numOfTickets " />
+                        <TableColumn fx:id="ticketType" prefWidth="72.0" text="ticketType " />
+                        <TableColumn fx:id="isBaggageIncluded" prefWidth="127.0" text="isBaggageIncluded " />
+                        <TableColumn fx:id="isRoundTrip" minWidth="9.0" prefWidth="84.0" text="isRoundTrip " />
+                        <TableColumn fx:id="vacationType" prefWidth="28.0" text="vacationType " />
+                        
+                        <TableColumn fx:id="vacationSleepingArrangements" prefWidth="38.0" text="vacationSleepingArrangements " />
+
                     </columns>
                   </TableView>
                   <Button fx:id="allMyRequestButton" layoutX="695.0" layoutY="267.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="All my requests" textAlignment="JUSTIFY" textFill="#3f1f8a">
@@ -90,7 +90,7 @@
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addVactionButton" layoutX="75.0" layoutY="267.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="add vacation" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="addVactionButton" layoutX="75.0" layoutY="267.0" mnemonicParsing="false" onAction="#openCreateVactionWindow" prefHeight="25.0" prefWidth="135.0" text="add vacation" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
