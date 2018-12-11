@@ -4,7 +4,10 @@ import Controller.LogedInController;
 import Controller.SearchController;
 import Model.VactaionAndRequest;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MyRequests {
@@ -13,6 +16,7 @@ public class MyRequests {
     public Button approve;
     public Button buy;
     LogedInController logedInController;
+    public MyRequests(){};
 
     public javafx.scene.control.TableView<VactaionAndRequest> reqTable;
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> destination;//vecation
@@ -27,7 +31,7 @@ public class MyRequests {
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> myVecEndDate;//vecation
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> buyerUserName;//request
 
-    public MyRequests(LogedInController logedInController){
+    public void SetController(LogedInController logedInController){
         this.logedInController = logedInController;
     }
 
@@ -48,5 +52,29 @@ public class MyRequests {
         ObservableList<VactaionAndRequest> requestsForMe = logedInController.getToAnswerRequests();
         reqForMeTable.setItems(requestsForMe);
     }
- }
+
+    public void reject(ActionEvent actionEvent) {
+
+    }
+
+    public void approve(ActionEvent actionEvent) {
+    }
+
+    public void tryBuy(ActionEvent actionEvent) {
+        TablePosition pos = reqTable.getSelectionModel().getSelectedCells().get(0);
+        int row = pos.getRow();
+// Item here is the table view type:
+        VactaionAndRequest item = reqTable.getItems().get(row);
+        TableColumn col = pos.getTableColumn();
+// this gives the value in the selected cell:
+        String data = (String) col.getCellObservableValue(item).getValue();
+
+        if(data == "confirmed"){
+            //show orens buy form
+        }
+        else{
+
+        }
+    }
+}
 

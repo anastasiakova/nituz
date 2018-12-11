@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,10 +44,18 @@ public class LogedInController {
         for (int i = 0; i < allRequests.size(); i++) {
             Request req = allRequests.get(i);
             Vacation vac = req.getVacation();
-            if (vac.get_vacationStatus() == Vacation.VacationStatus.IN_PROGRESS) {
-                vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
-                        vac.get_destination(), loged.getUsername(), req.getR_answer()));
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+            Date d;
+            try {
+                 d = formatter.parse(vac.get__startDate());
+                if ( d.after(new Date())) {
+                    vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
+                            vac.get_destination(), loged.getUsername(), req.getR_answer()));
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
+
         }
 //            vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(vac.get__startDate()),
 //                    new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(vac.get_endDate()), vac.get_destination(), logedInUsername, req.getR_answer()));

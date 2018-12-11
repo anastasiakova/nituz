@@ -27,7 +27,7 @@
             <TableColumn fx:id="endDate" prefWidth="129.0" text="end date " />
          </columns>
       </TableView>
-      <Button fx:id="buy" layoutX="2.0" layoutY="304.0" mnemonicParsing="false" text="BUY IT!" onAction="tryBuy"/>
+      <Button fx:id="buy" layoutX="2.0" layoutY="304.0" mnemonicParsing="false" text="BUY IT!" onAction="#tryBuy"/>
       <Label layoutX="5.0" layoutY="325.0" prefHeight="27.0" prefWidth="173.0" text="Requests for my vacations">
          <font>
             <Font size="14.0" />
@@ -41,8 +41,8 @@
            <TableColumn fx:id="myVecDestination" prefWidth="113.0" text="destination " />
         </columns>
       </TableView>
-      <Button fx:id="reject" layoutY="583.0" mnemonicParsing="false" text="Reject" onAction="reject" />
-      <Button fx:id="approve" layoutX="49.0" layoutY="583.0" mnemonicParsing="false" text="Approve" onAction="approve" />
+      <Button fx:id="reject" layoutY="583.0" mnemonicParsing="false" text="Reject" onAction="#reject" />
+      <Button fx:id="approve" layoutX="49.0" layoutY="583.0" mnemonicParsing="false" text="Approve" onAction="#approve" />
       <Label layoutX="2.0" layoutY="65.0" prefHeight="36.0" prefWidth="607.0" text="Answers for my requests">
          <font>
             <Font size="14.0" />
