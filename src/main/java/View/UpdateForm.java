@@ -1,5 +1,6 @@
 package View;
 
+import Controller.LogedInController;
 import Controller.UpdateFormController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ public class UpdateForm {
 
 
    // public SQLModel sqlModel;
-    public UpdateFormController updateFormController;
+    public LogedInController logedInController;
     @FXML
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button updateButton;
@@ -38,8 +39,8 @@ public class UpdateForm {
 
     };
     public UpdateForm() {};
-    public UpdateForm(UpdateFormController updateFormController) {
-        this.updateFormController = updateFormController;
+    public UpdateForm(LogedInController logedInController) {
+        this.logedInController = logedInController;
     }
     public void closeButtonAction(){
         // get a handle to the stage
@@ -51,7 +52,7 @@ public class UpdateForm {
 
     public void setController(UpdateFormController updateFormController)
     {
-        this.updateFormController = updateFormController;
+        this.logedInController = logedInController;
     }
 
     public void updateFormWindow(ActionEvent actionEvent) {
@@ -92,7 +93,7 @@ public class UpdateForm {
                     alert.show();
 
                 } else {
-                    this.updateFormController.UpdateUser(userText.getText(), passText.getText(), date, fNameText.getText()
+                    this.logedInController.UpdateUser(passText.getText(), date, fNameText.getText()
                             , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(),
                             creditCardNumber.getText(),idNumber.getText());
                     Alert alertI = new Alert(Alert.AlertType.INFORMATION);

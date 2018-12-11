@@ -1,11 +1,12 @@
 package View;
 
 import Controller.DeleteController;
+import Controller.LogedInController;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 public class Delete {
-    public DeleteController deleteController;
+    public LogedInController logedInController;
     //public SQLModel sqlModel;
     public javafx.scene.control.Button closeButton;
     public javafx.scene.control.Button deleteButton;
@@ -16,9 +17,6 @@ public class Delete {
 //    public Delete(SQLModel sqlModel) {
 //        this.sqlModel = sqlModel;
 //    }
-    public Delete(DeleteController deleteController) {
-        this.deleteController = deleteController;
-    }
 
     public void closeButtonAction(){
         // get a handle to the stage
@@ -30,14 +28,14 @@ public class Delete {
 //    public void setSqlModel(SQLModel sqlModel) {
 //        this.sqlModel = sqlModel;
 //    }
-    public void setController(DeleteController deleteController)
+    public void setController(LogedInController logedInController)
     {
-        this.deleteController = deleteController;
+        this.logedInController = logedInController;
     }
 
     public void deleteUserButtonAction(){
         String username = userText.getText();
-        this.deleteController.deleteUser(username);
+        this.logedInController.deleteUser();
 //        ISQLable userToDelete = new User(username, null,null,null,null,
 //                null,null,null,null);
         //sqlModel.deleteRecordFromTable(userToDelete);
