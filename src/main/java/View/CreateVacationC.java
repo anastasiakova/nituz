@@ -45,7 +45,7 @@ public class CreateVacationC implements Initializable {
     public TextField company;
     public TextField ticketNum;
 
-
+     public CreateVacationC(){}
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ticketTypeCombo.setItems(ticketTypeList);

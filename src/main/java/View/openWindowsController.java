@@ -146,7 +146,7 @@ public class openWindowsController {
 
     public void openCreateVactionWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlControl = new FXMLLoader();
-        Parent root = fxmlControl.load(getClass().getResource("/CreateVacation.fxml"));
+        Parent root = fxmlControl.load(getClass().getResource("/CreateVacation.fxml").openStream());
         Stage primaryStage = new Stage();
         CreateVacationC createVacationC = fxmlControl.getController();
         createVacationC.setController(this.logedInController);

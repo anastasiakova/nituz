@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -87,7 +88,12 @@ public class User implements ISQLable {
     public User(String[] searcheUser) {
         this.username = searcheUser[0];
         this.pwd = searcheUser[1];
-        this.birthday = new Date(searcheUser[2]);
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+        try {
+            this.birthday = formatter.parse(searcheUser[2]);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         this.privateName = searcheUser[3];
         this.lastName = searcheUser[4];
         this.city = searcheUser[5];
@@ -96,7 +102,7 @@ public class User implements ISQLable {
     }
 
     public User(String user){
-        this(user.split(", "));
+            this(user.split(", "));
     }
 
     public String getUsername() {
