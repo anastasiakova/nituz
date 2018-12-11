@@ -81,8 +81,8 @@ public class openWindowsController {
         this.allMyRequestButton.setVisible(false);
         this.updateDetalisButton.setVisible(false);
         startDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("__startDate"));
-        endDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("__endDate"));
-        destination.setCellValueFactory(new PropertyValueFactory<Vacation, String>("__destination"));
+        endDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_endDate"));
+        destination.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_destination"));
         aviationCompany.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_aviationCompany"));
         numOfTickets.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_numOfTickets"));
         ticketType.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_ticketType"));

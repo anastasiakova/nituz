@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Vacation implements ISQLable {
 
@@ -169,12 +170,16 @@ public class Vacation implements ISQLable {
         this._vacationSleepingArrangements = _vacationSleepingArrangements;
         this._ownerID = _ownerID;
     }
-    public Vacation (Date __startDate, Date _endDate, String _destination, String _aviationCompany,
+    public Vacation (String __startDate, String _endDate, String _destination, String _aviationCompany,
                      int _numOfTickets, String _ticketType, boolean _isBaggageIncluded, boolean _isRoundTrip,
                      String _vacationType, String _vacationSleepingArrangements, String _ownerID)  {
-
-        this.__startDate = __startDate;
-        this._endDate = _endDate;
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+        try {
+            this.__startDate = formatter.parse(__startDate);
+            this._endDate = formatter.parse(_endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         this._destination = _destination;
         this._aviationCompany =  _aviationCompany;
         this._numOfTickets = _numOfTickets;
@@ -236,10 +241,11 @@ public class Vacation implements ISQLable {
 
     @Override
     public void insertRecordToTable(PreparedStatement pstmt) {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         try {
             pstmt.setString(1, this.get_vacationID());
-            pstmt.setString(2, this.get__startDate().toString());
-            pstmt.setString(3, this.get_endDate().toString());
+            pstmt.setString(2, formatter.format(this.get__startDate()));
+            pstmt.setString(3, formatter.format(this.get_endDate()));
             pstmt.setString(4, this.get_destination());
             pstmt.setString(5, this.get_aviationCompany());
             pstmt.setString(6, String.valueOf(this.get_numOfTickets()));
@@ -307,7 +313,7 @@ public class Vacation implements ISQLable {
         return _vacationID;
     }
 
-    public Date get__startDate() {
+    public String get__startDate() {
         return __startDate;
     }
 

@@ -183,7 +183,7 @@ public class LogedInController {
         return FXCollections.observableList(vacations);
     }
 
-    public void CreateVacation(Date __startDate, Date _endDate,
+    public void CreateVacation(String __startDate, String _endDate,
                                String _destination, String _aviationCompany,
                                int _numOfTickets, String _ticketType,
                                boolean _isBaggageIncluded, boolean _isRoundTrip,

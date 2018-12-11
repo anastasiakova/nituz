@@ -113,7 +113,7 @@ public class CreateVacationC implements Initializable {
                     company.getText(), String.valueOf(ticketNumber), ticketType, isBaggage.toString(), isRoundTrip.toString(),
                     vacationType, sleeping);
            System.out.println(details);
-           logedInController.CreateVacation(start, end, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
+           logedInController.CreateVacation(startString, endString, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
                     isRoundTrip, vacationType, sleeping);
             // ########## vac constructor - need to move to the big controller ##########
 //            Vacation newVac = new Vacation(start, end, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
