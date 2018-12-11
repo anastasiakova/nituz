@@ -72,14 +72,16 @@ public class openWindowsController {
     public javafx.scene.control.TableColumn<Vacation, String> ownerID;
     public boolean isOk=false;
 
-
-    public void initialize() {
+    public void initButtons(){
         this.logOutButton.setVisible(false);
         this.welcomeLabel.setVisible(false);
         this.buyThisVacaionButton.setVisible(false);
         this.addVactionButton.setVisible(false);
         this.allMyRequestButton.setVisible(false);
         this.updateDetalisButton.setVisible(false);
+    }
+    public void initialize() {
+        initButtons();
         startDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("__startDate"));
         endDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_endDate"));
         destination.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_destination"));
@@ -96,8 +98,6 @@ public class openWindowsController {
         SearchController listOfVactions = new SearchController();
         ObservableList<Vacation> data = listOfVactions.getAllAvailableVacations();
         vacTable.setItems(data);
-        if(isOk)
-            System.out.println("sddsfsdf");
 
     }
 
@@ -153,9 +153,14 @@ public class openWindowsController {
         primaryStage.setTitle("Create New Vaction");
         primaryStage.setScene(new Scene(root, 500, 520));
         primaryStage.getScene().getStylesheets().add("/subWindowsCss.css");
-        primaryStage.show();
-    }
+        primaryStage.showAndWait();
+        initialize();
+        loginButtonsMaker(event);
 
+    }
+    public static void bla(){
+        System.out.println("sdfsdf");
+    }
     public void logOut() {
         this.searchController = new SearchController();
         this.resetButton.setVisible(true);

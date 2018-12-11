@@ -3,10 +3,14 @@ package View;
 import Controller.DeleteController;
 import Controller.LogedInController;
 import Model.Vacation;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.text.DateFormat;
@@ -83,7 +87,7 @@ public class CreateVacationC implements Initializable {
                     eHH.getText() + ":" + eMIN.getText();
             try {
                 start = formatter.parse(startString);
-                System.out.println(formatter.format(start));
+//                System.out.println(formatter.format(start));
                 end = formatter.parse(endString);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -112,16 +116,21 @@ public class CreateVacationC implements Initializable {
             List<String> details = Arrays.asList(start.toString(), end.toString(), destination.getText(),
                     company.getText(), String.valueOf(ticketNumber), ticketType, isBaggage.toString(), isRoundTrip.toString(),
                     vacationType, sleeping);
-           System.out.println(details);
+//           System.out.println(details);
            logedInController.CreateVacation(startString, endString, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
                     isRoundTrip, vacationType, sleeping);
             // ########## vac constructor - need to move to the big controller ##########
 //            Vacation newVac = new Vacation(start, end, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
 //                    isRoundTrip, vacationType, sleeping, ownerID);
+
+            Stage stage = (Stage) addButton.getScene().getWindow();
+
+            stage.close();
         }
     }
 
     public void setController(LogedInController controller) {
         this.logedInController = controller;
     }
+
 }
