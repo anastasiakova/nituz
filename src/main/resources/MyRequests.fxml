@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="456.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="400.0" prefWidth="600.0">
+      <VBox layoutX="9.0" prefHeight="400.0" prefWidth="591.0">
          <children>
             <Label prefHeight="71.0" prefWidth="609.0" text="Requests:" textAlignment="CENTER">
                <font>
@@ -45,7 +45,6 @@
                  <TableColumn fx:id="myVecStartDate" prefWidth="102.0" text="start date " />
                  <TableColumn fx:id="myVecEndDate" prefWidth="125.0" text="end date " />
                  <TableColumn fx:id="buyerUserName" prefWidth="119.0" text="buyer username " />
-                 <TableColumn fx:id="sallerAnswer" prefWidth="140.0" text="my answer " />
               </columns>
             </TableView>
          </children></VBox>
