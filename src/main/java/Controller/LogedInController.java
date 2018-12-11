@@ -166,4 +166,20 @@ public class LogedInController {
         //Vacation vacation = new Vacation(sqlModel.selectFromTable(Tables.TBL_VACATIONS, vacationFields));
         // vacation.set_vacationStatus(Vacation.VacationStatus.SOLD);
     }
+
+    public ObservableList<Vacation> getAllAvailableVacations(){
+        String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
+        fields[10] = Vacation.VacationStatus.FOR_SALE.name().toLowerCase();
+
+        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
+        List<Vacation> vacations = new ArrayList<Vacation>();
+        for (int i = 0; i < allVacationsStr.length & allVacationsStr[0] != "" ; i++) {
+            Vacation vac = new Vacation(allVacationsStr[i]);
+            if(vac.get_ownerID() != loged.getUsername()){
+                vacations.add(vac);
+            }
+
+        }
+        return FXCollections.observableList(vacations);
+    }
 }
