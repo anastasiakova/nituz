@@ -239,7 +239,7 @@ public class openWindowsController {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("/UpdateForm.fxml").openStream());
             UpdateForm creatView = fxmlLoader.getController();
-            creatView.setController(new UpdateFormController());
+            creatView.setController(this.logedInController);
             Scene scene = new Scene(root, 380, 550);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes

@@ -13,8 +13,8 @@ public class UpdateFormController {
         this.sqlModel = SQLModel.GetInstance();
     }
     public void UpdateUser(String username, String pwd, Date birthday, String privateName, String lastName,
-                      String city, String bankAcount, String creditCard, String id){
-        ISQLable newUser = new User(username, pwd, birthday, privateName, lastName, city, bankAcount, id);
+                      String city, String bankAccount, String creditCard, String id){
+        ISQLable newUser = new User(username, pwd, birthday, privateName, lastName, city, bankAccount, id);
         sqlModel.updateRecord(newUser);
     }
 
