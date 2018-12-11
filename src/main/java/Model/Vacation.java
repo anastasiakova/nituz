@@ -241,11 +241,10 @@ public class Vacation implements ISQLable {
 
     @Override
     public void insertRecordToTable(PreparedStatement pstmt) {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         try {
             pstmt.setString(1, this.get_vacationID());
-            pstmt.setString(2, formatter.format(this.get__startDate()));
-            pstmt.setString(3, formatter.format(this.get_endDate()));
+            pstmt.setString(2, this.get__startDate());
+            pstmt.setString(3, this.get_endDate());
             pstmt.setString(4, this.get_destination());
             pstmt.setString(5, this.get_aviationCompany());
             pstmt.setString(6, String.valueOf(this.get_numOfTickets()));
@@ -314,11 +313,13 @@ public class Vacation implements ISQLable {
     }
 
     public String get__startDate() {
-        return __startDate;
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+        return formatter.format(__startDate);
     }
 
-    public Date get_endDate() {
-        return _endDate;
+    public String get_endDate() {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+        return formatter.format(_endDate);
     }
 
     public String get_destination() {

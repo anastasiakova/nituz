@@ -44,8 +44,7 @@ public class LogedInController {
             Request req = allRequests.get(i);
             Vacation vac = req.getVacation();
             if (vac.get_vacationStatus() == Vacation.VacationStatus.IN_PROGRESS) {
-                vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(vac.get__startDate()),
-                        new SimpleDateFormat("dd/MM/yyyy-HH:mm").format(vac.get_endDate()),
+                vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                         vac.get_destination(), loged.getUsername(), req.getR_answer()));
             }
         }
@@ -79,8 +78,7 @@ public class LogedInController {
             Request req = allRequests.get(i);
             if(allRequests.get(i).getR_answer() == "pending"){
                 Vacation vac = req.getVacation();
-                vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/MM/yyyy-HH:mm").format(vac.get__startDate()),
-                        new SimpleDateFormat("dd/MM/yyyy-HH:mm").format(vac.get_endDate()),
+                vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                         vac.get_destination(), loged.getUsername(), req.getR_answer()));
             }
 //            Request req = new Request(allRequests[i]);
