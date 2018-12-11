@@ -5,7 +5,7 @@ import Model.SQLModel;
 import Model.User;
 
 public class DeleteController {
-    public static String currentlyLoggedInUserID = ""; //TODO find a better solution!
+
     SQLModel sqlModel;
 
 

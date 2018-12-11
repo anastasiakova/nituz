@@ -16,7 +16,7 @@ public class Main extends Application {
         Parent root = fxmlControl.load(getClass().getResource(("/openWindow.fxml")).openStream());
         primaryStage.setTitle("VACATION 4 U ");
         openWindowsController view = fxmlControl.getController();
-        view.init();
+        view.initialize();
         primaryStage.setScene(new Scene(root, 950, 620));
         primaryStage.getScene().getStylesheets().add("/openWindowCss.css");
         primaryStage.show();

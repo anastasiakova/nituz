@@ -169,6 +169,28 @@ public class Vacation implements ISQLable {
         this._vacationSleepingArrangements = _vacationSleepingArrangements;
         this._ownerID = _ownerID;
     }
+    public Vacation (Date __startDate, Date _endDate, String _destination, String _aviationCompany,
+                     int _numOfTickets, String _ticketType, boolean _isBaggageIncluded, boolean _isRoundTrip,
+                     String _vacationType, String _vacationSleepingArrangements, String _ownerID)  {
+
+        this.__startDate = __startDate;
+        this._endDate = _endDate;
+        this._destination = _destination;
+        this._aviationCompany =  _aviationCompany;
+        this._numOfTickets = _numOfTickets;
+        this._ticketType = TicketType.valueOf(_ticketType);
+        this._isBaggageIncluded = _isBaggageIncluded;
+        this._isRoundTrip = _isRoundTrip;
+        this._vacationType = VacationType.valueOf(_vacationType);
+        this._vacationSleepingArrangements = VacationSleepingArrangements.valueOf(_vacationSleepingArrangements);
+        this._ownerID = _ownerID;
+
+        count++;
+        this._vacationID = String.valueOf(count);
+
+        this._vacationStatus = VacationStatus.FOR_SALE;
+    }
+
     public Vacation(String []serchedVacation ) {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         this._vacationID = serchedVacation[0];
