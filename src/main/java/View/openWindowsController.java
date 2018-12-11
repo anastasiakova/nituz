@@ -210,8 +210,25 @@ public class openWindowsController {
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
             stage.show();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("cant do it!! ");
         }
+    }
+
+    public void updateWindow(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Update User");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("/UpdateForm.fxml").openStream());
+            UpdateForm creatView = fxmlLoader.getController();
+            creatView.setController(new UpdateFormController());
+            Scene scene = new Scene(root, 400, 550);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+            stage.show();
+        } catch (Exception e) {
+
         }
+    }
 }

@@ -80,12 +80,12 @@
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="updateDetalisButton" layoutX="498.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="update detalis" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="updateDetalisButton" layoutX="498.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="update detalis" onAction="#updateWindow" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buyThisVacaionButton" layoutX="274.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="buy this vacaion" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="buyThisVacaionButton" layoutX="274.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="i want this vaction!" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
