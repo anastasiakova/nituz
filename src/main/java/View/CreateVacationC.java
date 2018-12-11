@@ -3,12 +3,9 @@ package View;
 import Controller.DeleteController;
 import Controller.LogedInController;
 import Model.Vacation;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -48,8 +45,12 @@ public class CreateVacationC implements Initializable {
     public TextField destination;
     public TextField company;
     public TextField ticketNum;
+    Date start = null, end = null;
+    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
 
-     public CreateVacationC(){}
+    public CreateVacationC() {
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ticketTypeCombo.setItems(ticketTypeList);
@@ -59,9 +60,12 @@ public class CreateVacationC implements Initializable {
         sleepCombo.setItems(sleepingList);
     }
 
-    public void createVacation() {
+    public void createVacation() throws ParseException {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-
+        String startString = sDD.getText() + "/" + sMM.getText() + "/" + sYY.getText() + "-" +
+                sHH.getText() + ":" + sMIN.getText();
+        String endString = eDD.getText() + "/" + eMM.getText() + "/" + eYY.getText() + "-" +
+                eHH.getText() + ":" + eMIN.getText();
         if (sDD == null || sDD.getText().equals("") ||
                 sMM == null || sMM.getText().equals("") ||
                 sYY == null || sYY.getText().equals("") ||
@@ -73,25 +77,31 @@ public class CreateVacationC implements Initializable {
                 eHH == null || eHH.getText().equals("") ||
                 eMIN == null || eMIN.getText().equals("") ||
                 destination.getText().equals("") ||
-                ticketNum.getText().equals("")) {
+                ticketNum.getText().equals("") || ticketTypeCombo.getValue() == null ||
+                roundTripCombo.getValue() == null || baggageCombo.getValue() == null ||
+                sleepCombo.getValue() == null) {
             alert.setContentText("Please enter all the required fields (marked in *)");
             alert.show();
-        } else {
+        } else if (formatter.parse(startString).after(formatter.parse(endString))) {
             //date & time:
-            Date start = null, end = null;
-
-            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm",Locale.ENGLISH);
-            String startString = sDD.getText() + "/" + sMM.getText() + "/" + sYY.getText() + "-" +
-                    sHH.getText() + ":" + sMIN.getText();
-            String endString = eDD.getText() + "/" + eMM.getText() + "/" + eYY.getText() + "-" +
-                    eHH.getText() + ":" + eMIN.getText();
-            try {
-                start = formatter.parse(startString);
-//                System.out.println(formatter.format(start));
-                end = formatter.parse(endString);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            alert.setContentText("Please enter valid dates");
+            alert.show();
+        }
+        else if (!ticketNum.getText().matches("\\d*")|| Integer.parseInt(sDD.getText()) > 31 || Integer.parseInt(sDD.getText()) <= 0
+                || Integer.parseInt(eDD.getText()) > 31 || Integer.parseInt(eDD.getText()) <= 0 ||
+                Integer.parseInt(sMM.getText()) > 12 || Integer.parseInt(sMM.getText()) <= 0 ||
+                Integer.parseInt(eMM.getText()) > 12 || Integer.parseInt(eMM.getText()) <= 0) {
+            alert.setContentText("Please enter only number in the number of tickets");
+            alert.show();
+        }
+        else if(Integer.parseInt(sHH.getText())<0 || Integer.parseInt(sHH.getText())>23 ||
+                Integer.parseInt(sMIN.getText())<0 ||Integer.parseInt(sMIN.getText())>=60 ||
+                Integer.parseInt(eHH.getText())<0 || Integer.parseInt(eHH.getText())>23 ||
+                Integer.parseInt(eMIN.getText())<0 ||Integer.parseInt(eMIN.getText())>=60){
+            alert.setContentText("Please enter valid times");
+            alert.show();
+        }
+        else{
             //string fields:
             int ticketNumber = 0;
             try {
@@ -116,9 +126,9 @@ public class CreateVacationC implements Initializable {
             List<String> details = Arrays.asList(start.toString(), end.toString(), destination.getText(),
                     company.getText(), String.valueOf(ticketNumber), ticketType, isBaggage.toString(), isRoundTrip.toString(),
                     vacationType, sleeping);
-//           System.out.println(details);
-           logedInController.CreateVacation(startString, endString, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
-                    isRoundTrip, vacationType, sleeping);
+            System.out.println(details);
+            logedInController.CreateVacation(startString, endString, destination.getText(), company.getText(), ticketNumber,
+                    ticketType, isBaggage, isRoundTrip, vacationType, sleeping);
             // ########## vac constructor - need to move to the big controller ##########
 //            Vacation newVac = new Vacation(start, end, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
 //                    isRoundTrip, vacationType, sleeping, ownerID);
@@ -132,5 +142,4 @@ public class CreateVacationC implements Initializable {
     public void setController(LogedInController controller) {
         this.logedInController = controller;
     }
-
 }

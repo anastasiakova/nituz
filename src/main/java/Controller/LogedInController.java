@@ -104,7 +104,7 @@ public class LogedInController {
     }
 
     public void UpdateUser( String pwd, Date birthday, String privateName, String lastName,
-                           String city, String bankAcount, String creditCard, String id){
+                           String city, String bankAcount, String id){
         loged = new User(loged.getUsername(), pwd, birthday, privateName, lastName, city, bankAcount, id);
         sqlModel.updateRecord(loged);
     }
