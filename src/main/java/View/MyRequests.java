@@ -58,11 +58,11 @@ public class MyRequests {
 
 
     public void reject(ActionEvent actionEvent) {
-        if(!reqTable.getSelectionModel().getSelectedCells().isEmpty()){
-            TablePosition pos = reqTable.getSelectionModel().getSelectedCells().get(0);
+        if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()){
+            TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
             int row = pos.getRow();
 // Item here is the table view type:
-            VactaionAndRequest item = reqTable.getItems().get(row);
+            VactaionAndRequest item = reqForMeTable.getItems().get(row);
             TableColumn col = pos.getTableColumn();
 // this gives the value in the selected cell:
             //String data = (String) col.getCellObservableValue(item).getValue();
@@ -77,11 +77,11 @@ public class MyRequests {
     }
 
     public void approve(ActionEvent actionEvent) {
-        if(!reqTable.getSelectionModel().getSelectedCells().isEmpty()) {
-            TablePosition pos = reqTable.getSelectionModel().getSelectedCells().get(0);
+        if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
+            TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
             int row = pos.getRow();
 // Item here is the table view type:
-            VactaionAndRequest item = reqTable.getItems().get(row);
+            VactaionAndRequest item = reqForMeTable.getItems().get(row);
             TableColumn col = pos.getTableColumn();
 // this gives the value in the selected cell:
             //String data = (String) col.getCellObservableValue(item).getValue();
@@ -93,7 +93,6 @@ public class MyRequests {
             alert.setContentText("You need to peek vacation first");
             alert.show();
         }
-
     }
 
     public void tryBuy(ActionEvent actionEvent) {
