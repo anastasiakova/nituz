@@ -19,14 +19,14 @@ public class CreateController {
     }
 
 
-    public void CreatePayment(String aprovedRequestId){
-        Payments newPayment = new Payments(aprovedRequestId);
-        BigModel.CreatePaymentAndUpdateVacation(newPayment);
-    }
-
-    public void CreateRequest(String r_buyer, String r_seller, String vacationID){
-        Request newRequest = new Request(r_buyer, r_seller, vacationID);
-        BigModel.CreateRequestAndUpdateVacation(newRequest);
-    }
+//    public void CreatePayment(String aprovedRequestId){
+//        Payments newPayment = new Payments(aprovedRequestId);
+//        BigModel.CreatePaymentAndUpdateVacation(newPayment);
+//    }
+//
+//    public void CreateRequest(String r_buyer, String r_seller, String vacationID){
+//        Request newRequest = new Request(r_buyer, r_seller, vacationID);
+//        BigModel.CreateRequestAndUpdateVacation(newRequest);
+//    }
 
 }

@@ -35,7 +35,7 @@
                                     <AnchorPane prefHeight="81.0" prefWidth="147.0">
                                        <children>
                                           <Button fx:id="loginButton" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#logINButtonAction" text="log in" />
-                                          <Button fx:id="createUserButton" layoutX="75.0" layoutY="2.0" mnemonicParsing="false" onAction="#createUserAction" text="sign up" />
+                                          <Button fx:id="createUserButton" layoutX="75.0" layoutY="2.0" mnemonicParsing="false" onAction="#createUserWindow" text="sign up" />
                                           <Label fx:id="welcomeLabel" layoutX="1.0" layoutY="33.0" prefHeight="26.0" prefWidth="147.0" text="welcome!">
                                              <font>
                                                 <Font name="System Bold" size="19.0" />
@@ -75,7 +75,7 @@
 
                     </columns>
                   </TableView>
-                  <Button fx:id="allMyRequestButton" layoutX="695.0" layoutY="267.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="All my requests" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="allMyRequestButton" layoutX="695.0" layoutY="267.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="All my requests"  onAction="#myRequestWindow" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
