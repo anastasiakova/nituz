@@ -148,7 +148,7 @@ public class LogedInController {
 
     public void CreatePaymentAndUpdateVacation(String aprovedRequestId){
         Payments newPayment = new Payments(aprovedRequestId);
-        newPayment.get_Request().setR_answer("approved");
+        newPayment.get_Request().setR_answer("confirmed");
         newPayment.get_Request().setPayment(newPayment);
         loged.UpdateMyRequsts(newPayment.get_Request());
         sqlModel.updateRecord(newPayment.get_Request());
@@ -190,21 +190,16 @@ public class LogedInController {
 
     public void UpdateRequest(String status, String reqID){
        List<Request> myRequests = loged.getRequestsForMe();
-       String vacationID = "";
         for (Request req: myRequests) {
             if(req.getR_ID().equals(reqID)){
                 req.setR_answer(status);
-                vacationID = req.getVacationID();
+                if(status.equals("rejected")) {
+                    Vacation vac = req.getVacation();
+                    vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
+                    sqlModel.updateRecord(vac);
+                }
                 sqlModel.updateRecord(req);
             }
-        }
-        if(status.equals("rejected")) {
-            String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
-            fields[0] = vacationID;
-            String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
-            Vacation vac = new Vacation(allVacationsStr);
-            vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
-            sqlModel.updateRecord(vac);
         }
     }
 
