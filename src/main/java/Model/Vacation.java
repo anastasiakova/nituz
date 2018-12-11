@@ -170,7 +170,7 @@ public class Vacation implements ISQLable {
         this._ownerID = _ownerID;
     }
     public Vacation(String []serchedVacation ) {
-        DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
         this._vacationID = serchedVacation[0];
         try {
             this.__startDate = formatter.parse(serchedVacation[1]);

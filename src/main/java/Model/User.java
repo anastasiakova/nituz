@@ -1,7 +1,13 @@
 package Model;
 
+import View.MyRequests;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +24,8 @@ public class User implements ISQLable {
     private String bankAcount;
     private String id;
 
-    private List<Request> myRequests;
-    private List<Request> requestsForMe;
+    private ArrayList<Request> myRequests;
+    private ArrayList<Request> requestsForMe;
 
     private String tableFields = "tbl_users("
             + TblFields.enumDict.get("userFields").get(0) + ", "//user name
@@ -124,11 +130,11 @@ public class User implements ISQLable {
         return privateName;
     }
 
-    public List<Request> getMyRequests() {
+    public ArrayList<Request> getMyRequests() {
         return myRequests;
     }
 
-    public List<Request> getRequestsForMe() {
+    public ArrayList<Request> getRequestsForMe() {
         return requestsForMe;
     }
 
@@ -233,19 +239,17 @@ public class User implements ISQLable {
         return tableName;
     }
 
-    public static void CreateRequestAndUpdateVacation(Request newRequest) {
-        //create request
-        SQLModel sql = SQLModel.GetInstance();
-        sql.insertRecordToTable(Tables.TBL_REQUESTS.name().toLowerCase(),newRequest);
-        //update vacation
-        String[] fields = {newRequest.getR_ID(),newRequest.getR_seller(),"","","","",
-                "","","","","","",""};
-        String vacation = sql.selectFromTable(Tables.TBL_VACATIONS,fields);
-        if(vacation!=""){
-            Vacation forUpdate = new Vacation(vacation);
-            forUpdate.set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
-            sql.updateRecord(forUpdate);
+    public void UpdateMyRequsts(Request newRequest) {
+        if(myRequests.contains(newRequest)){
+            myRequests.remove(newRequest);
         }
+        myRequests.add(newRequest);
+    }
+    public void UpdateRequstsForMe(Request newRequest) {
+        if(requestsForMe.contains(newRequest)){
+            requestsForMe.remove(newRequest);
+        }
+        requestsForMe.add(newRequest);
     }
 
     private void setMyRequests(String username) {
@@ -268,4 +272,7 @@ public class User implements ISQLable {
            requestsForMe.add(new Request(allRequests[i]));
         }
     }
+
+
+
 }

@@ -11,10 +11,16 @@ public class Request implements ISQLable {
     private String r_buyerID;
     private String r_seller;
     private String r_answer;
+
+    private Payments payment;
     //private String vacationID;
     private Vacation vacation;
     private String primaryKeyName = "r_ID";
     private String tableName = "tbl_requests";
+
+    public void setPayment(Payments payment) {
+        this.payment = payment;
+    }
 
     private enum ansStatus {
         confirmed,
@@ -62,6 +68,7 @@ public class Request implements ISQLable {
         this.r_seller = r_seller;
         this.r_answer = ansStatus.pending.toString();
         setVacation(vacationID);
+        payment = null;
     }
 
     public Request(String[] searchedRequest) {
@@ -70,16 +77,34 @@ public class Request implements ISQLable {
         this.r_seller = searchedRequest[2];
         this.r_answer = searchedRequest[3];
         setVacation(searchedRequest[4]);
+        if(r_answer == ansStatus.confirmed.name()){
+            trySetPayment(r_ID,r_buyerID,r_seller);
+        }
+        else{
+            payment = null;
+        }
     }
+
     public Request(String request){
        this(request.split(", "));
     }
 
     public void upateAnswer(boolean isConfirmed) {
-        if (isConfirmed)
+        if (isConfirmed) {
             this.r_answer = ansStatus.confirmed.toString();
-        else
+            trySetPayment(this.r_ID, this.r_buyerID, this.r_seller);
+        }
+        else {
             this.r_answer = ansStatus.rejected.toString();
+        }
+    }
+
+    public Payments getPayment() {
+        return payment;
+    }
+
+    public Vacation getVacation() {
+        return vacation;
     }
 
     @Override
@@ -135,23 +160,6 @@ public class Request implements ISQLable {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Request r = (Request) o;
-        return Objects.equals(getR_ID(), r.getR_ID()) &&
-                Objects.equals(getR_buyerID(), r.getR_buyerID()) &&
-                Objects.equals(getR_seller(), r.getR_seller()) &&
-                Objects.equals(getVacationID(), r.getVacationID()) &&
-                Objects.equals(getR_answer(), r.getR_answer());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getR_ID(), getR_buyerID(), getR_seller(), getVacationID(), getR_answer());
-    }
-
     public String getR_ID() {
         return r_ID;
     }
@@ -181,5 +189,32 @@ public class Request implements ISQLable {
         fields[0] = vacationID;
         String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
         this.vacation = new Vacation(allRequests[0]);
+    }
+
+    private void trySetPayment(String r_id, String r_buyerID, String r_seller) {
+        String[] fields = new String[TblFields.enumDict.get("paymentsTblFields").size()];
+        fields[1] = r_id;
+        fields[2] = r_buyerID;
+        fields[3] = r_seller;
+        String allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_PAYMENTS, fields);
+        if(allRequests != "") {
+            this.payment = new Payments(allRequests.split("\n")[0]);
+        }
+        else {
+            this.payment = null;
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Request request = (Request) o;
+        return this.r_ID == request.getR_ID();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getR_ID());
     }
 }

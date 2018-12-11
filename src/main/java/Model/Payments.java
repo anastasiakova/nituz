@@ -12,7 +12,8 @@ import java.util.Calendar;
 public class Payments implements ISQLable {
     private static Integer _paymentId = 0;
 
-    private String _aprovedRequest;
+    //private String _aprovedRequest;
+    private  Request _aprovedRequest;
     private String _id;
     private String _date;
     private String primaryKeyName = "payment_id";
@@ -33,15 +34,15 @@ public class Payments implements ISQLable {
     public Payments(String[] searchedPayment) {
         if(searchedPayment.length != 1){
             this._id = searchedPayment[0];
-            this._aprovedRequest = searchedPayment[1];
+            set_aprovedRequest(searchedPayment[1]);
             this._date = searchedPayment[2];
             this._status = Status.valueOf(searchedPayment[3].toUpperCase());
         }
         else{
-            this._aprovedRequest = searchedPayment[0];
+            set_aprovedRequest(searchedPayment[0]);
             _paymentId++;
             this._id = _paymentId.toString();
-            this._date = new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(Calendar.getInstance().getTime());
+            this._date = new SimpleDateFormat("dd/MM/yyyy-HH:mm").format(Calendar.getInstance().getTime());
             this._status = Status.inProgress;
         }
     }
@@ -62,6 +63,10 @@ public class Payments implements ISQLable {
     }
 
     public String get_aprovedRequest() {
+        return _aprovedRequest.getR_ID();
+    }
+
+    public Request get_Request() {
         return _aprovedRequest;
     }
 
@@ -135,5 +140,12 @@ public class Payments implements ISQLable {
                 ", " + get_date() +
                 ", " + get_status() +
                 ");";
+    }
+
+    private void set_aprovedRequest(String requestID){
+        String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
+        fields[0] = requestID;
+        String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
+        this._aprovedRequest = new Request(allRequests[0]);
     }
 }
