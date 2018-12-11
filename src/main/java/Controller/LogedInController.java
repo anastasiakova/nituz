@@ -213,4 +213,6 @@ public class LogedInController {
     public  void LogOut(){
         loged = null;
     }
+
+
 }

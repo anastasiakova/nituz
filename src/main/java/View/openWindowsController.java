@@ -198,7 +198,7 @@ public class openWindowsController {
         }
     }
 
-    public void createUserAction(ActionEvent actionEvent) {
+    public void createUserWindow(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
             stage.setTitle("Create User");
@@ -213,6 +213,17 @@ public class openWindowsController {
         } catch (Exception e) {
             System.out.println("cant do it!! ");
         }
+    }
+
+    public void myRequestWindow(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/MyRequests.fxml"));
+//            UpdateForm creatView = fxmlLoader.getController();
+//            creatView.setController(new UpdateFormController());
+        Scene scene = new Scene(root);
+        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        window.setScene(scene);
+//            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+        window.show();
     }
 
     public void updateWindow(ActionEvent actionEvent) {
