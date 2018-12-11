@@ -182,4 +182,15 @@ public class LogedInController {
         }
         return FXCollections.observableList(vacations);
     }
+
+    public void CreateVacation(Date __startDate, Date _endDate,
+                               String _destination, String _aviationCompany,
+                               int _numOfTickets, String _ticketType,
+                               boolean _isBaggageIncluded, boolean _isRoundTrip,
+                               String _vacationType, String _vacationSleepingArrangements){
+        ISQLable newVacation = new Vacation(__startDate, _endDate, _destination, _aviationCompany,
+                _numOfTickets, _ticketType, _isBaggageIncluded, _isRoundTrip, _vacationType,
+                 _vacationSleepingArrangements, loged.getUsername());
+        sqlModel.insertRecordToTable(Tables.TBL_VACATIONS.toString().toLowerCase(), newVacation);
+    }
 }

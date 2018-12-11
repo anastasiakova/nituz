@@ -49,9 +49,10 @@ public class openWindowsController {
     public Label passLabel;
     public Label useLabel;
     public Label welcomeLabel;
-
+    public LogedInController logedInController;
     public openWindowsController() {
     }
+
     public openWindowsController(SearchController searchController) { this.searchController = searchController;}
 
     public SearchController searchController = new SearchController();
@@ -106,8 +107,9 @@ public class openWindowsController {
         if (userText.getText() != "" && passText.getText() != "") {
             System.out.println(userText.getText());
             //controller search
-
-            loginSuccessful = searchController.isLoginValid(userText.getText(), passText.getText());
+            this.logedInController = new LogedInController();
+//            loginSuccessful = searchController.isLoginValid(userText.getText(), passText.getText());
+            loginSuccessful = logedInController.tryLogIn(userText.getText(),passText.getText());
             if (loginSuccessful) {
                 loginButtonsMaker(event);
             } else {
@@ -137,17 +139,23 @@ public class openWindowsController {
         this.t2.setVisible(false);
         this.t3.setVisible(false);
         this.t4.setVisible(false);
+        ObservableList<Vacation> data = logedInController.getAllAvailableVacations();
+        vacTable.setItems(data);
+
     }
 
     public void openCreateVactionWindow(ActionEvent event) throws IOException {
         FXMLLoader fxmlControl = new FXMLLoader();
         Parent root = fxmlControl.load(getClass().getResource("/CreateVacation.fxml"));
         Stage primaryStage = new Stage();
+        CreateVacationC createVacationC = fxmlControl.getController();
+        createVacationC.setController(new DeleteController());
         primaryStage.setTitle("Create New Vaction");
         primaryStage.setScene(new Scene(root, 500, 520));
         primaryStage.getScene().getStylesheets().add("/subWindowsCss.css");
         primaryStage.show();
     }
+
     public void logOut() {
         this.searchController = new SearchController();
         this.resetButton.setVisible(true);

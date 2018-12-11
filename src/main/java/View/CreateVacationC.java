@@ -1,5 +1,7 @@
 package View;
 
+import Controller.DeleteController;
+import Controller.LogedInController;
 import Model.Vacation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ import java.util.*;
 
 public class CreateVacationC implements Initializable {
     public Button addButton;
+    LogedInController logedInController;
     //ComboBoxs:
     public ComboBox<String> ticketTypeCombo;
     public ComboBox<String> baggageCombo;
@@ -110,9 +113,15 @@ public class CreateVacationC implements Initializable {
                     company.getText(), String.valueOf(ticketNumber), ticketType, isBaggage.toString(), isRoundTrip.toString(),
                     vacationType, sleeping);
            System.out.println(details);
+           logedInController.CreateVacation(start, end, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
+                    isRoundTrip, vacationType, sleeping);
             // ########## vac constructor - need to move to the big controller ##########
 //            Vacation newVac = new Vacation(start, end, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
 //                    isRoundTrip, vacationType, sleeping, ownerID);
         }
+    }
+
+    public void setController(LogedInController controller) {
+        this.logedInController = controller;
     }
 }
