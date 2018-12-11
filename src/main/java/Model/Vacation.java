@@ -2,13 +2,14 @@ package Model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.Date;
-import java.util.Locale;
 
 public class Vacation implements ISQLable {
 
@@ -47,7 +48,31 @@ public class Vacation implements ISQLable {
 
 
 
-    private static int count = 0;
+    private static int count = getMyMaxCounter();
+
+    public static int getMyMaxCounter() {
+        Path currentPath = Paths.get("");
+        String _path = "jdbc:sqlite:" + currentPath.toAbsolutePath().toString() + "\\dataBase.db";
+        String sql = "SELECT * FROM tbl_vacations;\n";
+        List<Integer> res = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) {
+                res.add(Integer.parseInt(rs.getString(1).trim()));
+            }
+            Collections.sort(res);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if(res.size()>0) {
+            return res.get(res.size() - 1);
+        }
+        return 0;
+    }
     //<editor-fold desc="Vacation enums">
     public static enum TicketType{
         ADULT,

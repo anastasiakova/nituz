@@ -1,12 +1,15 @@
 package Model;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.Objects;
+import javafx.collections.transformation.SortedList;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.*;
+import java.util.*;
 
 // we need to check for equal request- the same buyer, seller and vecID !!!!
 public class Request implements ISQLable {
-    private static int counter = 1;
+    private static int counter = getMyMaxCounter();
     private String r_ID;
     private String r_buyerID;
     private String r_seller;
@@ -20,6 +23,30 @@ public class Request implements ISQLable {
 
     public void setPayment(Payments payment) {
         this.payment = payment;
+    }
+
+    public static int getMyMaxCounter() {
+        Path currentPath = Paths.get("");
+        String _path = "jdbc:sqlite:" + currentPath.toAbsolutePath().toString() + "\\dataBase.db";
+        String sql = "SELECT * FROM tbl_requests;\n";
+        List<Integer> res = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) {
+                 res.add(Integer.parseInt(rs.getString(1).trim()));
+            }
+            Collections.sort(res);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if(res.size()>0) {
+            return res.get(res.size() - 1);
+        }
+        return 0;
     }
 
     private enum ansStatus {
@@ -62,8 +89,8 @@ public class Request implements ISQLable {
 
 
     public Request(String r_buyer, String r_seller, String vacationID) {
-        this.r_ID = Integer.toString(counter);
         counter++;
+        this.r_ID = Integer.toString(counter);
         this.r_buyerID = r_buyer;
         this.r_seller = r_seller;
         this.r_answer = ansStatus.pending.toString();

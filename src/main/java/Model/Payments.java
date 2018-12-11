@@ -1,17 +1,39 @@
 package Model;
 
-import org.omg.PortableInterceptor.SUCCESSFUL;
-
-import java.sql.DatabaseMetaData;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
 
 public class Payments implements ISQLable {
-    private static Integer _paymentId = 0;
+    private static Integer _paymentId = getMyMaxCounter();
+    public static int getMyMaxCounter() {
+        Path currentPath = Paths.get("");
+        String _path = "jdbc:sqlite:" + currentPath.toAbsolutePath().toString() + "\\dataBase.db";
+        String sql = "SELECT * FROM tbl_payments;\n";
+        List<Integer> res = new ArrayList<>();
 
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt  = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)){
+
+            // loop through the result set
+            while (rs.next()) {
+                res.add(Integer.parseInt(rs.getString(1).trim()));
+            }
+            Collections.sort(res);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        if(res.size()>0) {
+            return res.get(res.size() - 1);
+        }
+        return 0;
+    }
     //private String _aprovedRequest;
     private  Request _aprovedRequest;
     private String _id;
