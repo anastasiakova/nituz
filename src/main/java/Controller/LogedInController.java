@@ -190,7 +190,7 @@ public class LogedInController {
     }
 
     public void UpdateRequest(String status, String reqID){
-       List<Request> myRequests = loged.getMyRequests();
+       List<Request> myRequests = loged.getRequestsForMe();
         for (Request req: myRequests) {
             if(req.getR_ID().equals(reqID)){
                 req.setR_answer(status);
