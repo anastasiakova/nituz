@@ -94,8 +94,7 @@ public class UpdateForm {
 
                 } else {
                     this.logedInController.UpdateUser(passText.getText(), date, fNameText.getText()
-                            , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(),
-                            creditCardNumber.getText(),idNumber.getText());
+                            , lNameText.getText(), cityText.getText(), bankAccountNumber.getText() ,idNumber.getText());
                     Alert alertI = new Alert(Alert.AlertType.INFORMATION);
                     alertI.setContentText("User updated successfully.");
                     alertI.show();

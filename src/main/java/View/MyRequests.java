@@ -4,10 +4,14 @@ import Controller.LogedInController;
 import Controller.SearchController;
 import Model.VactaionAndRequest;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MyRequests {
 
+    public Button reject;
+    public Button approve;
+    public Button buy;
     LogedInController logedInController;
 
     public javafx.scene.control.TableView<VactaionAndRequest> reqTable;
