@@ -32,18 +32,18 @@ public class User implements ISQLable {
             + TblFields.enumDict.get("userFields").get(0) + ", "//user name
             + TblFields.enumDict.get("userFields").get(1) + ", "//pwd
             + TblFields.enumDict.get("userFields").get(2) + ", "//birthday
-            + TblFields.enumDict.get("userFields").get(3) +", "//private name
-            + TblFields.enumDict.get("userFields").get(4) +", "//last name
-            + TblFields.enumDict.get("userFields").get(5)//city
+            + TblFields.enumDict.get("userFields").get(3) + ", "//private name
+            + TblFields.enumDict.get("userFields").get(4) + ", "//last name
+            + TblFields.enumDict.get("userFields").get(5) + ", "//city
             + TblFields.enumDict.get("userFields").get(6) + ", "//bank
             + TblFields.enumDict.get("userFields").get(7)//id
-            + ") VALUES(?,?,?,?,?,?,?,?,?)";
+            + ") VALUES(?,?,?,?,?,?,?,?)";
 
     private String primaryKeyName = "username";
     private String tableName = "tbl_users";
 
 
-    public static String createUsersTableSQL(){
+    public static String createUsersTableSQL() {
         return ("CREATE TABLE IF NOT EXISTS tbl_users (\n" +
                 TblFields.enumDict.get("userFields").get(0) + " text NOT NULL PRIMARY KEY,\n" +
                 TblFields.enumDict.get("userFields").get(1) + " text NOT NULL,\n" +
@@ -53,14 +53,14 @@ public class User implements ISQLable {
                 TblFields.enumDict.get("userFields").get(5) + "	text,\n" +
                 TblFields.enumDict.get("userFields").get(6) + "	text,\n" +
                 TblFields.enumDict.get("userFields").get(7) + "	text\n" +
-        ");");
+                ");");
     }
 
-    public static String dropUsersTableSQL(){
+    public static String dropUsersTableSQL() {
         return "DROP TABLE IF EXISTS tbl_users;";
     }
 
-    public String getUserFieldsSQL(){
+    public String getUserFieldsSQL() {
         return "VALUES (" + username +
                 ", " + pwd +
                 ", " + birthday +
@@ -101,17 +101,18 @@ public class User implements ISQLable {
         this.id = searcheUser[7];
     }
 
-    public User(String user){
-            this(user.split(", "));
+    public User(String user) {
+        this(user.split(", "));
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getPrimaryKey(){
+    public String getPrimaryKey() {
         return getUsername();
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -124,8 +125,9 @@ public class User implements ISQLable {
         this.pwd = pwd;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public String getBirthday() {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(birthday);
     }
 
     public void setBirthday(Date birthday) {
@@ -171,6 +173,7 @@ public class User implements ISQLable {
     public String getId() {
         return id;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -181,14 +184,14 @@ public class User implements ISQLable {
                 Objects.equals(getBirthday(), user.getBirthday()) &&
                 Objects.equals(getPrivateName(), user.getPrivateName()) &&
                 Objects.equals(getLastName(), user.getLastName()) &&
-                Objects.equals(getCity(), user.getCity())&&
-                Objects.equals(getBankAcount(), user.getBankAcount())&&
+                Objects.equals(getCity(), user.getCity()) &&
+                Objects.equals(getBankAcount(), user.getBankAcount()) &&
                 Objects.equals(getId(), user.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUsername(), getPwd(), getBirthday(), getPrivateName(), getLastName(), getCity(),getBankAcount(),getId());
+        return Objects.hash(getUsername(), getPwd(), getBirthday(), getPrivateName(), getLastName(), getCity(), getBankAcount(), getId());
     }
 
     @Override
@@ -246,13 +249,14 @@ public class User implements ISQLable {
     }
 
     public void UpdateMyRequsts(Request newRequest) {
-        if(myRequests.contains(newRequest)){
+        if (myRequests.contains(newRequest)) {
             myRequests.remove(newRequest);
         }
         myRequests.add(newRequest);
     }
+
     public void UpdateRequstsForMe(Request newRequest) {
-        if(requestsForMe.contains(newRequest)){
+        if (requestsForMe.contains(newRequest)) {
             requestsForMe.remove(newRequest);
         }
         requestsForMe.add(newRequest);
@@ -268,17 +272,16 @@ public class User implements ISQLable {
         }
     }
 
-    private void setRequestsForMe(String username){
+    private void setRequestsForMe(String username) {
         requestsForMe = new ArrayList<>();
         String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
         fields[2] = username;
         fields[4] = "pending";
         String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
         for (int i = 0; i < allRequests.length & allRequests[0] != ""; i++) {
-           requestsForMe.add(new Request(allRequests[i]));
+            requestsForMe.add(new Request(allRequests[i]));
         }
     }
-
 
 
 }

@@ -6,6 +6,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -25,21 +28,26 @@ public class Create {
     public javafx.scene.control.TextField fNameText;
     public javafx.scene.control.TextField cityText;
     public javafx.scene.control.TextField lNameText;
-    public javafx.scene.control.DatePicker dateText;
+    public javafx.scene.control.TextField dd;
+    public javafx.scene.control.TextField mm;
+    public javafx.scene.control.TextField yy;
     public javafx.scene.control.TextField bankAccountNumber;
-    public javafx.scene.control.TextField creditCardNumber;
     public TextField idNumber;
+    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-    public Create() {};
+    public Create() {
+    }
 
-//    public Create(SQLModel sqlModel) {
+    ;
+
+    //    public Create(SQLModel sqlModel) {
 //        this.sqlModel = sqlModel;
 //    }
     public Create(CreateController createController) {
         this.createController = createController;
     }
 
-    public void closeButtonAction(){
+    public void closeButtonAction() {
         // get a handle to the stage
         Stage stage = (Stage) closeButton.getScene().getWindow();
         // do what you have to do
@@ -54,64 +62,57 @@ public class Create {
         this.createController = createController;
     }
 
-    public void createButtonAction(){
+    public void createButtonAction() throws ParseException {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        String bDay = dd.getText() + "/" + mm.getText() + "/" + yy.getText();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -18);
+        Date d1 = calendar.getTime();
+        Date date = null;
+        System.out.println(dd.getText());
+        System.out.println(mm.getText());
+        System.out.println(yy.getText());
+        System.out.println(userText.getText());
+        System.out.println(passText.getText());
+        System.out.println(fNameText.getText());
+        System.out.println(lNameText.getText());
+        System.out.println(cityText.getText());
+        System.out.println(bankAccountNumber.getText());
+        System.out.println(idNumber.getText());
 
-        if(null == dateText.getValue()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Your'e must put a birth date! ");
+
+        if (dd == null || dd.getText().equals("") ||
+                mm == null || mm.getText().equals("") ||
+                yy == null || yy.getText().equals("") || userText.getText().equals("") ||
+                passText.getText().equals("") || fNameText.getText().equals("") || lNameText.getText().equals("") ||
+                cityText.getText().equals("") || bankAccountNumber.getText().equals("") || idNumber.getText().equals("")) {
+            alert.setContentText("Please enter all the required fields");
             alert.show();
+        } else if (!bankAccountNumber.getText().matches("\\d*")) {
+            alert.setContentText("You must enter numbers in bank account! ");
+            alert.show();
+        } else if (!idNumber.getText().matches("\\d*")) {
+            alert.setContentText("You must put a numbers in ID! ");
+            alert.show();
+        } else if (formatter.parse(bDay).after(d1)) {
+            alert.setContentText("You are too young to register! ");
+            alert.show();
+        } else {
+            date = formatter.parse(bDay);
+            this.createController.CreateUser(userText.getText(), passText.getText(), date, fNameText.getText()
+                    , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(), idNumber.getText());//TODO should be fields for that
+            Alert alertI = new Alert(Alert.AlertType.INFORMATION);
+            alertI.setContentText("User Created:\n\n" + createController.getUserCreatedMassage(userText.getText(),
+                    true));
+            alertI.show();
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
         }
-        else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            if(!bankAccountNumber.getText().matches("\\d*")) {
-                alert.setContentText("Your'e must put numbers in bank acount! ");
-                alert.show();
-            }
-            else if(!idNumber.getText().matches("\\d*")) {
-                alert.setContentText("Your'e must put a numbers in id! ");
-                alert.show();
-            }
-            else {
-                LocalDate localDate = dateText.getValue();
-                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
-                Date date = Date.from(instant);
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.YEAR, -18);
-                Date d1 = calendar.getTime();
-                if (date.after(d1)) {
-                    alert.setContentText("Your'e too young to register! ");
-                    alert.show();
-                } else {
-//               ISQLable newUser = new User(userText.getText(), passText.getText(), date, fNameText.getText()
-//                        , lNameText.getText(), cityText.getText());
-//                sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
-                    this.createController.CreateUser(userText.getText(), passText.getText(), date, fNameText.getText()
-                            , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(), idNumber.getText());//TODO should be fields for that
-                    Alert alertI = new Alert(Alert.AlertType.INFORMATION);
-//                String[] users = new String[TblFields.values().length];
-//                users[0] = userText.getText();
-//                String ansSelect = sqlModel.selectFromTable(Tables.TBL_USERS, users);
-//                String[] arrAns = ansSelect.split(",");
-//                alert.setContentText("User Created:\n\n" +
-//                        "User Name: " + arrAns[0] + "\n"
-//                        + "Password: " + arrAns[1].substring(1)
-//
-//                        + "\nB-day: " + arrAns[2].substring(1)
-//                        + "\nFirst Name: " + arrAns[3].substring(1)
-//                        + "\nLast Name: " + arrAns[4].substring(1)
-//                        + "\nCity: " + arrAns[5].substring(1, arrAns[5].length() - 2));
-                    alertI.setContentText("User Created:\n\n" + createController.getUserCreatedMassage(userText.getText(), true));
-                    alertI.show();
-                    Stage stage = (Stage) closeButton.getScene().getWindow();
-                    stage.close();
-                }
-            }
-        }
-
-
     }
-
-
-
 }
+
+
+
+
+
+
