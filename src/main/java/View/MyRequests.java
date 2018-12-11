@@ -38,17 +38,17 @@ public class MyRequests {
     }
 
     public void init() {
-        destination.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("_destination"));
-        startDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("__startDate"));
-        endDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("_endDate"));
-        sallerUserName.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("_ownerID"));
-        answer.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("r_answer"));
+        destination.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("destination"));
+        startDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("startDate"));
+        endDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("endDate"));
+        sallerUserName.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("userName"));
+        answer.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("answer"));
 
-        myVecDestination.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("_destination"));
-        myVecStartDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("__startDate"));
-        myVecEndDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("_endDate"));
-        buyerUserName.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("r_buyerID"));
-        myAnswer.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("r_answer"));
+        myVecDestination.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("destination"));
+        myVecStartDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("startDate"));
+        myVecEndDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("endDate"));
+        buyerUserName.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("userName"));
+        myAnswer.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("answer"));
 
         ObservableList<VactaionAndRequest> myRequests = logedInController.getMyRequests();
         reqTable.setItems(myRequests);
@@ -77,7 +77,7 @@ public class MyRequests {
     }
 
     public void approve(ActionEvent actionEvent) {
-        if(!reqTable.getSelectionModel().getSelectedCells().isEmpty()){
+        if(!reqTable.getSelectionModel().getSelectedCells().isEmpty()) {
             TablePosition pos = reqTable.getSelectionModel().getSelectedCells().get(0);
             int row = pos.getRow();
 // Item here is the table view type:
@@ -85,12 +85,13 @@ public class MyRequests {
             TableColumn col = pos.getTableColumn();
 // this gives the value in the selected cell:
             //String data = (String) col.getCellObservableValue(item).getValue();
-            logedInController.UpdateRequest("confirmed",item.getReqID());
+            logedInController.UpdateRequest("confirmed", item.getReqID());
             init();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("You need to peek vacation first");
+            alert.show();
         }
 
     }
@@ -103,21 +104,21 @@ public class MyRequests {
             VactaionAndRequest item = reqTable.getItems().get(row);
             TableColumn col = pos.getTableColumn();
 // this gives the value in the selected cell:
-            String data = (String) col.getCellObservableValue(item).getValue();
 
-            if(data == "confirmed"){
+            if(item.getAnswer().equals("confirmed")){
                 //show orens buy form
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Can't buy vacation if request was rejected");
+                alert.show();
             }
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("You need to peek vacation first");
+            alert.show();
         }
-
     }
 }
 
