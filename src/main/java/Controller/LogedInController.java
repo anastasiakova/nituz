@@ -50,7 +50,7 @@ public class LogedInController {
                  d = formatter.parse(vac.get__startDate());
                 if ( d.after(new Date())) {
                     vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
-                            vac.get_destination(), loged.getUsername(), req.getR_answer()));
+                            vac.get_destination(), loged.getUsername(), req.getR_answer(),req.getR_ID()));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -88,7 +88,7 @@ public class LogedInController {
             if(allRequests.get(i).getR_answer() == "pending"){
                 Vacation vac = req.getVacation();
                 vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
-                        vac.get_destination(), loged.getUsername(), req.getR_answer()));
+                        vac.get_destination(), loged.getUsername(), req.getR_answer(),req.getR_ID()));
             }
 //            Request req = new Request(allRequests[i]);
 //            String vecationID = req.getVacationID();
@@ -187,6 +187,16 @@ public class LogedInController {
             }
         }
         return FXCollections.observableList(vacations);
+    }
+
+    public void UpdateRequest(String status, String reqID){
+       List<Request> myRequests = loged.getMyRequests();
+        for (Request req: myRequests) {
+            if(req.getR_ID().equals(reqID)){
+                req.setR_answer(status);
+                sqlModel.updateRecord(req);
+            }
+        }
     }
 
     public void CreateVacation(String __startDate, String _endDate,

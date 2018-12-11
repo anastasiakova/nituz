@@ -7,13 +7,15 @@ public class VactaionAndRequest {
     String destination;
     String userName;
     String answer;
+    String reqID;
 
-    public VactaionAndRequest(String startDate, String endDate, String destination, String userName, String answer){
+    public VactaionAndRequest(String startDate, String endDate, String destination, String userName, String answer, String reqID){
         this.startDate = startDate;
         this.endDate = endDate;
         this.destination = destination;
         this.userName = userName;
         this.answer = answer;
+        this.reqID = reqID;
     }
 
     public String getStartDate() {
@@ -34,6 +36,10 @@ public class VactaionAndRequest {
 
     public String getAnswer() {
         return answer;
+    }
+
+    public String getReqID() {
+        return reqID;
     }
 
 }
