@@ -173,10 +173,9 @@ public class LogedInController {
         List<Vacation> vacations = new ArrayList<Vacation>();
         for (int i = 0; i < allVacationsStr.length & allVacationsStr[0] != "" ; i++) {
             Vacation vac = new Vacation(allVacationsStr[i]);
-            if(vac.get_ownerID() != loged.getUsername()){
+            if(!vac.get_ownerID().equals(loged.getUsername())){
                 vacations.add(vac);
             }
-
         }
         return FXCollections.observableList(vacations);
     }

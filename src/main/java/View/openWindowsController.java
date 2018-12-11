@@ -70,7 +70,7 @@ public class openWindowsController {
     public javafx.scene.control.TableColumn<Vacation, String> vacationStatus;
     public javafx.scene.control.TableColumn<Vacation, String> vacationSleepingArrangements;
     public javafx.scene.control.TableColumn<Vacation, String> ownerID;
-    public boolean isOk=false;
+    public boolean userModeOn=false;
 
     public void initButtons(){
         this.logOutButton.setVisible(false);
@@ -94,9 +94,12 @@ public class openWindowsController {
         //vacationStatus.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_vacationStatus"));
         vacationSleepingArrangements.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_vacationSleepingArrangements"));
         //ownerID.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_ownerID"));
-
         SearchController listOfVactions = new SearchController();
-        ObservableList<Vacation> data = listOfVactions.getAllAvailableVacations();
+        ObservableList<Vacation> data=null;
+        if(userModeOn)
+            data = logedInController.getAllAvailableVacations();
+        else
+            data = listOfVactions.getAllAvailableVacations();
         vacTable.setItems(data);
 
     }
@@ -111,6 +114,8 @@ public class openWindowsController {
 //            loginSuccessful = searchController.isLoginValid(userText.getText(), passText.getText());
             loginSuccessful = logedInController.tryLogIn(userText.getText(),passText.getText());
             if (loginSuccessful) {
+                userModeOn=true;
+                initialize();
                 loginButtonsMaker(event);
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -139,8 +144,6 @@ public class openWindowsController {
         this.t2.setVisible(false);
         this.t3.setVisible(false);
         this.t4.setVisible(false);
-        ObservableList<Vacation> data = logedInController.getAllAvailableVacations();
-        vacTable.setItems(data);
 
     }
 
@@ -182,10 +185,12 @@ public class openWindowsController {
         this.t3.setVisible(true);
         this.t4.setVisible(true);
         this.logedInController.LogOut();
+        this.userModeOn=false;
+        initialize();
     }
 
     public void unVisibleButtons(ActionEvent event){
-        if(isOk){
+        if(userModeOn){
             resetButton.setVisible(false);
         }
     }
