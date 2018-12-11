@@ -102,8 +102,8 @@ public class Request implements ISQLable {
         this.r_ID = searchedRequest[0];
         this.r_buyerID = searchedRequest[1];
         this.r_seller = searchedRequest[2];
-        this.r_answer = searchedRequest[3];
-        setVacation(searchedRequest[4]);
+        this.r_answer = searchedRequest[4];
+        setVacation(searchedRequest[3]);
         if(r_answer == ansStatus.confirmed.name()){
             trySetPayment(r_ID,r_buyerID,r_seller);
         }

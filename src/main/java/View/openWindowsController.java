@@ -2,6 +2,7 @@ package View;
 
 import Controller.*;
 import Model.Vacation;
+import Model.VactaionAndRequest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -70,7 +71,7 @@ public class openWindowsController {
     public javafx.scene.control.TableColumn<Vacation, String> vacationStatus;
     public javafx.scene.control.TableColumn<Vacation, String> vacationSleepingArrangements;
     public javafx.scene.control.TableColumn<Vacation, String> ownerID;
-    public boolean userModeOn=false;
+    public boolean userModeOn = false;
 
     public void initButtons(){
         this.logOutButton.setVisible(false);
@@ -117,7 +118,7 @@ public class openWindowsController {
             if (loginSuccessful) {
                 userModeOn=true;
                 initialize();
-                loginButtonsMaker(event);
+                loginButtonsMaker();
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setContentText("You Suck!");
@@ -127,7 +128,7 @@ public class openWindowsController {
         }
     }
 
-    public void loginButtonsMaker(ActionEvent event) {
+    public void loginButtonsMaker() {
         this.createUserButton.setVisible(false);
         this.userText.setVisible(false);
         this.loginButton.setVisible(false);
@@ -160,7 +161,7 @@ public class openWindowsController {
         primaryStage.getScene().getStylesheets().add("/subWindowsCss.css");
         primaryStage.showAndWait();
         initialize();
-        loginButtonsMaker(event);
+        loginButtonsMaker();
 
     }
 
@@ -187,6 +188,7 @@ public class openWindowsController {
         this.t4.setVisible(true);
         this.logedInController.LogOut();
         this.userModeOn=false;
+        loginButtonsMaker();
         initialize();
     }
 
@@ -244,6 +246,27 @@ public class openWindowsController {
             stage.show();
         } catch (Exception e) {
 
+        }
+    }
+
+    public void setRequest(ActionEvent actionEvent) {
+        if(!vacTable.getSelectionModel().getSelectedCells().isEmpty()){
+            TablePosition pos = vacTable.getSelectionModel().getSelectedCells().get(0);
+            int row = pos.getRow();
+// Item here is the table view type:
+            Vacation item = vacTable.getItems().get(row);
+// this gives the value in the selected cell:
+            logedInController.CreateRequestAndUpdateVacation(item.get_ownerID(),item.get_vacationID());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Request sended");
+            alert.show();
+            initialize();
+            loginButtonsMaker();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("You need to peek vacation first");
+            alert.show();
         }
     }
 }

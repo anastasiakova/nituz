@@ -85,7 +85,7 @@
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buyThisVacaionButton" layoutX="274.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="i want this vaction!" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="buyThisVacaionButton" layoutX="274.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="i want this vaction!" textAlignment="JUSTIFY" textFill="#3f1f8a" onAction="#setRequest">
                      <font>
                         <Font name="Calibri Bold" size="16.0" />
                      </font>
