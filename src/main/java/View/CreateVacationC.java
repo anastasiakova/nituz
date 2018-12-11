@@ -3,11 +3,17 @@ package View;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
@@ -42,6 +48,26 @@ public class CreateVacationC implements Initializable {
     }
 
     public void createVacation(){
+        //get dates:
+        LocalDate ld = startDate.getValue();
+        String startDateS = ld.toString();
+        ld = endDate.getValue();
+        String endDateS = ld.toString();
+        DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
+        try {
+            Date start = formatter.parse(startDateS);
+            Date end = formatter.parse(endDateS);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+
+        if (true) {
+
+            alert.setContentText("No birthday date entered. A birthday is required.");
+            alert.show();
+        }
     }
 }

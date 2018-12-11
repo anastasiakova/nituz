@@ -41,7 +41,7 @@ public class Payments implements ISQLable {
             this._aprovedRequest = searchedPayment[0];
             _paymentId++;
             this._id = _paymentId.toString();
-            this._date = new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(Calendar.getInstance().getTime());
+            this._date = new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(Calendar.getInstance().getTime());
             this._status = Status.inProgress;
         }
     }

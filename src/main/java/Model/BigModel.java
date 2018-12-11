@@ -68,8 +68,8 @@ public class BigModel {
             if (reqVacation != "") {
                 Vacation vac = new Vacation(reqVacation);
                 DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
-                vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(vac.get__startDate()),
-                        new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(vac.get_endDate()), vac.get_destination(), logedInUsername, req.getR_answer()));
+                vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(vac.get__startDate()),
+                        new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(vac.get_endDate()), vac.get_destination(), logedInUsername, req.getR_answer()));
             }
 
         }
