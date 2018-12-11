@@ -214,5 +214,9 @@ public class LogedInController {
         loged = null;
     }
 
+    public String getUserNameFromUserAsStripAndCleanString(){
+        return this.loged.getUsername();
+    }
+
 
 }

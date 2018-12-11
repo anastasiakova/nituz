@@ -233,7 +233,7 @@ public class openWindowsController {
     public void updateWindow(ActionEvent actionEvent) {
         try {
             Stage stage = new Stage();
-            stage.setTitle("Update User");
+            stage.setTitle("update User");
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource("/UpdateForm.fxml").openStream());
             UpdateForm creatView = fxmlLoader.getController();
