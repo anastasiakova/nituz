@@ -88,7 +88,7 @@ public class User implements ISQLable {
     public User(String[] searcheUser) {
         this.username = searcheUser[0];
         this.pwd = searcheUser[1];
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
             this.birthday = formatter.parse(searcheUser[2]);
         } catch (ParseException e) {

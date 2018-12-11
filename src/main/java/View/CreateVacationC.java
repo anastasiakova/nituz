@@ -122,11 +122,6 @@ public class CreateVacationC implements Initializable {
             else isRoundTrip = false;
             String vacationType = vacTypeCombo.getValue();
             String sleeping = sleepCombo.getValue();
-            String ownerID = "";
-            List<String> details = Arrays.asList(start.toString(), end.toString(), destination.getText(),
-                    company.getText(), String.valueOf(ticketNumber), ticketType, isBaggage.toString(), isRoundTrip.toString(),
-                    vacationType, sleeping);
-            System.out.println(details);
             logedInController.CreateVacation(startString, endString, destination.getText(), company.getText(), ticketNumber,
                     ticketType, isBaggage, isRoundTrip, vacationType, sleeping);
             // ########## vac constructor - need to move to the big controller ##########

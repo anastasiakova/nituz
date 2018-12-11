@@ -156,16 +156,14 @@ public class openWindowsController {
         CreateVacationC createVacationC = fxmlControl.getController();
         createVacationC.setController(this.logedInController);
         primaryStage.setTitle("Create New Vaction");
-        primaryStage.setScene(new Scene(root, 500, 520));
+        primaryStage.setScene(new Scene(root, 520, 500));
         primaryStage.getScene().getStylesheets().add("/subWindowsCss.css");
         primaryStage.showAndWait();
         initialize();
         loginButtonsMaker(event);
 
     }
-    public static void bla(){
-        System.out.println("sdfsdf");
-    }
+
     public void logOut() {
         this.searchController = new SearchController();
         this.createUserButton.setVisible(true);
@@ -206,10 +204,12 @@ public class openWindowsController {
             Parent root = fxmlLoader.load(getClass().getResource("/Create.fxml").openStream());
             Create creatView = fxmlLoader.getController();
             creatView.setCreateController(new CreateController());
-            Scene scene = new Scene(root, 270, 420);
+            Scene scene = new Scene(root, 350, 450);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-            stage.show();
+            stage.showAndWait();
+            initialize();
+
         } catch (Exception e) {
             System.out.println("cant do it!! ");
         }
@@ -238,7 +238,7 @@ public class openWindowsController {
             Parent root = fxmlLoader.load(getClass().getResource("/UpdateForm.fxml").openStream());
             UpdateForm creatView = fxmlLoader.getController();
             creatView.setController(new UpdateFormController());
-            Scene scene = new Scene(root, 400, 550);
+            Scene scene = new Scene(root, 380, 550);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
             stage.show();
