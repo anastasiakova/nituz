@@ -149,7 +149,7 @@ public class openWindowsController {
         Parent root = fxmlControl.load(getClass().getResource("/CreateVacation.fxml"));
         Stage primaryStage = new Stage();
         CreateVacationC createVacationC = fxmlControl.getController();
-        createVacationC.setController(new DeleteController());
+        createVacationC.setController(this.logedInController);
         primaryStage.setTitle("Create New Vaction");
         primaryStage.setScene(new Scene(root, 500, 520));
         primaryStage.getScene().getStylesheets().add("/subWindowsCss.css");
