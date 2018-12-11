@@ -73,13 +73,14 @@ public class CreateVacationC implements Initializable {
             //date & time:
             Date start = null, end = null;
 
-            DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
+            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm",Locale.ENGLISH);
             String startString = sDD.getText() + "/" + sMM.getText() + "/" + sYY.getText() + "-" +
                     sHH.getText() + ":" + sMIN.getText();
             String endString = eDD.getText() + "/" + eMM.getText() + "/" + eYY.getText() + "-" +
                     eHH.getText() + ":" + eMIN.getText();
             try {
                 start = formatter.parse(startString);
+                System.out.println(formatter.format(start));
                 end = formatter.parse(endString);
             } catch (ParseException e) {
                 e.printStackTrace();

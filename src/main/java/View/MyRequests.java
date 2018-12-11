@@ -36,10 +36,10 @@ public class MyRequests {
         myVecEndDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("_endDate"));
         buyerUserName.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("r_buyerID"));
 
-        ObservableList<VactaionAndRequest> myRequests = searchController.getMyRequests();
-        reqTable.setItems(myRequests);
-        ObservableList<VactaionAndRequest> requestsForMe = searchController.getToAnswerRequests();
-        reqForMeTable.setItems(requestsForMe);
+//        ObservableList<VactaionAndRequest> myRequests = searchController.getMyRequests();
+//        reqTable.setItems(myRequests);
+//        ObservableList<VactaionAndRequest> requestsForMe = searchController.getToAnswerRequests();
+//        reqForMeTable.setItems(requestsForMe);
     }
  }
 
