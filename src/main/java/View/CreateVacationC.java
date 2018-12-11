@@ -3,10 +3,14 @@ package View;
 import Controller.DeleteController;
 import Controller.LogedInController;
 import Model.Vacation;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.text.DateFormat;
@@ -124,4 +128,5 @@ public class CreateVacationC implements Initializable {
     public void setController(LogedInController controller) {
         this.logedInController = controller;
     }
+
 }
