@@ -67,10 +67,6 @@ public class Create {
                 alert.setContentText("Your'e must put numbers in bank acount! ");
                 alert.show();
             }
-            else if(!creditCardNumber.getText().matches("\\d*")) {
-                alert.setContentText("Your'e must put numbers in credit! ");
-                alert.show();
-            }
             else if(!idNumber.getText().matches("\\d*")) {
                 alert.setContentText("Your'e must put a numbers in id! ");
                 alert.show();
@@ -91,7 +87,7 @@ public class Create {
 //                        , lNameText.getText(), cityText.getText());
 //                sqlModel.insertRecordToTable(Tables.TBL_USERS.toString().toLowerCase(), newUser);
                     this.createController.CreateUser(userText.getText(), passText.getText(), date, fNameText.getText()
-                            , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(), creditCardNumber.getText(), idNumber.getText());//TODO should be fields for that
+                            , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(), idNumber.getText());//TODO should be fields for that
                     Alert alertI = new Alert(Alert.AlertType.INFORMATION);
 //                String[] users = new String[TblFields.values().length];
 //                users[0] = userText.getText();

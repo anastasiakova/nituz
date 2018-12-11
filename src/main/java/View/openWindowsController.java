@@ -30,7 +30,7 @@ import javax.swing.*;
 
 public class openWindowsController {
     @FXML
-    public Button resetButton;
+    public Button createUserButton;
     @FXML
     public Button loginButton;
     public Button logOutButton;
@@ -75,7 +75,8 @@ public class openWindowsController {
     public void initButtons(){
         this.logOutButton.setVisible(false);
         this.welcomeLabel.setVisible(false);
-        this.buyThisVacaionButton.setVisible(false);
+        if(vacTable.getItems().size() == 0)
+            this.buyThisVacaionButton.setDisable(true);
         this.addVactionButton.setVisible(false);
         this.allMyRequestButton.setVisible(false);
         this.updateDetalisButton.setVisible(false);
@@ -127,7 +128,7 @@ public class openWindowsController {
     }
 
     public void loginButtonsMaker(ActionEvent event) {
-        this.resetButton.setVisible(false);
+        this.createUserButton.setVisible(false);
         this.userText.setVisible(false);
         this.loginButton.setVisible(false);
         this.passText.setVisible(false);
@@ -136,7 +137,8 @@ public class openWindowsController {
         this.logOutButton.setVisible(true);
         this.welcomeLabel.setText("Welcome "+this.userText.getText()+"!");
         this.welcomeLabel.setVisible(true);
-        this.buyThisVacaionButton.setVisible(true);
+        if(vacTable.getItems().size() > 0)
+            this.buyThisVacaionButton.setDisable(false);
         this.addVactionButton.setVisible(true);
         this.allMyRequestButton.setVisible(true);
         this.updateDetalisButton.setVisible(true);
@@ -166,7 +168,7 @@ public class openWindowsController {
     }
     public void logOut() {
         this.searchController = new SearchController();
-        this.resetButton.setVisible(true);
+        this.createUserButton.setVisible(true);
         this.userText.setVisible(true);
         this.userText.setText("");
         this.passText.setText("");
@@ -176,7 +178,8 @@ public class openWindowsController {
         this.passLabel.setVisible(true);
         this.logOutButton.setVisible(false);
         this.welcomeLabel.setVisible(false);
-        this.buyThisVacaionButton.setVisible(false);
+        if(vacTable.getItems().size() == 0)
+            this.buyThisVacaionButton.setDisable(true);
         this.addVactionButton.setVisible(false);
         this.allMyRequestButton.setVisible(false);
         this.updateDetalisButton.setVisible(false);
@@ -191,15 +194,24 @@ public class openWindowsController {
 
     public void unVisibleButtons(ActionEvent event){
         if(userModeOn){
-            resetButton.setVisible(false);
+            createUserButton.setVisible(false);
         }
     }
 
-    public void resetButtonAction(ActionEvent actionEvent) {
-        this.userText.setText("");
-        this.passText.setText("");
-        searchController=null;
-        searchController=new SearchController();
-        resetButton.setVisible(true);
-    }
+    public void createUserAction(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("Create User");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("/Create.fxml").openStream());
+            Create creatView = fxmlLoader.getController();
+            creatView.setCreateController(new CreateController());
+            Scene scene = new Scene(root, 270, 420);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+            stage.show();
+        }catch (Exception e) {
+            System.out.println("cant do it!! ");
+        }
+        }
 }
