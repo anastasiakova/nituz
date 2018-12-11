@@ -216,14 +216,18 @@ public class openWindowsController {
     }
 
     public void myRequestWindow(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/MyRequests.fxml"));
-//            UpdateForm creatView = fxmlLoader.getController();
-//            creatView.setController(new UpdateFormController());
-        Scene scene = new Scene(root);
-        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        window.setScene(scene);
+            Stage stage = new Stage();
+            stage.setTitle("My requestes:");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("/MyRequests.fxml").openStream());
+            MyRequests creatView = fxmlLoader.getController();
+            creatView.SetController(this.logedInController);
+            Scene scene = new Scene(root);
+            Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            creatView.init();
 //            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-        window.show();
+            window.show();
     }
 
     public void updateWindow(ActionEvent actionEvent) {

@@ -39,6 +39,7 @@
            <TableColumn fx:id="myVecEndDate" prefWidth="125.0" text="end date " />
            <TableColumn fx:id="buyerUserName" prefWidth="119.0" text="buyer username " />
            <TableColumn fx:id="myVecDestination" prefWidth="113.0" text="destination " />
+            <TableColumn fx:id="myAnswer" minWidth="0.0" prefWidth="118.0" text="answer " />
         </columns>
       </TableView>
       <Button fx:id="reject" layoutY="583.0" mnemonicParsing="false" text="Reject" onAction="#reject" />

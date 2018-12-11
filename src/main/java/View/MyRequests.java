@@ -31,6 +31,7 @@ public class MyRequests {
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> myVecStartDate;//vecation
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> myVecEndDate;//vecation
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> buyerUserName;//request
+    public javafx.scene.control.TableColumn<VactaionAndRequest,String> myAnswer;//request
 
     public void SetController(LogedInController logedInController){
         this.logedInController = logedInController;
@@ -47,7 +48,7 @@ public class MyRequests {
         myVecStartDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("__startDate"));
         myVecEndDate.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("_endDate"));
         buyerUserName.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("r_buyerID"));
-        buyerUserName.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("r_answer"));
+        myAnswer.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("r_answer"));
 
         ObservableList<VactaionAndRequest> myRequests = logedInController.getMyRequests();
         reqTable.setItems(myRequests);
@@ -55,12 +56,6 @@ public class MyRequests {
         reqForMeTable.setItems(requestsForMe);
     }
 
-    public void initialize(){
-        ObservableList<VactaionAndRequest> myRequests = logedInController.getMyRequests();
-        reqTable.setItems(myRequests);
-        ObservableList<VactaionAndRequest> requestsForMe = logedInController.getToAnswerRequests();
-        reqForMeTable.setItems(requestsForMe);
-    }
 
     public void reject(ActionEvent actionEvent) {
         if(!reqTable.getSelectionModel().getSelectedCells().isEmpty()){
@@ -72,7 +67,7 @@ public class MyRequests {
 // this gives the value in the selected cell:
             //String data = (String) col.getCellObservableValue(item).getValue();
             logedInController.UpdateRequest("rejected",item.getReqID());
-            initialize();
+            init();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -91,7 +86,7 @@ public class MyRequests {
 // this gives the value in the selected cell:
             //String data = (String) col.getCellObservableValue(item).getValue();
             logedInController.UpdateRequest("confirmed",item.getReqID());
-            initialize();
+            init();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

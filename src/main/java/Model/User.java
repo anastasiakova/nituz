@@ -99,6 +99,8 @@ public class User implements ISQLable {
         this.city = searcheUser[5];
         this.bankAcount = searcheUser[6];
         this.id = searcheUser[7];
+        setMyRequests(username);
+        setRequestsForMe(username);
     }
 
     public User(String user) {
