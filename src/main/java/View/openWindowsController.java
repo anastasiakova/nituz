@@ -54,8 +54,9 @@ public class openWindowsController {
     public openWindowsController() {
     }
 
-    public openWindowsController(SearchController searchController) { this.searchController = searchController;}
-    public void SetController(LogedInController logedInController){
+    public openWindowsController(LogedInController logedInController) { this.logedInController = logedInController;}
+
+    public void setController(LogedInController logedInController) {
         this.logedInController = logedInController;
     }
 
@@ -76,6 +77,7 @@ public class openWindowsController {
     public javafx.scene.control.TableColumn<Vacation, String> ownerID;
     public boolean userModeOn = false;
     public String userName="";
+    public String password="";
 
     public void initButtons(){
         this.logOutButton.setVisible(false);
@@ -109,19 +111,25 @@ public class openWindowsController {
         vacTable.setItems(data);
 
     }
-
+    public void upadteBeforeReturn(String userName, String password){
+        this.userName=userName;
+        this.password=password;
+    }
     public void logINButtonAction(ActionEvent event) throws IOException {
+        if(userName=="" && password=="") {
+            userName = userText.getText();
+            password = passText.getText();
+        }
         //validate user name & password
         boolean loginSuccessful = false;
-        if (userText.getText() != "" && passText.getText() != "") {
+        if (userName != "" && password != "") {
             //System.out.println(userText.getText());
             //controller search
             this.logedInController = new LogedInController();
 //            loginSuccessful = searchController.isLoginValid(userText.getText(), passText.getText());
-            loginSuccessful = logedInController.tryLogIn(userText.getText(),passText.getText());
+            loginSuccessful = logedInController.tryLogIn(userName,password);
             if (loginSuccessful) {
                 userModeOn=true;
-                userName=userText.getText();
                 initialize();
                 loginButtonsMaker();
             } else {
@@ -132,6 +140,9 @@ public class openWindowsController {
 
         }
     }
+
+
+
 
     public void loginButtonsMaker() {
         this.createUserButton.setVisible(false);
@@ -229,6 +240,7 @@ public class openWindowsController {
             Parent root = fxmlLoader.load(getClass().getResource("/MyRequests.fxml").openStream());
             MyRequests creatView = fxmlLoader.getController();
             creatView.SetController(this.logedInController);
+            creatView.updateTextFields(userName,password);
             Scene scene = new Scene(root);
             Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             window.setScene(scene);

@@ -40,6 +40,8 @@ public class MyRequests {
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> myVecEndDate;//vecation
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> buyerUserName;//request
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> myAnswer;//request
+    public String userName="";
+    public String password="";
 
     public void SetController(LogedInController logedInController){
         this.logedInController = logedInController;
@@ -72,7 +74,10 @@ public class MyRequests {
 
     }
 
-
+    public void updateTextFields(String userName,String pass){
+        this.userName=userName;
+        this.password=pass;
+    }
     public void reject(ActionEvent actionEvent) {
         if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()){
             TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
@@ -152,7 +157,26 @@ public class MyRequests {
 
 
     public void goBack(ActionEvent actionEvent) throws IOException {
+        try {
+            Stage stage = new Stage();
+            stage.setTitle("update User");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource("/openWindow.fxml").openStream());
+            openWindowsController creatView = fxmlLoader.getController();
+            creatView.setController(this.logedInController);
+            Scene scene = new Scene(root);
+            Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.getScene().getStylesheets().add("/openWindowCss.css");
+            //System.out.println(userName+"---"+password);
+            creatView.upadteBeforeReturn(userName,password);
+            creatView.logINButtonAction(actionEvent);
 
+//            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+            window.show();
+        } catch (Exception e) {
+
+        }
 
     }
 }
