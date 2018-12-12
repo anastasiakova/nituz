@@ -169,8 +169,7 @@ public class MyRequests {
             window.setScene(scene);
             window.getScene().getStylesheets().add("/openWindowCss.css");
             //System.out.println(userName+"---"+password);
-            creatView.upadteBeforeReturn(userName,password);
-            creatView.logINButtonAction(actionEvent);
+            creatView.returnLogIn(userName,password);
 
 //            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
             window.show();

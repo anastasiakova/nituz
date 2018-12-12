@@ -111,15 +111,10 @@ public class openWindowsController {
         vacTable.setItems(data);
 
     }
-    public void upadteBeforeReturn(String userName, String password){
-        this.userName=userName;
-        this.password=password;
-    }
+
     public void logINButtonAction(ActionEvent event) throws IOException {
-        if(userName=="" && password=="") {
-            userName = userText.getText();
-            password = passText.getText();
-        }
+        userName=userText.getText();
+        password=passText.getText();
         //validate user name & password
         boolean loginSuccessful = false;
         if (userName != "" && password != "") {
@@ -142,8 +137,29 @@ public class openWindowsController {
     }
 
 
+    public void returnLogIn(String userName,String password) throws IOException {
+        this.userName=userName;
+        this.password=password;
+        //validate user name & password
+        boolean loginSuccessful = false;
+        if (userName != "" && password != "") {
+            //System.out.println(userText.getText());
+            //controller search
+            this.logedInController = new LogedInController();
+//            loginSuccessful = searchController.isLoginValid(userText.getText(), passText.getText());
+            loginSuccessful = logedInController.tryLogIn(userName,password);
+            if (loginSuccessful) {
+                userModeOn=true;
+                initialize();
+                loginButtonsMaker();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("You Suck!");
+                alert.show();
+            }
 
-
+        }
+    }
     public void loginButtonsMaker() {
         this.createUserButton.setVisible(false);
         this.userText.setVisible(false);
