@@ -132,7 +132,7 @@ public class MyRequests {
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     Parent root = fxmlLoader.load(getClass().getResource("/Payment.fxml").openStream());
                     PaymentController creatView = fxmlLoader.getController();
-                    Scene scene = new Scene(root, 380, 550);
+                    Scene scene = new Scene(root, 340, 350);
                     stage.setScene(scene);
                     //stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
                     stage.showAndWait();
