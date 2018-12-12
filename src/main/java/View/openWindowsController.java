@@ -75,6 +75,7 @@ public class openWindowsController {
     public javafx.scene.control.TableColumn<Vacation, String> vacationSleepingArrangements;
     public javafx.scene.control.TableColumn<Vacation, String> ownerID;
     public boolean userModeOn = false;
+    public String userName="";
 
     public void initButtons(){
         this.logOutButton.setVisible(false);
@@ -120,6 +121,7 @@ public class openWindowsController {
             loginSuccessful = logedInController.tryLogIn(userText.getText(),passText.getText());
             if (loginSuccessful) {
                 userModeOn=true;
+                userName=userText.getText();
                 initialize();
                 loginButtonsMaker();
             } else {
@@ -139,7 +141,7 @@ public class openWindowsController {
         this.useLabel.setVisible(false);
         this.passLabel.setVisible(false);
         this.logOutButton.setVisible(true);
-        this.welcomeLabel.setText("Welcome "+this.userText.getText()+"!");
+        this.welcomeLabel.setText("Welcome "+userName+"!");
         this.welcomeLabel.setVisible(true);
         if(vacTable.getItems().size() > 0)
             this.buyThisVacaionButton.setDisable(false);

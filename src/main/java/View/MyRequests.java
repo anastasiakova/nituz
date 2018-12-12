@@ -131,6 +131,7 @@ public class MyRequests {
                     stage.setScene(scene);
                     //stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
                     stage.showAndWait();
+                    logedInController.CreatePaymentAndUpdateVacation(item.getReqID());
                     init();
                 } catch (Exception e) {
 
