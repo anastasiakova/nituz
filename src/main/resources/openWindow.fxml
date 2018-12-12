@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="620.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.openWindowsController">
+<AnchorPane prefHeight="620.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.openWindowsController">
    <children>
       <VBox prefHeight="620.0" prefWidth="950.0">
          <children>
@@ -32,16 +32,19 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <AnchorPane prefHeight="81.0" prefWidth="147.0">
+                                    <AnchorPane prefHeight="211.0" prefWidth="124.0">
                                        <children>
-                                          <Button fx:id="loginButton" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#logINButtonAction" text="log in" />
+                                          <Button fx:id="loginButton" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#logINButtonAction" text="log in" />
                                           <Button fx:id="createUserButton" layoutX="75.0" layoutY="2.0" mnemonicParsing="false" onAction="#createUserWindow" text="sign up" />
-                                          <Label fx:id="welcomeLabel" layoutX="1.0" layoutY="33.0" prefHeight="26.0" prefWidth="147.0" text="welcome!">
+                                          <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="2.0" layoutY="43.0" prefHeight="26.0" prefWidth="147.0" text="welcome!">
                                              <font>
                                                 <Font name="System Bold" size="19.0" />
                                              </font>
                                           </Label>
-                                          <Button fx:id="logOutButton" layoutX="44.0" layoutY="76.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" />
+                                          <Button fx:id="logOutButton" layoutX="33.0" layoutY="81.0" mnemonicParsing="false" onAction="#logOut" text="Log Out">
+                                             <font>
+                                                <Font size="17.0" />
+                                             </font></Button>
                                        </children>
                                     </AnchorPane>
                                  </children>
@@ -75,24 +78,24 @@
 
                     </columns>
                   </TableView>
-                  <Button fx:id="allMyRequestButton" layoutX="695.0" layoutY="267.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="All my requests"  onAction="#myRequestWindow" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="allMyRequestButton" layoutX="661.0" layoutY="267.0" mnemonicParsing="false" onAction="#myRequestWindow" prefHeight="37.0" prefWidth="169.0" text="All my requests" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
-                        <Font name="Calibri Bold" size="16.0" />
+                        <Font name="Calibri Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="updateDetalisButton" layoutX="498.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="update detalis" onAction="#updateWindow" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="updateDetalisButton" layoutX="475.0" layoutY="268.0" mnemonicParsing="false" onAction="#updateWindow" prefHeight="37.0" prefWidth="156.0" text="Update detalis" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
-                        <Font name="Calibri Bold" size="16.0" />
+                        <Font name="Calibri Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buyThisVacaionButton" layoutX="274.0" layoutY="268.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="I want this vaction!" textAlignment="JUSTIFY" textFill="#3f1f8a" onAction="#setRequest">
+                  <Button fx:id="buyThisVacaionButton" layoutX="238.0" layoutY="268.0" mnemonicParsing="false" onAction="#setRequest" prefHeight="37.0" prefWidth="204.0" text="I want this vaction!" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
-                        <Font name="Calibri Bold" size="16.0" />
+                        <Font name="Calibri Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="addVactionButton" layoutX="75.0" layoutY="267.0" mnemonicParsing="false" onAction="#openCreateVactionWindow" prefHeight="25.0" prefWidth="135.0" text="add vacation" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="addVactionButton" layoutX="54.0" layoutY="267.0" mnemonicParsing="false" onAction="#openCreateVactionWindow" prefHeight="37.0" prefWidth="156.0" text="Add vacation" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
-                        <Font name="Calibri Bold" size="16.0" />
+                        <Font name="Calibri Bold" size="20.0" />
                      </font>
                   </Button>
                   <Label fx:id="t1" layoutX="820.0" layoutY="47.0" text="To buy selected">

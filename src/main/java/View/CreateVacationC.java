@@ -86,22 +86,20 @@ public class CreateVacationC implements Initializable {
             //date & time:
             alert.setContentText("Please enter valid dates");
             alert.show();
-        }
-        else if (!ticketNum.getText().matches("\\d*")|| Integer.parseInt(sDD.getText()) > 31 || Integer.parseInt(sDD.getText()) <= 0
-                || Integer.parseInt(eDD.getText()) > 31 || Integer.parseInt(eDD.getText()) <= 0 ||
-                Integer.parseInt(sMM.getText()) > 12 || Integer.parseInt(sMM.getText()) <= 0 ||
-                Integer.parseInt(eMM.getText()) > 12 || Integer.parseInt(eMM.getText()) <= 0) {
+        } else if (!ticketNum.getText().matches("\\d*") ||
+                (Integer.parseInt(sDD.getText()) > 31 && Integer.parseInt(sDD.getText()) <= 0) ||
+                (Integer.parseInt(eDD.getText()) > 31 && Integer.parseInt(eDD.getText()) <= 0) ||
+                (Integer.parseInt(sMM.getText()) > 12 && Integer.parseInt(sMM.getText()) <= 0) ||
+                (Integer.parseInt(eMM.getText()) > 12 && Integer.parseInt(eMM.getText()) <= 0)) {
             alert.setContentText("Please enter only number in the number of tickets");
             alert.show();
-        }
-        else if(Integer.parseInt(sHH.getText())<0 || Integer.parseInt(sHH.getText())>23 ||
-                Integer.parseInt(sMIN.getText())<0 ||Integer.parseInt(sMIN.getText())>=60 ||
-                Integer.parseInt(eHH.getText())<0 || Integer.parseInt(eHH.getText())>23 ||
-                Integer.parseInt(eMIN.getText())<0 ||Integer.parseInt(eMIN.getText())>=60){
+        } else if ((Integer.parseInt(sHH.getText()) < 0 && Integer.parseInt(sHH.getText()) > 23) ||
+                (Integer.parseInt(sMIN.getText()) < 0 && Integer.parseInt(sMIN.getText()) >= 60) ||
+                (Integer.parseInt(eHH.getText()) < 0 && Integer.parseInt(eHH.getText()) > 23) ||
+                (Integer.parseInt(eMIN.getText()) < 0 && Integer.parseInt(eMIN.getText()) >= 60)) {
             alert.setContentText("Please enter valid times");
             alert.show();
-        }
-        else{
+        } else {
             //string fields:
             int ticketNumber = 0;
             try {
@@ -129,7 +127,6 @@ public class CreateVacationC implements Initializable {
 //                    isRoundTrip, vacationType, sleeping, ownerID);
 
             Stage stage = (Stage) addButton.getScene().getWindow();
-
             stage.close();
         }
     }

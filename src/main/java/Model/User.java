@@ -251,7 +251,12 @@ public class User implements ISQLable {
     }
 
     public void UpdateMyRequsts(Request newRequest) {
-        if (myRequests.contains(newRequest)) {
+        boolean isIn = false;
+        for(int i = 0; i <myRequests.size();i++) {
+            if (newRequest.getR_ID().equals(myRequests.get(i).getR_ID()))
+                isIn = true;
+        }
+        if (isIn) {
             myRequests.remove(newRequest);
         }
         myRequests.add(newRequest);
