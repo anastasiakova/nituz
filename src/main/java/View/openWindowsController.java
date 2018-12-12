@@ -55,6 +55,9 @@ public class openWindowsController {
     }
 
     public openWindowsController(SearchController searchController) { this.searchController = searchController;}
+    public void SetController(LogedInController logedInController){
+        this.logedInController = logedInController;
+    }
 
     public SearchController searchController = new SearchController();
     public javafx.scene.control.Button btn_create;
@@ -110,7 +113,7 @@ public class openWindowsController {
         //validate user name & password
         boolean loginSuccessful = false;
         if (userText.getText() != "" && passText.getText() != "") {
-            System.out.println(userText.getText());
+            //System.out.println(userText.getText());
             //controller search
             this.logedInController = new LogedInController();
 //            loginSuccessful = searchController.isLoginValid(userText.getText(), passText.getText());

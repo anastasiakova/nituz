@@ -17,8 +17,8 @@ public class SQLModel {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
                 // for check
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
+//                System.out.println("The driver name is " + meta.getDriverName());
+//                System.out.println("A new database has been created.");
             }
 
         } catch (SQLException e) {
@@ -46,7 +46,7 @@ public class SQLModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Succesfully added tbl_users!");
+//        System.out.println("Succesfully added tbl_users!");
     }
 
     private void createRequestsTable() {
@@ -57,7 +57,7 @@ public class SQLModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Succesfully added tbl_requests!");
+//        System.out.println("Succesfully added tbl_requests!");
     }
 
     private void createVactionsTable() {
@@ -68,7 +68,7 @@ public class SQLModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Succesfully added tbl_vacations!");
+//        System.out.println("Succesfully added tbl_vacations!");
     }
 
     private void createPaymentsTable() {
@@ -79,7 +79,7 @@ public class SQLModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Succesfully added tbl_payments!");
+        //System.out.println("Succesfully added tbl_payments!");
     }
 
     public void insertRecordToTable(String table, ISQLable isqLable){

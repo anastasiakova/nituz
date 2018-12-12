@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -61,6 +62,14 @@ public class MyRequests {
         reqTable.setItems(myRequests);
         ObservableList<VactaionAndRequest> requestsForMe = logedInController.getToAnswerRequests();
         reqForMeTable.setItems(requestsForMe);
+        if(requestsForMe.size() == 0){
+            approve.setDisable(true);
+            reject.setDisable(true);
+        }
+        if(myRequests.size() == 0){
+            buy.setDisable(true);
+        }
+
     }
 
 
@@ -112,7 +121,20 @@ public class MyRequests {
 // this gives the value in the selected cell:
 
             if(item.getAnswer().equals("confirmed")){
-                //show orens buy form
+                try {
+                    Stage stage = new Stage();
+                    stage.setTitle("payment vacation");
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    Parent root = fxmlLoader.load(getClass().getResource("/Payment.fxml").openStream());
+                    PaymentController creatView = fxmlLoader.getController();
+                    Scene scene = new Scene(root, 380, 550);
+                    stage.setScene(scene);
+                    //stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+                    stage.showAndWait();
+                    init();
+                } catch (Exception e) {
+
+                }
             }
             else{
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -129,14 +151,8 @@ public class MyRequests {
 
 
     public void goBack(ActionEvent actionEvent) throws IOException {
-//        Stage stage = new Stage();
-//        stage.setTitle("VACTION 4 U");
-//        Parent root = FXMLLoader.load(getClass().getResource("/openWindowController.fxml"));
-//        Scene scene = new Scene(root);
-//        Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-//        window.setScene(scene);
-////            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
-//        window.show();
+
+
     }
 }
 
