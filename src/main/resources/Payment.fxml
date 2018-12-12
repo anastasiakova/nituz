@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="319.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Payment">
+<AnchorPane prefHeight="319.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.PaymentController">
    <children>
       <TabPane prefHeight="410.0" prefWidth="336.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -24,7 +24,7 @@
                               <Font name="Calibri Bold" size="29.0" />
                            </font>
                         </Label>
-                        <Button layoutX="93.0" layoutY="252.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Pay Now" />
+                        <Button fx:id="payCC" layoutX="93.0" layoutY="252.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Pay Now" />
                         <GridPane layoutX="25.0" layoutY="81.0" prefHeight="142.0" prefWidth="286.0">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.20001220703125" minWidth="10.0" prefWidth="110.20001220703125" />
@@ -41,7 +41,7 @@
                                  <font>
                                     <Font name="Calibri" size="15.0" />
                                  </font></Label>
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField fx:id="cardNum" GridPane.columnIndex="1" />
                               <Label text="Expired date:" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="15.0" />
@@ -56,19 +56,19 @@
                                  </font></Label>
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.59997940063477" minWidth="10.0" prefWidth="49.4000244140625" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.39997558593751" minWidth="10.0" prefWidth="126.39997558593751" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.59997940063477" minWidth="10.0" prefWidth="59.66667175292969" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="126.39997558593751" minWidth="10.0" prefWidth="116.33332824707031" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="42.0" text="mm" />
-                                    <TextField maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="42.0" text="yy" GridPane.columnIndex="1" />
+                                    <TextField fx:id="mm" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="50.0" promptText="mm" />
+                                    <TextField fx:id="yy" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="55.0" promptText="yyyy" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
-                              <TextField maxWidth="-Infinity" prefWidth="42.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="cvv" maxWidth="-Infinity" prefHeight="31.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="ID" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </children>
@@ -93,12 +93,12 @@
                                  <font>
                                     <Font name="Calibri" size="15.0" />
                                  </font></Label>
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField fx:id="userPP" GridPane.columnIndex="1" />
                               <Label text="Password:" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="Calibri" size="15.0" />
                                  </font></Label>
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="pswPP" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                         <Label alignment="CENTER" layoutX="24.0" layoutY="24.0" prefHeight="43.0" prefWidth="286.0" text="Pay With PayPal:">
@@ -106,7 +106,7 @@
                               <Font name="Calibri Bold" size="29.0" />
                            </font>
                         </Label>
-                        <Button layoutX="95.0" layoutY="196.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Pay Now" />
+                        <Button fx:id="payPP" layoutX="95.0" layoutY="196.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="145.0" text="Pay Now" />
                      </children></AnchorPane>
             </content>
           </Tab>
