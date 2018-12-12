@@ -61,8 +61,8 @@
                <children>
                   <TableView fx:id="vacTable" layoutX="10.0" prefHeight="244.0" prefWidth="799.0">
                     <columns>
-                      <TableColumn fx:id="startDate" prefWidth="75.0" text="startDate " />
-                      <TableColumn fx:id="endDate" prefWidth="75.0" text="endDate " />
+                      <TableColumn fx:id="startDate" prefWidth="75.0" text="start Date " />
+                      <TableColumn fx:id="endDate" prefWidth="75.0" text="end Date " />
                         <TableColumn fx:id="destination" prefWidth="75.0" text="destination " />
                         <TableColumn fx:id="aviationCompany" prefWidth="112.0" text="aviationCompany " />
                         <TableColumn fx:id="numOfTickets" prefWidth="96.0" text="numOfTickets " />

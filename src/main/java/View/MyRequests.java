@@ -5,11 +5,18 @@ import Controller.SearchController;
 import Model.VactaionAndRequest;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MyRequests {
 
@@ -118,6 +125,18 @@ public class MyRequests {
             alert.setContentText("You need to peek vacation first");
             alert.show();
         }
+    }
+
+
+    public void goBack(ActionEvent actionEvent) throws IOException {
+//        Stage stage = new Stage();
+//        stage.setTitle("VACTION 4 U");
+//        Parent root = FXMLLoader.load(getClass().getResource("/openWindowController.fxml"));
+//        Scene scene = new Scene(root);
+//        Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+//        window.setScene(scene);
+////            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+//        window.show();
     }
 }
 

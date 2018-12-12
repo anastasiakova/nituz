@@ -188,7 +188,7 @@ public class openWindowsController {
         this.t4.setVisible(true);
         this.logedInController.LogOut();
         this.userModeOn=false;
-        loginButtonsMaker();
+//        loginButtonsMaker();
         initialize();
     }
 
