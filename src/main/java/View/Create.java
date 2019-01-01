@@ -35,14 +35,8 @@ public class Create {
     public TextField idNumber;
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-    public Create() {
-    }
+    public Create() {}
 
-    ;
-
-    //    public Create(SQLModel sqlModel) {
-//        this.sqlModel = sqlModel;
-//    }
     public Create(CreateController createController) {
         this.createController = createController;
     }
@@ -53,10 +47,6 @@ public class Create {
         // do what you have to do
         stage.close();
     }
-
-//    public void setSqlModel(SQLModel sqlModel) {
-//        this.sqlModel = sqlModel;
-//    }
 
     public void setCreateController(CreateController createController) {
         this.createController = createController;
@@ -79,7 +69,6 @@ public class Create {
         System.out.println(cityText.getText());
         System.out.println(bankAccountNumber.getText());
         System.out.println(idNumber.getText());
-
 
         if (dd == null || dd.getText().equals("") ||
                 mm == null || mm.getText().equals("") ||

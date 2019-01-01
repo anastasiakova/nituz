@@ -1,8 +1,6 @@
 package View;
 
-import Controller.DeleteController;
 import Controller.LogedInController;
-import Model.Vacation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;

@@ -57,22 +57,6 @@ public class LogedInController {
             }
 
         }
-//            vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(vac.get__startDate()),
-//                    new SimpleDateFormat("dd/mm/yyyy-HH:mm").format(vac.get_endDate()), vac.get_destination(), logedInUsername, req.getR_answer()));
-//            VactaionAndRequest vactaionAndRequest =ne
-//            Request req = new Request(allRequests[i]);
-//            String vecationID = req.getVacationID();
-//            fields = new String[TblFields.enumDict.get("vacationFields").size()];
-//            fields[0] = vecationID;
-//            fields[10] = Vacation.VacationStatus.IN_PROGRESS.name();
-//            String reqVacation = SQLModel.GetInstance().selectFromTable(Tables.TBL_VACATIONS, fields);
-//            if (reqVacation != "") {
-//                Vacation vac = new Vacation(reqVacation);
-//                DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
-//
-//            }
-
-       // }
         return FXCollections.observableList(vactaionAndRequests);
     }
 
