@@ -11,11 +11,9 @@ import java.util.List;
 
 public class Payments implements ISQLable {
     private static Integer _paymentId = getMyMaxCounter();
-
     public void set_status(Status _status) {
         this._status = _status;
     }
-
     public static int getMyMaxCounter() {
         Path currentPath = Paths.get("");
         String _path = "jdbc:sqlite:" + currentPath.toAbsolutePath().toString() + "\\dataBase.db";

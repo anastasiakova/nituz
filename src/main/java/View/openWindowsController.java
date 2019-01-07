@@ -39,6 +39,7 @@ public class openWindowsController {
     public Button updateDetalisButton;
     public Button buyThisVacaionButton;
     public Button addVactionButton;
+    public Button switchThisVacaionButton;
 
     public TextField userText;
     public TextField passText;
@@ -50,6 +51,7 @@ public class openWindowsController {
     public Label passLabel;
     public Label useLabel;
     public Label welcomeLabel;
+    public Label vaca4u;
     public LogedInController logedInController;
 
     public SearchController searchController = new SearchController();
@@ -70,7 +72,7 @@ public class openWindowsController {
     public boolean userModeOn = false;
     public String userName="";
     public String password="";
-
+    public String VactionToSwitchDetalis="";
     public openWindowsController() {
     }
 
@@ -84,14 +86,17 @@ public class openWindowsController {
     public void initButtons(){
         this.logOutButton.setVisible(false);
         this.welcomeLabel.setVisible(false);
-        if(vacTable.getItems().size() == 0)
+        if(vacTable.getItems().size() == 0) {
             this.buyThisVacaionButton.setDisable(true);
+            this.switchThisVacaionButton.setDisable(true);
+        }
         this.addVactionButton.setVisible(false);
         this.allMyRequestButton.setVisible(false);
         this.updateDetalisButton.setVisible(false);
     }
     public void initialize() {
         initButtons();
+        vaca4u.getStyleClass().add("titleCss");
         startDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("__startDate"));
         endDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_endDate"));
         destination.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_destination"));
@@ -172,8 +177,10 @@ public class openWindowsController {
         this.logOutButton.setVisible(true);
         this.welcomeLabel.setText("Welcome "+userName+"!");
         this.welcomeLabel.setVisible(true);
-        if(vacTable.getItems().size() > 0)
+        if(vacTable.getItems().size() > 0) {
             this.buyThisVacaionButton.setDisable(false);
+            this.switchThisVacaionButton.setDisable(false);
+        }
         this.addVactionButton.setVisible(true);
         this.allMyRequestButton.setVisible(true);
         this.updateDetalisButton.setVisible(true);
@@ -211,8 +218,10 @@ public class openWindowsController {
         this.passLabel.setVisible(true);
         this.logOutButton.setVisible(false);
         this.welcomeLabel.setVisible(false);
-        if(vacTable.getItems().size() == 0)
+        //if(vacTable.getItems().size() == 0) {
             this.buyThisVacaionButton.setDisable(true);
+            this.switchThisVacaionButton.setDisable(true);
+        //}
         this.addVactionButton.setVisible(false);
         this.allMyRequestButton.setVisible(false);
         this.updateDetalisButton.setVisible(false);
@@ -291,17 +300,63 @@ public class openWindowsController {
 // Item here is the table view type:
             Vacation item = vacTable.getItems().get(row);
 // this gives the value in the selected cell:
-            logedInController.CreateRequestAndUpdateVacation(item.get_ownerID(),item.get_vacationID());
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Request sended");
-            alert.show();
-            initialize();
-            loginButtonsMaker();
+            if(item.get_ownerID().equals(userName)){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("You can't Buy your own vacations! pick another");
+                alert.show();
+            }
+            else {
+                logedInController.CreateRequestAndUpdateVacation(item.get_ownerID(), item.get_vacationID());
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Request sended");
+                alert.show();
+                initialize();
+                loginButtonsMaker();
+            }
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("You need to peek vacation first");
             alert.show();
+        }
+    }
+
+    public void switchVac(ActionEvent actionEvent){
+        try {
+            if(!vacTable.getSelectionModel().getSelectedCells().isEmpty()) {
+                TablePosition pos = vacTable.getSelectionModel().getSelectedCells().get(0);
+                int row = pos.getRow();
+// Item here is the table view type:
+                Vacation item = vacTable.getItems().get(row);
+                if(item.get_ownerID().equals(userName)){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("You can't Buy your own vacations! pick another");
+                    alert.show();
+                }
+                else {
+                    VactionToSwitchDetalis = "Owner ID: " + item.get_ownerID() + " | " + "Destination: " + item.get_destination() + " | " + "Start: " + item.get__startDate() + " | " +
+                            "End: " + item.get_endDate();
+                    Stage stage = new Stage();
+                    stage.setTitle("Switch User");
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    Parent root = fxmlLoader.load(getClass().getResource("/SwitchWindow.fxml").openStream());
+                    SwitchWindowController creatView = fxmlLoader.getController();
+                    creatView.setController(this.logedInController);
+                    creatView.updateTable(VactionToSwitchDetalis);
+                    Scene scene = new Scene(root, 820, 450);
+                    stage.setScene(scene);
+                    stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
+                    stage.show();
+                }
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("You need to peek vacation first");
+                alert.show();
+            }
+        } catch (Exception e) {
+            System.out.print("BIG ERROR");
+
         }
     }
 }

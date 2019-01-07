@@ -11,13 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="620.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.openWindowsController">
+<AnchorPane prefHeight="620.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.openWindowsController">
    <children>
       <VBox prefHeight="620.0" prefWidth="950.0">
          <children>
             <AnchorPane prefHeight="212.0" prefWidth="324.0">
                <children>
-                  <Label layoutX="236.0" layoutY="48.0" text="Vacation4U">
+                  <Label fx:id="vaca4u" layoutX="14.0" layoutY="14.0" text="Every Vacation4U">
                      <font>
                         <Font name="Calibri Bold" size="76.0" />
                      </font>
@@ -88,7 +88,7 @@
                         <Font name="Calibri Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="buyThisVacaionButton" layoutX="238.0" layoutY="268.0" mnemonicParsing="false" onAction="#setRequest" prefHeight="37.0" prefWidth="204.0" text="I want this vaction!" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="buyThisVacaionButton" layoutX="238.0" layoutY="268.0" mnemonicParsing="false" onAction="#setRequest" prefHeight="37.0" prefWidth="204.0" text=" Buy this vaction!" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
                         <Font name="Calibri Bold" size="20.0" />
                      </font>
@@ -118,6 +118,11 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
+                  <Button fx:id="switchThisVacaionButton" layoutX="238.0" layoutY="314.0" mnemonicParsing="false" onAction="#switchVac" prefHeight="37.0" prefWidth="204.0" text="Switch this vacation!" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                     <font>
+                        <Font name="Calibri Bold" size="20.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>

@@ -165,9 +165,7 @@ public class LogedInController {
         List<Vacation> vacations = new ArrayList<Vacation>();
         for (int i = 0; i < allVacationsStr.length & !allVacationsStr[0].equals(""); i++) {
             Vacation vac = new Vacation(allVacationsStr[i]);
-            if(!vac.get_ownerID().equals(loged.getUsername())){
-                vacations.add(vac);
-            }
+            vacations.add(vac);
         }
         return FXCollections.observableList(vacations);
     }
@@ -204,6 +202,21 @@ public class LogedInController {
 
     public String getUserNameFromUserAsStripAndCleanString(){
         return this.loged.getUsername();
+    }
+
+    public ObservableList<Vacation> CreateSwitchVacation(){
+        String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
+        fields[10] = Vacation.VacationStatus.FOR_SALE.name().toLowerCase();
+
+        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
+        List<Vacation> vacations = new ArrayList<Vacation>();
+        for (int i = 0; i < allVacationsStr.length & !allVacationsStr[0].equals(""); i++) {
+            Vacation vac = new Vacation(allVacationsStr[i]);
+            if(vac.get_ownerID().equals(loged.getUsername())){
+                vacations.add(vac);
+            }
+        }
+        return FXCollections.observableList(vacations);
     }
 
 
