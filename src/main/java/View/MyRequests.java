@@ -122,12 +122,19 @@ public class MyRequests {
             TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
             int row = pos.getRow();
 // Item here is the table view type:
+
             VactaionAndRequest item = reqForMeTable.getItems().get(row);
-            TableColumn col = pos.getTableColumn();
+            if (!item.getAnswer().equals("approve")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("You must approve this request first!");
+                alert.show();
+            } else {
+                TableColumn col = pos.getTableColumn();
 // this gives the value in the selected cell:
-            //String data = (String) col.getCellObservableValue(item).getValue();
-            logedInController.UpdateRequest("confirmed", item.getReqID());
-            init();
+                //String data = (String) col.getCellObservableValue(item).getValue();
+                logedInController.UpdateRequest("confirmed", item.getReqID());
+                init();
+            }
         }
         else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
