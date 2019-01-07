@@ -50,7 +50,7 @@ public class LogedInController {
                  d = formatter.parse(vac.get__startDate());
                 if (d.after(new Date())) {
                     vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
-                            vac.get_destination(), loged.getUsername(), req.getR_answer(),req.getR_ID()));
+                            vac.get_destination(), vac.get_ownerID(), req.getR_answer(),req.getR_ID()));
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -68,7 +68,7 @@ public class LogedInController {
             if(!allRequests.get(i).getR_answer().equals("confirmed") && !allRequests.get(i).getR_answer().equals("rejected")){
                 Vacation vac = req.getVacation();
                 vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
-                        vac.get_destination(), loged.getUsername(), req.getR_answer(),req.getR_ID()));
+                        vac.get_destination(), req.getR_buyerID(), req.getR_answer(),req.getR_ID()));
             }
         }
         return FXCollections.observableList(vactaionAndRequests);
