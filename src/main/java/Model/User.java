@@ -22,7 +22,6 @@ public class User implements ISQLable {
     private String privateName;
     private String lastName;
     private String city;
-    private String bankAcount;
     private String id;
 
     private ArrayList<Request> myRequests;
@@ -35,9 +34,8 @@ public class User implements ISQLable {
             + TblFields.enumDict.get("userFields").get(3) + ", "//private name
             + TblFields.enumDict.get("userFields").get(4) + ", "//last name
             + TblFields.enumDict.get("userFields").get(5) + ", "//city
-            + TblFields.enumDict.get("userFields").get(6) + ", "//bank
-            + TblFields.enumDict.get("userFields").get(7)//id
-            + ") VALUES(?,?,?,?,?,?,?,?)";
+            + TblFields.enumDict.get("userFields").get(6)//id
+            + ") VALUES(?,?,?,?,?,?,?)";
 
     private String primaryKeyName = "username";
     private String tableName = "tbl_users";
@@ -51,8 +49,7 @@ public class User implements ISQLable {
                 TblFields.enumDict.get("userFields").get(3) + "	text,\n" +
                 TblFields.enumDict.get("userFields").get(4) + "	text,\n" +
                 TblFields.enumDict.get("userFields").get(5) + "	text,\n" +
-                TblFields.enumDict.get("userFields").get(6) + "	text,\n" +
-                TblFields.enumDict.get("userFields").get(7) + "	text\n" +
+                TblFields.enumDict.get("userFields").get(6) + "	text\n" +
                 ");");
     }
 
@@ -67,19 +64,18 @@ public class User implements ISQLable {
                 ", " + privateName +
                 ", " + lastName +
                 ", " + city +
-                ", " + bankAcount +
                 ", " + id +
                 ");";
     }
 
-    public User(String username, String pwd, Date birthday, String privateName, String lastName, String city, String bankAcount, String id) {
+    public User(String username, String pwd, Date birthday, String privateName, String lastName,
+                String city, String id) {
         this.username = username;
         this.pwd = pwd;
         this.birthday = birthday;
         this.privateName = privateName;
         this.lastName = lastName;
         this.city = city;
-        this.bankAcount = bankAcount;
         this.id = id;
         setMyRequests(username);
         setRequestsForMe(username);
@@ -97,8 +93,7 @@ public class User implements ISQLable {
         this.privateName = searcheUser[3];
         this.lastName = searcheUser[4];
         this.city = searcheUser[5];
-        this.bankAcount = searcheUser[6];
-        this.id = searcheUser[7];
+        this.id = searcheUser[6];
         setMyRequests(username);
         setRequestsForMe(username);
     }
@@ -168,10 +163,6 @@ public class User implements ISQLable {
         this.city = city;
     }
 
-    public String getBankAcount() {
-        return bankAcount;
-    }
-
     public String getId() {
         return id;
     }
@@ -187,13 +178,13 @@ public class User implements ISQLable {
                 Objects.equals(getPrivateName(), user.getPrivateName()) &&
                 Objects.equals(getLastName(), user.getLastName()) &&
                 Objects.equals(getCity(), user.getCity()) &&
-                Objects.equals(getBankAcount(), user.getBankAcount()) &&
                 Objects.equals(getId(), user.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUsername(), getPwd(), getBirthday(), getPrivateName(), getLastName(), getCity(), getBankAcount(), getId());
+        return Objects.hash(getUsername(), getPwd(), getBirthday(), getPrivateName(),
+                getLastName(), getCity(), getId());
     }
 
     @Override
@@ -205,8 +196,7 @@ public class User implements ISQLable {
                 TblFields.enumDict.get("userFields").get(3) + "='" + privateName + "\'," +
                 TblFields.enumDict.get("userFields").get(4) + "='" + lastName + "\'," +
                 TblFields.enumDict.get("userFields").get(5) + "='" + city + "\'," +
-                TblFields.enumDict.get("userFields").get(6) + "='" + bankAcount + "\'," +
-                TblFields.enumDict.get("userFields").get(7) + "='" + id + "\'," +
+                TblFields.enumDict.get("userFields").get(6) + "='" + id + "\'," +
                 '}';
     }
 
@@ -218,8 +208,7 @@ public class User implements ISQLable {
             pstmt.setString(4, this.getPrivateName());
             pstmt.setString(5, this.getLastName());
             pstmt.setString(6, this.getCity());
-            pstmt.setString(7, this.getBankAcount());
-            pstmt.setString(8, this.getId());
+            pstmt.setString(7, this.getId());
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -236,8 +225,7 @@ public class User implements ISQLable {
                 "'," + TblFields.enumDict.get("userFields").get(3) + "='" + this.getPrivateName() +
                 "'," + TblFields.enumDict.get("userFields").get(4) + "='" + this.getLastName() +
                 "'," + TblFields.enumDict.get("userFields").get(5) + "='" + this.getCity() +
-                "'," + TblFields.enumDict.get("userFields").get(6) + "='" + this.getBankAcount() +
-                "'," + TblFields.enumDict.get("userFields").get(7) + "='" + this.getId() +
+                "'," + TblFields.enumDict.get("userFields").get(6) + "='" + this.getId() +
                 "'\n";
     }
 

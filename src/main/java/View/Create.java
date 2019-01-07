@@ -31,7 +31,6 @@ public class Create {
     public javafx.scene.control.TextField dd;
     public javafx.scene.control.TextField mm;
     public javafx.scene.control.TextField yy;
-    public javafx.scene.control.TextField bankAccountNumber;
     public TextField idNumber;
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -59,37 +58,29 @@ public class Create {
         calendar.add(Calendar.YEAR, -18);
         Date d1 = calendar.getTime();
         Date date = null;
-        System.out.println(dd.getText());
-        System.out.println(mm.getText());
-        System.out.println(yy.getText());
-        System.out.println(userText.getText());
-        System.out.println(passText.getText());
-        System.out.println(fNameText.getText());
-        System.out.println(lNameText.getText());
-        System.out.println(cityText.getText());
-        System.out.println(bankAccountNumber.getText());
-        System.out.println(idNumber.getText());
+        System.out.println(Calendar.getInstance().get(Calendar.YEAR));
 
         if (dd == null || dd.getText().equals("") ||
                 mm == null || mm.getText().equals("") ||
                 yy == null || yy.getText().equals("") || userText.getText().equals("") ||
                 passText.getText().equals("") || fNameText.getText().equals("") || lNameText.getText().equals("") ||
-                cityText.getText().equals("") || bankAccountNumber.getText().equals("") || idNumber.getText().equals("")) {
+                cityText.getText().equals("") || idNumber.getText().equals("")) {
             alert.setContentText("Please enter all the required fields");
-            alert.show();
-        } else if (!bankAccountNumber.getText().matches("\\d*")) {
-            alert.setContentText("You must enter numbers in bank account! ");
             alert.show();
         } else if (!idNumber.getText().matches("\\d*")) {
             alert.setContentText("You must put a numbers in ID! ");
             alert.show();
-        } else if (formatter.parse(bDay).after(d1)) {
+        }
+        else if(Integer.parseInt(yy.getText()) > Calendar.getInstance().get(Calendar.YEAR)){
+            alert.setContentText("The year you entered is wrong! ");
+            alert.show();
+        }else if (formatter.parse(bDay).after(d1)) {
             alert.setContentText("You are too young to register! ");
             alert.show();
         } else {
             date = formatter.parse(bDay);
             this.createController.CreateUser(userText.getText(), passText.getText(), date, fNameText.getText()
-                    , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(), idNumber.getText());//TODO should be fields for that
+                    , lNameText.getText(), cityText.getText(), idNumber.getText());//TODO should be fields for that
             Alert alertI = new Alert(Alert.AlertType.INFORMATION);
             alertI.setContentText("User Created:\n\n" + createController.getUserCreatedMassage(userText.getText(),
                     true));

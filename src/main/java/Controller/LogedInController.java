@@ -90,15 +90,15 @@ public class LogedInController {
     }
 
     public void deleteUser(){
-        ISQLable userToDelete = new User(loged.getUsername(), "",null,"",
-                "","","","");
+        ISQLable userToDelete = new User(loged.getUsername(), "",null,"","",
+                "","");
         sqlModel.deleteRecordFromTable(userToDelete);
         loged = null;
     }
 
     public void UpdateUser( String pwd, Date birthday, String privateName, String lastName,
-                           String city, String bankAccount, String id){
-        loged = new User(loged.getUsername(), pwd, birthday, privateName, lastName, city, bankAccount, id);
+                           String city, String id){
+        loged = new User(loged.getUsername(), pwd, birthday, privateName, lastName, city, id);
         sqlModel.updateRecord(loged);
     }
 

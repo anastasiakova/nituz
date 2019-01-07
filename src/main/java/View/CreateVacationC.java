@@ -45,9 +45,9 @@ public class CreateVacationC implements Initializable {
     public TextField ticketNum;
     Date start = null, end = null;
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
+    Calendar calendar = Calendar.getInstance();
 
-    public CreateVacationC() {
-    }
+    public CreateVacationC() {}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -80,7 +80,8 @@ public class CreateVacationC implements Initializable {
                 sleepCombo.getValue() == null) {
             alert.setContentText("Please enter all the required fields (marked in *)");
             alert.show();
-        } else if (formatter.parse(startString).after(formatter.parse(endString))) {
+        }
+        else if (formatter.parse(startString).after(formatter.parse(endString))) {
             //date & time:
             alert.setContentText("Please enter valid dates");
             alert.show();

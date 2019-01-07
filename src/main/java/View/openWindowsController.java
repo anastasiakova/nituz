@@ -51,14 +51,6 @@ public class openWindowsController {
     public Label useLabel;
     public Label welcomeLabel;
     public LogedInController logedInController;
-    public openWindowsController() {
-    }
-
-    public openWindowsController(LogedInController logedInController) { this.logedInController = logedInController;}
-
-    public void setController(LogedInController logedInController) {
-        this.logedInController = logedInController;
-    }
 
     public SearchController searchController = new SearchController();
     public javafx.scene.control.Button btn_create;
@@ -78,6 +70,16 @@ public class openWindowsController {
     public boolean userModeOn = false;
     public String userName="";
     public String password="";
+
+    public openWindowsController() {
+    }
+
+    public openWindowsController(LogedInController logedInController) { this.logedInController = logedInController;}
+
+    public void setController(LogedInController logedInController) {
+        this.logedInController = logedInController;
+    }
+
 
     public void initButtons(){
         this.logOutButton.setVisible(false);

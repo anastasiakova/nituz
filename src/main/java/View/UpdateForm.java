@@ -27,7 +27,6 @@ public class UpdateForm {
     public javafx.scene.control.TextField fNameText;
     public javafx.scene.control.TextField cityText;
     public javafx.scene.control.TextField lNameText;
-    public javafx.scene.control.TextField bankAccountNumber;
     public javafx.scene.control.TextField idNumber;
     public javafx.scene.control.TextField dd;
     public javafx.scene.control.TextField mm;
@@ -38,12 +37,9 @@ public class UpdateForm {
 
     }
 
-    ;
 
     public UpdateForm() {
     }
-
-    ;
 
     public UpdateForm(LogedInController logedInController) {
         this.logedInController = logedInController;
@@ -74,10 +70,7 @@ public class UpdateForm {
             alert.setContentText("No birthday date entered. A birthday is required.");
             alert.show();
         }
-           else if(!bankAccountNumber.getText().matches("\\d*")) {
-                alert.setContentText("Your'e must put numbers in bank acount! ");
-                alert.show();
-            }
+
             else if(!idNumber.getText().matches("\\d*")) {
                 alert.setContentText("Your'e must put a numbers in id! ");
                 alert.show();
@@ -106,7 +99,6 @@ public class UpdateForm {
         System.out.println(fNameText.getText());
         System.out.println(lNameText.getText());
         System.out.println(cityText.getText());
-        System.out.println(bankAccountNumber.getText());
         System.out.println(idNumber.getText());
         String bDay = dd.getText() + "/" + mm.getText() + "/" + yyyy.getText();
         Calendar calendar = Calendar.getInstance();
@@ -120,11 +112,8 @@ public class UpdateForm {
                 mm == null || mm.getText().equals("") ||
                 yyyy == null || yyyy.getText().equals("") ||
                 passText.getText().equals("") || fNameText.getText().equals("") || lNameText.getText().equals("") ||
-                cityText.getText().equals("") || bankAccountNumber.getText().equals("") || idNumber.getText().equals("")) {
+                cityText.getText().equals("")  || idNumber.getText().equals("")) {
             alert.setContentText("Please enter all the required fields");
-            alert.show();
-        } else if (!bankAccountNumber.getText().matches("\\d*")) {
-            alert.setContentText("You must enter numbers in bank account! ");
             alert.show();
         } else if (!idNumber.getText().matches("\\d*")) {
             alert.setContentText("You must put a numbers in ID! ");
@@ -135,7 +124,7 @@ public class UpdateForm {
         } else {
             date = formatter.parse(bDay);
             this.logedInController.UpdateUser(passText.getText(), date, fNameText.getText()
-                    , lNameText.getText(), cityText.getText(), bankAccountNumber.getText(), idNumber.getText());
+                    , lNameText.getText(), cityText.getText(), idNumber.getText());
             Alert alertI = new Alert(Alert.AlertType.INFORMATION);
             alertI.setContentText("User updated successfully.");
             alertI.show();
