@@ -48,7 +48,7 @@ public class LogedInController {
             Date d;
             try {
                  d = formatter.parse(vac.get__startDate());
-                if ( d.after(new Date())) {
+                if (d.after(new Date())) {
                     vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                             vac.get_destination(), loged.getUsername(), req.getR_answer(),req.getR_ID()));
                 }
@@ -69,7 +69,7 @@ public class LogedInController {
         List<VactaionAndRequest> vactaionAndRequests = new ArrayList<>();
         for (int i = 0; i < allRequests.size(); i++) {
             Request req = allRequests.get(i);
-            if(allRequests.get(i).getR_answer().equals("pending")){
+            if(!allRequests.get(i).getR_answer().equals("confirmed")){
                 Vacation vac = req.getVacation();
                 vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                         vac.get_destination(), loged.getUsername(), req.getR_answer(),req.getR_ID()));

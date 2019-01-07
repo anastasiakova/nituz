@@ -23,7 +23,7 @@ public class MyRequests {
 
     public Button reject;
     public Button approve;
-    public Button buy;
+    public Button markAsPaidButton;
     LogedInController logedInController;
     public MyRequests(){};
 
@@ -60,16 +60,15 @@ public class MyRequests {
         buyerUserName.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("userName"));
         myAnswer.setCellValueFactory(new PropertyValueFactory<VactaionAndRequest,String>("answer"));
 
-        ObservableList<VactaionAndRequest> myRequests = logedInController.getMyRequests();
+        ObservableList<VactaionAndRequest> myRequests = logedInController.getMyRequests();  // UP!!!!
         reqTable.setItems(myRequests);
-        ObservableList<VactaionAndRequest> requestsForMe = logedInController.getToAnswerRequests();
+        System.out.println(myRequests);
+        ObservableList<VactaionAndRequest> requestsForMe = logedInController.getToAnswerRequests(); // DOWN!!!
         reqForMeTable.setItems(requestsForMe);
+        System.out.println(requestsForMe);
         if(requestsForMe.size() == 0){
             approve.setDisable(true);
             reject.setDisable(true);
-        }
-        if(myRequests.size() == 0){
-            buy.setDisable(true);
         }
 
     }
@@ -99,6 +98,26 @@ public class MyRequests {
     }
 
     public void approve(ActionEvent actionEvent) {
+        if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
+            TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
+            int row = pos.getRow();
+// Item here is the table view type:
+            VactaionAndRequest item = reqForMeTable.getItems().get(row);
+            TableColumn col = pos.getTableColumn();
+// this gives the value in the selected cell:
+            //String data = (String) col.getCellObservableValue(item).getValue();
+            logedInController.UpdateRequest("waiting_for_payment", item.getReqID());
+            init();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("You need to peek vacation first");
+            alert.show();
+        }
+    }
+
+
+    public void markAsPaid(ActionEvent actionEvent) {
         if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
             TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
             int row = pos.getRow();

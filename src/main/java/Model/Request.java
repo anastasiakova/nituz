@@ -52,6 +52,7 @@ public class Request implements ISQLable {
     private enum ansStatus {
         confirmed,
         pending,
+        waiting_for_payment,
         rejected
     }
 
