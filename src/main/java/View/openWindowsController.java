@@ -1,6 +1,7 @@
 package View;
 
 import Controller.*;
+import Model.User;
 import Model.Vacation;
 import Model.VactaionAndRequest;
 import javafx.collections.FXCollections;
@@ -73,6 +74,7 @@ public class openWindowsController {
     public String userName="";
     public String password="";
     public String VactionToSwitchDetalis="";
+    public User activeUser= null;
     public openWindowsController() {
     }
 

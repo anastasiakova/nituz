@@ -271,7 +271,7 @@ public class User implements ISQLable {
         requestsForMe = new ArrayList<>();
         String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
         fields[2] = username;
-        fields[4] = "pending";
+        //fields[4] = "pending";
         String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
         for (int i = 0; i < allRequests.length & allRequests[0] != ""; i++) {
             requestsForMe.add(new Request(allRequests[i]));

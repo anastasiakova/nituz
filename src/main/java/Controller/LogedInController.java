@@ -62,10 +62,6 @@ public class LogedInController {
 
     public ObservableList<VactaionAndRequest> getToAnswerRequests(){
         ArrayList<Request> allRequests = loged.getRequestsForMe();
-//        String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
-//        fields[2] = logedInUsername;
-//        fields[4] = "pending";
-//        String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
         List<VactaionAndRequest> vactaionAndRequests = new ArrayList<>();
         for (int i = 0; i < allRequests.size(); i++) {
             Request req = allRequests.get(i);
@@ -74,17 +70,6 @@ public class LogedInController {
                 vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                         vac.get_destination(), loged.getUsername(), req.getR_answer(),req.getR_ID()));
             }
-//            Request req = new Request(allRequests[i]);
-//            String vecationID = req.getVacationID();
-//            fields = new String[TblFields.enumDict.get("vacationFields").size()];
-//            fields[0] = vecationID;
-            //String reqVacation = SQLModel.GetInstance().selectFromTable(Tables.TBL_VACATIONS, fields);
-//            if (reqVacation != "") {
-//                Vacation vac = new Vacation(reqVacation);
-//                DateFormat formatter = new SimpleDateFormat("dd/mm/yyyy-HH:mm");
-//                vactaionAndRequests.add(new VactaionAndRequest(new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(vac.get__startDate()),
-//                        new SimpleDateFormat("dd/mm/yyyy-HH:mm:ss").format(vac.get_endDate()), vac.get_destination(), logedInUsername, req.getR_answer()));
-//            }
         }
         return FXCollections.observableList(vactaionAndRequests);
     }
