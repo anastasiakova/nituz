@@ -64,6 +64,8 @@ public class CreateVacationC implements Initializable {
                 sHH.getText() + ":" + sMIN.getText();
         String endString = eDD.getText() + "/" + eMM.getText() + "/" + eYY.getText() + "-" +
                 eHH.getText() + ":" + eMIN.getText();
+        System.out.println(startString);
+        System.out.println(Calendar.getInstance().getTime());
         if (sDD == null || sDD.getText().equals("") ||
                 sMM == null || sMM.getText().equals("") ||
                 sYY == null || sYY.getText().equals("") ||
@@ -79,6 +81,10 @@ public class CreateVacationC implements Initializable {
                 roundTripCombo.getValue() == null || baggageCombo.getValue() == null ||
                 sleepCombo.getValue() == null) {
             alert.setContentText("Please enter all the required fields (marked in *)");
+            alert.show();
+        }else if(!formatter.parse(startString).after(Calendar.getInstance().getTime())||
+                !formatter.parse(endString).after(Calendar.getInstance().getTime())){
+            alert.setContentText("Please enter a future dates");
             alert.show();
         }
         else if (formatter.parse(startString).after(formatter.parse(endString))) {
