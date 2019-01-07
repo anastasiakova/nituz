@@ -64,8 +64,6 @@ public class CreateVacationC implements Initializable {
                 sHH.getText() + ":" + sMIN.getText();
         String endString = eDD.getText() + "/" + eMM.getText() + "/" + eYY.getText() + "-" +
                 eHH.getText() + ":" + eMIN.getText();
-        System.out.println(startString);
-        System.out.println(Calendar.getInstance().getTime());
         if (sDD == null || sDD.getText().equals("") ||
                 sMM == null || sMM.getText().equals("") ||
                 sYY == null || sYY.getText().equals("") ||

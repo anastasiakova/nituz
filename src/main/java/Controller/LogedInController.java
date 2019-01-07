@@ -120,14 +120,6 @@ public class LogedInController {
         //update vacation
         newRequest.getVacation().set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
         sqlModel.updateRecord(newRequest.getVacation());
-//        String[] fields = {newRequest.getR_ID(),newRequest.getR_seller(),"","","","",
-//                "","","","","","",""};
-//        String vacation = sqlModel.selectFromTable(Tables.TBL_VACATIONS,fields);
-//        if(vacation!=""){
-//            Vacation forUpdate = new Vacation(vacation);
-//            forUpdate.set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
-//            sqlModel.updateRecord(forUpdate);
-//        }
     }
 
     public void CreatePaymentAndUpdateVacation(String aprovedRequestId){

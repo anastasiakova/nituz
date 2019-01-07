@@ -78,6 +78,7 @@ public class MyRequests {
         this.userName=userName;
         this.password=pass;
     }
+
     public void reject(ActionEvent actionEvent) {
         if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()){
             TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
