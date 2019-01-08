@@ -191,6 +191,28 @@ public class LogedInController {
         return FXCollections.observableList(vacations);
     }
 
+    public Vacation getAvailableVacation(String reqId){
+        //get request
+        String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
+        requestFields[0] = reqId;
+        String request = sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields);
+        Request myRequest = new Request(request);
+
+        //get trade
+        String[] fieldsOfTrade = {"", myRequest.getR_buyerID(), loged.getUsername(), "", myRequest.getVacation().get_vacationID()};
+        String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fieldsOfTrade);
+        String [] splittedTrade = trade.split("\n")[0].split(", ");
+
+        String[] fieldsOfVacation = new String[TblFields.enumDict.get("vacationFields").size()];
+        fieldsOfVacation[0] = splittedTrade[3];
+
+        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fieldsOfVacation).split("\n");
+
+        Vacation vac = new Vacation(allVacationsStr[0]);
+
+        return vac;
+    }
+
     public void UpdateRequest(String status, String reqID){
        List<Request> myRequests = loged.getRequestsForMe();
         for (Request req: myRequests) {

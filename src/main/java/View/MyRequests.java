@@ -2,17 +2,16 @@ package View;
 
 import Controller.LogedInController;
 import Controller.SearchController;
+import Model.Vacation;
 import Model.VactaionAndRequest;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TablePosition;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -125,16 +124,27 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
             markAsPaidSwitch.setDisable(true);
         }
 
-
         tradeReqForMeTable.setOnMouseClicked((MouseEvent event) -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2){
-                dealisLine ="regID: "+ tradeReqForMeTable.getSelectionModel().getSelectedItem().getReqID() + "\nStart Date: "
+                dealisLine = "My Vacation: \n Start Date: "
                         + tradeReqForMeTable.getSelectionModel().getSelectedItem().getStartDate() + "\nEnd Date: "
                         + tradeReqForMeTable.getSelectionModel().getSelectedItem().getEndDate()  + "\nDestination: "
                         + tradeReqForMeTable.getSelectionModel().getSelectedItem().getDestination()  + "\nAnswer: "
                         + tradeReqForMeTable.getSelectionModel().getSelectedItem().getAnswer()  + "\nUser Name: "
-                        + tradeReqForMeTable.getSelectionModel().getSelectedItem().getUserName();
-                System.out.println(dealisLine);
+                        + tradeReqForMeTable.getSelectionModel().getSelectedItem().getUserName() + "\n";
+                Vacation vacation =logedInController.getAvailableVacation(tradeReqForMeTable.getSelectionModel().getSelectedItem().getReqID());
+                dealisLine += "\n\nOptional for trade vacation details:\n";
+                dealisLine += "Start Date:" + vacation.get__startDate() + "\nEnd Date: " + vacation.get_endDate();
+                dealisLine += "\nDestination:" + vacation.get_destination() + "\nAviation Company:" + vacation.get_aviationCompany();
+                dealisLine += "\nNum Of Tickets:" + vacation.get_numOfTickets() + "\nTicket Type:" + vacation.get_ticketType();
+                dealisLine += "\nBaggage Included:" + vacation.is_isBaggageIncluded() +"\nRound Trip:" + vacation.is_isRoundTrip();
+                dealisLine += "\nVacation Sleeping Arrangements:" + vacation.get_vacationSleepingArrangements() + "\nSelle User Name:" + vacation.get_ownerID();
+                Alert alert = new Alert(Alert.AlertType.NONE);
+                alert.getDialogPane().getButtonTypes().add(ButtonType.OK);
+                alert.setContentText(dealisLine);
+                alert.setHeaderText("More Information About The Trade");
+
+                alert.show();
             }
         });
     }
