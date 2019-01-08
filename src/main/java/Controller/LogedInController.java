@@ -45,14 +45,17 @@ public class LogedInController {
             Vacation vac = req.getVacation();
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
             Date d;
-            String[] fields = {"", loged.getId(), req.getR_seller(), "", req.getVacation().get_vacationID()};
-            String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fields);
+            String[] fieldsOfTradeWhenLogedIsInitlizer = {"", loged.getUsername(), req.getR_seller(), "", req.getVacation().get_vacationID()};
+            String tradeWhenLogedIsInitlizer = sqlModel.selectFromTable(Tables.TBL_TRADES, fieldsOfTradeWhenLogedIsInitlizer);
+
+            String[]fieldsOfTradeWhenOtherIsInitlizer = {"",req.getR_seller(), loged.getUsername(), req.getVacation().get_vacationID(), "" };
+            String tradeWhenOtherIsInitlizer = sqlModel.selectFromTable(Tables.TBL_TRADES, fieldsOfTradeWhenOtherIsInitlizer);
             try {
                  d = formatter.parse(vac.get__startDate());
                 if (d.after(new Date())) {
                     if(isSwitch){
 
-                        if(trade != "") {
+                        if(tradeWhenLogedIsInitlizer != "" ){//|| tradeWhenOtherIsInitlizer!= "") {
 //                            String[] myVacFields = new String[TblFields.enumDict.get("vacationFields").size()];
 //                            myVacFields[0] = trade.split("\n")[0].split(",")[2];
 //                            String selectedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, myVacFields);
@@ -64,7 +67,7 @@ public class LogedInController {
                         }
                     }
                     else{
-                        if(trade == "") {
+                        if(tradeWhenOtherIsInitlizer == "" && tradeWhenLogedIsInitlizer == "" ) {
                             vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                                     vac.get_destination(), vac.get_ownerID(), req.getR_answer(), req.getR_ID()));
                         }
@@ -88,17 +91,21 @@ public class LogedInController {
             Request req = allRequests.get(i);
             if(!allRequests.get(i).getR_answer().equals("confirmed") && !allRequests.get(i).getR_answer().equals("rejected")){
                 Vacation vac = req.getVacation();
-                String[] fields = {"", loged.getId(), req.getR_seller(), "", req.getVacation().get_vacationID()};
-                String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fields);
+                String[] fieldsOfTradeWhenLogedIsInitlizer = {"",req.getR_buyerID(),loged.getUsername(),"",req.getVacation().get_vacationID()};
+                String tradeOfTradeWhenLogedIsInitlizer = sqlModel.selectFromTable(Tables.TBL_TRADES, fieldsOfTradeWhenLogedIsInitlizer);
+
+                String[] fieldsOfTradeWhenOtherIsInitlizer = {"",loged.getUsername(),req.getR_buyerID(),req.getVacation().get_vacationID(),"" };
+                String tradeOfTradeWhenOtherIsInitlizer = sqlModel.selectFromTable(Tables.TBL_TRADES, fieldsOfTradeWhenOtherIsInitlizer);
+
                 if(isSwitch){
 
-                    if(trade != "") {
+                    if(tradeOfTradeWhenLogedIsInitlizer != "" ) {
                         vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                                 vac.get_destination(), req.getR_buyerID(), req.getR_answer(), req.getR_ID()));
                     }
                 }
                 else{
-                    if(trade == "") {
+                    if(tradeOfTradeWhenLogedIsInitlizer == "" && tradeOfTradeWhenOtherIsInitlizer == "" ) {
                         vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                                 vac.get_destination(), req.getR_buyerID(), req.getR_answer(),req.getR_ID()));
                     }
@@ -238,20 +245,20 @@ public class LogedInController {
         Request myRequest = new Request(request);
 
         //get trade
-        String[] fields = { myRequest.getR_buyerID()+loged.getUsername(), myRequest.getR_buyerID(), loged.getUsername(), "", myRequest.getVacation().get_vacationID()};
+        String[] fields = {"", myRequest.getR_buyerID(), loged.getUsername(), "", myRequest.getVacation().get_vacationID()};
         String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fields);
-
+        String [] splittedTrade = trade.split("\n")[0].split(", ");
         //get other user vacation
-        String[] otherUserVac = new String[TblFields.enumDict.get("vacationFields").size()];
-        otherUserVac[0] = trade.split("\n")[0].split(",")[3];
-        String selectedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, otherUserVac);
-        String[] selectedVacSplited = selectedVac.split("\n");
-        Vacation otherUserVacation = new Vacation(selectedVacSplited[0]);
+//        String[] otherUserVac = new String[TblFields.enumDict.get("vacationFields").size()];
+//        otherUserVac[0] = trade.split("\n")[0].split(", ")[3];
+//        String selectedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, otherUserVac);
+//        String[] selectedVacSplited = selectedVac.split("\n");
+//        Vacation otherUserVacation = new Vacation(selectedVacSplited[0]);
 
 
         //get other user
         String[] otherUserFields = new String[TblFields.enumDict.get("userFields").size()];
-        otherUserFields[0] = otherUserVacation.get_ownerID() ;
+        otherUserFields[0] = splittedTrade[1];//otherUserVacation.get_ownerID() ;
         String user = sqlModel.selectFromTable(Tables.TBL_USERS, otherUserFields);
         String[] valid = user.split("\n");
         User otherUser = new User(valid[0]);
@@ -259,27 +266,36 @@ public class LogedInController {
         //update other user req and my vacation
         List<Request> myRequests = otherUser.getRequestsForMe();
         for (Request req: myRequests) {
-            if(req.getVacation().get_vacationID().equals(otherUserVacation.get_vacationID())){
-                req.setR_answer(status);
+            if(req.getVacation().get_vacationID().equals(splittedTrade[3])){//otherUserVacation.get_vacationID()
                 if(status.equals("rejected")) {
                     Vacation vac = req.getVacation();
                     vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
                     sqlModel.updateRecord(vac);
+                    sqlModel.deleteRecordFromTable(req);
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
                 if(status.equals("confirmed")) {
+                    req.setR_answer(status);
                     Vacation vac = req.getVacation();
                     vac.set_vacationStatus(Vacation.VacationStatus.SOLD);
                     sqlModel.updateRecord(vac);
+                    sqlModel.updateRecord(req);
                 }
-                sqlModel.updateRecord(req);
+
             }
         }
 
         //update trade(delete)
         if( !status.equals("waiting_for_payment")){
-            String[] data = {"",otherUser.getId(), loged.getId(),otherUserVacation.get_vacationID() , myRequest.getVacation().get_vacationID()};
+            String[] data = {"", otherUser.getUsername(), loged.getUsername(),splittedTrade[3] , myRequest.getVacation().get_vacationID()};
             sqlModel.deleteRecordFromTable("tbl_trades", TblFields.enumDict.get("tradeFields"),data );
         }
+        String[] newLogedIn = {loged.getUsername(),loged.getPwd(),loged.getBirthday(),loged.getPrivateName(),loged.getLastName(),loged.getCity(),loged.getId()};
+        loged = new User(newLogedIn);
     }
 
     public void CreateSwitchVacation(String askedVacId, String MyVacId){
@@ -289,10 +305,15 @@ public class LogedInController {
        // String[] askedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
         Vacation askedVac = new Vacation( sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n")[0]);
 
+//        String[] fields2 = new String[TblFields.enumDict.get("vacationFields").size()];
+//        fields[0] = MyVacId;
+//        // String[] askedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
+//        Vacation myVac = new Vacation( sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n")[0]);
+
         //create requests
         this.CreateRequestAndUpdateVacation(askedVac.get_ownerID(),askedVac.get_vacationID());//updates asked vac
 
-        Request newRequest = new Request(askedVac.get_ownerID(), loged.getUsername(), askedVac.get_vacationID());
+        Request newRequest = new Request(askedVac.get_ownerID(), loged.getUsername(), MyVacId);
         sqlModel.insertRecordToTable(Tables.TBL_REQUESTS.name().toLowerCase(),newRequest);
         //update vacation
         newRequest.getVacation().set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
@@ -307,7 +328,7 @@ public class LogedInController {
                 + TblFields.enumDict.get("tradeFields").get(3) + ", "
                 + TblFields.enumDict.get("tradeFields").get(4)
                 + ") VALUES(?,?,?,?,?)";
-        String[] data = {MyVacId+askedVacId ,loged.getId(), askedVac.get_ownerID(), MyVacId, askedVacId};
+        String[] data = {MyVacId+askedVacId,loged.getUsername(), askedVac.get_ownerID(), MyVacId, askedVacId};
         sqlModel.insertRecordToTable(fieldsNames,data);
     }
 }
