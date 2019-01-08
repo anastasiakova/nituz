@@ -238,7 +238,7 @@ public class LogedInController {
         Request myRequest = new Request(request);
 
         //get trade
-        String[] fields = { myRequest.getR_buyerID()+loged.getId(), myRequest.getR_buyerID(), loged.getId(), "", myRequest.getVacation().get_vacationID()};
+        String[] fields = { myRequest.getR_buyerID()+loged.getUsername(), myRequest.getR_buyerID(), loged.getUsername(), "", myRequest.getVacation().get_vacationID()};
         String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fields);
 
         //get other user vacation
