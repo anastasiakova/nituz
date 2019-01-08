@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -65,6 +67,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
 
     public String userName="";
     public String password="";
+    public String dealisLine="";
 
 
     public void SetController(LogedInController logedInController){
@@ -121,6 +124,19 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
             rejectSwitch.setDisable(true);
             markAsPaidSwitch.setDisable(true);
         }
+
+
+        tradeReqForMeTable.setOnMouseClicked((MouseEvent event) -> {
+            if (event.getButton().equals(MouseButton.PRIMARY) && event.getClickCount() == 2){
+                dealisLine ="regID: "+ tradeReqForMeTable.getSelectionModel().getSelectedItem().getReqID() + "\nStart Date: "
+                        + tradeReqForMeTable.getSelectionModel().getSelectedItem().getStartDate() + "\nEnd Date: "
+                        + tradeReqForMeTable.getSelectionModel().getSelectedItem().getEndDate()  + "\nDestination: "
+                        + tradeReqForMeTable.getSelectionModel().getSelectedItem().getDestination()  + "\nAnswer: "
+                        + tradeReqForMeTable.getSelectionModel().getSelectedItem().getAnswer()  + "\nUser Name: "
+                        + tradeReqForMeTable.getSelectionModel().getSelectedItem().getUserName();
+                System.out.println(dealisLine);
+            }
+        });
     }
 
     public void updateTextFields(String userName,String pass){
