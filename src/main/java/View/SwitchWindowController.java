@@ -83,7 +83,7 @@ public class SwitchWindowController {
             Vacation item = myVacTable.getItems().get(row);
             this.logedInController.CreateSwitchVacation(this.vacID, item.get_vacationID());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("A switch request has sent! ");
+            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\n A switch request has sent! ");
             alert.show();
             TimeUnit.SECONDS.sleep(3);
             Stage stage = (Stage) switchButton.getScene().getWindow();
@@ -92,7 +92,7 @@ public class SwitchWindowController {
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("You need to peek vacation of your own first");
+            alert.setContentText( "Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "You need to peek vacation of your own first");
             alert.show();
         }
     }

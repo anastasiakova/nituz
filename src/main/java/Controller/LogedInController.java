@@ -18,26 +18,19 @@ public class LogedInController {
 
     public LogedInController() {
         this.sqlModel = SQLModel.GetInstance();
-
     }
 
     public boolean tryLogIn(String username,String pwd){
-        String[] fields = new String[TblFields.enumDict.get("userFields").size()];
-        fields[0] = username;
-        fields[1] = pwd;
-        String user = sqlModel.selectFromTable(Tables.TBL_USERS, fields);
-        if(user.equals("")){
-            return false;
-        }
-        String[] valid = user.split("\n");
-        loged = new User(valid[0]);
-        return true;
+       SearchController search = new SearchController();
+       boolean ans = search.isLoginValid(username,pwd);
+       if (ans){
+           loged = new User(username);
+       }
+       return ans;
     }
 
     public ObservableList<VactaionAndRequest> getMyRequests(boolean isSwitch){
-//        String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
-//        fields[1] = logedInUsername;
-//        String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
+
         ArrayList<Request> allRequests = loged.getMyRequests();
         List<VactaionAndRequest> vactaionAndRequests = new ArrayList<>();
         for (int i = 0; i < allRequests.size(); i++) {
@@ -55,12 +48,7 @@ public class LogedInController {
                 if (d.after(new Date())) {
                     if(isSwitch){
 
-                        if(tradeWhenLogedIsInitlizer != "" ){//|| tradeWhenOtherIsInitlizer!= "") {
-//                            String[] myVacFields = new String[TblFields.enumDict.get("vacationFields").size()];
-//                            myVacFields[0] = trade.split("\n")[0].split(",")[2];
-//                            String selectedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, myVacFields);
-//                            String[] selectedVacSplited = selectedVac.split("\n");
-//                            Vacation myVac = new Vacation(selectedVacSplited[0]);
+                        if(tradeWhenLogedIsInitlizer != "" ){
 
                             vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
                                     vac.get_destination(), vac.get_ownerID(), req.getR_answer(), req.getR_ID()));
@@ -78,8 +66,6 @@ public class LogedInController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-
         }
         return FXCollections.observableList(vactaionAndRequests);
     }
@@ -116,27 +102,10 @@ public class LogedInController {
         return FXCollections.observableList(vactaionAndRequests);
     }
 
-    public void deleteUser(){
-        ISQLable userToDelete = new User(loged.getUsername(), "",null,"","",
-                "","");
-        sqlModel.deleteRecordFromTable(userToDelete);
-        loged = null;
-    }
-
     public void UpdateUser( String pwd, Date birthday, String privateName, String lastName,
                            String city, String id){
         loged = new User(loged.getUsername(), pwd, birthday, privateName, lastName, city, id);
         sqlModel.updateRecord(loged);
-    }
-
-    public void CreateVacation(Date __startDate, Date _endDate,
-                               String _destination, String _aviationCompany,
-                               int _numOfTickets, Vacation.TicketType _ticketType,
-                               boolean _isBaggageIncluded, boolean _isRoundTrip,
-                               Vacation.VacationType _vacationType, Vacation.VacationStatus _vacationStatus,
-                               Vacation.VacationSleepingArrangements _vacationSleepingArrangements, String _ownerID){
-        ISQLable newVacation = new Vacation(loged.getUsername(),__startDate, _endDate, _destination, _aviationCompany, _numOfTickets, _ticketType, _isBaggageIncluded, _isRoundTrip, _vacationType, _vacationStatus, _vacationSleepingArrangements, _ownerID);
-        sqlModel.insertRecordToTable(Tables.TBL_VACATIONS.toString().toLowerCase(), newVacation);
     }
 
     public void CreateRequestAndUpdateVacation( String r_seller, String vacationID) {
@@ -148,33 +117,6 @@ public class LogedInController {
         newRequest.getVacation().set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
         sqlModel.updateRecord(newRequest.getVacation());
     }
-
-//    public void CreatePaymentAndUpdateVacation(String aprovedRequestId){
-//        Payments newPayment = new Payments(aprovedRequestId);
-//        newPayment.ChangeStatus(false);
-//        newPayment.get_Request().setPayment(newPayment);
-//        loged.UpdateMyRequsts(newPayment.get_Request());
-//        sqlModel.updateRecord(newPayment.get_Request());
-//        newPayment.get_Request().getVacation().set_vacationStatus(Vacation.VacationStatus.SOLD);
-//        sqlModel.updateRecord(newPayment.get_Request().getVacation());
-//        //Insert Payment to DB
-//        sqlModel.insertRecordToTable(Tables.TBL_PAYMENTS.name().toLowerCase(), newPayment);
-//
-//        //Set request as approved:
-//        //String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
-//        //String approvedReqId = newPayment.get_aprovedRequest();
-//        //requestFields[0] = approvedReqId;
-//        //approvedRequest.setPayment(newPayment);
-//        //Request approvedRequest = new Request(sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields));
-//        //approvedRequest.setR_answer("Approved");
-//        //Set vacation as sold:
-////        String[] vacationFields = new String[TblFields.enumDict.get("vacationFields").size()];
-////        String vacationId = approvedRequest.getVacationID();
-////        vacationFields[0] = vacationId;
-//
-//        //Vacation vacation = new Vacation(sqlModel.selectFromTable(Tables.TBL_VACATIONS, vacationFields));
-//        // vacation.set_vacationStatus(Vacation.VacationStatus.SOLD);
-//    }
 
     public ObservableList<Vacation> getAllAvailableVacations(){
         String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
@@ -191,27 +133,27 @@ public class LogedInController {
         return FXCollections.observableList(vacations);
     }
 
-    public Vacation getAvailableVacation(String reqId){
-        //get request
-        String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
-        requestFields[0] = reqId;
-        String request = sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields);
-        Request myRequest = new Request(request);
-
-        //get trade
-        String[] fieldsOfTrade = {"", myRequest.getR_buyerID(), loged.getUsername(), "", myRequest.getVacation().get_vacationID()};
-        String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fieldsOfTrade);
-        String [] splittedTrade = trade.split("\n")[0].split(", ");
-
-        String[] fieldsOfVacation = new String[TblFields.enumDict.get("vacationFields").size()];
-        fieldsOfVacation[0] = splittedTrade[3];
-
-        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fieldsOfVacation).split("\n");
-
-        Vacation vac = new Vacation(allVacationsStr[0]);
-
-        return vac;
-    }
+//    public Vacation getAvailableVacation(String reqId){
+//        //get request
+//        String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
+//        requestFields[0] = reqId;
+//        String request = sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields);
+//        Request myRequest = new Request(request);
+//
+//        //get trade
+//        String[] fieldsOfTrade = {"", myRequest.getR_buyerID(), loged.getUsername(), "", myRequest.getVacation().get_vacationID()};
+//        String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fieldsOfTrade);
+//        String [] splittedTrade = trade.split("\n")[0].split(", ");
+//
+//        String[] fieldsOfVacation = new String[TblFields.enumDict.get("vacationFields").size()];
+//        fieldsOfVacation[0] = splittedTrade[3];
+//
+//        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fieldsOfVacation).split("\n");
+//
+//        Vacation vac = new Vacation(allVacationsStr[0]);
+//
+//        return vac;
+//    }
 
     public void UpdateRequest(String status, String reqID){
        List<Request> myRequests = loged.getRequestsForMe();
@@ -244,17 +186,9 @@ public class LogedInController {
         sqlModel.insertRecordToTable(Tables.TBL_VACATIONS.toString().toLowerCase(), newVacation);
     }
 
-    public  void LogOut(){
+    public void deleteUser(){
         loged = null;
     }
-
-    public String getUserNameFromUserAsStripAndCleanString(){
-        return this.loged.getUsername();
-    }
-
-//    public ObservableList<Vacation> CreateSwitchVacation(){
-//
-//    }
 
     public void UpdateSwitchVacation(String status, String reqID){
         //update my req for me and other user vacation
@@ -270,13 +204,6 @@ public class LogedInController {
         String[] fields = {"", myRequest.getR_buyerID(), loged.getUsername(), "", myRequest.getVacation().get_vacationID()};
         String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fields);
         String [] splittedTrade = trade.split("\n")[0].split(", ");
-        //get other user vacation
-//        String[] otherUserVac = new String[TblFields.enumDict.get("vacationFields").size()];
-//        otherUserVac[0] = trade.split("\n")[0].split(", ")[3];
-//        String selectedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, otherUserVac);
-//        String[] selectedVacSplited = selectedVac.split("\n");
-//        Vacation otherUserVacation = new Vacation(selectedVacSplited[0]);
-
 
         //get other user
         String[] otherUserFields = new String[TblFields.enumDict.get("userFields").size()];
@@ -294,11 +221,6 @@ public class LogedInController {
                     vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
                     sqlModel.updateRecord(vac);
                     sqlModel.deleteRecordFromTable(req);
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
                 }
                 if(status.equals("confirmed")) {
                     req.setR_answer(status);
@@ -315,34 +237,29 @@ public class LogedInController {
         if( !status.equals("waiting_for_payment")){
             String[] data = {"", otherUser.getUsername(), loged.getUsername(),splittedTrade[3] , myRequest.getVacation().get_vacationID()};
             sqlModel.deleteRecordFromTable("tbl_trades", TblFields.enumDict.get("tradeFields"),data );
+            String[] newLogedIn = {loged.getUsername(),loged.getPwd(),loged.getBirthday(),loged.getPrivateName(),loged.getLastName(),loged.getCity(),loged.getId()};
+            loged = new User(newLogedIn);
         }
-        String[] newLogedIn = {loged.getUsername(),loged.getPwd(),loged.getBirthday(),loged.getPrivateName(),loged.getLastName(),loged.getCity(),loged.getId()};
-        loged = new User(newLogedIn);
+
     }
 
     public void CreateSwitchVacation(String askedVacId, String MyVacId){
 
         String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
         fields[0] = askedVacId;
-       // String[] askedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
         Vacation askedVac = new Vacation( sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n")[0]);
-
-//        String[] fields2 = new String[TblFields.enumDict.get("vacationFields").size()];
-//        fields[0] = MyVacId;
-//        // String[] askedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
-//        Vacation myVac = new Vacation( sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n")[0]);
 
         //create requests
         this.CreateRequestAndUpdateVacation(askedVac.get_ownerID(),askedVac.get_vacationID());//updates asked vac
 
         Request newRequest = new Request(askedVac.get_ownerID(), loged.getUsername(), MyVacId);
         sqlModel.insertRecordToTable(Tables.TBL_REQUESTS.name().toLowerCase(),newRequest);
+
         //update vacation
         newRequest.getVacation().set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
         sqlModel.updateRecord(newRequest.getVacation()); //updates my vac
 
         //put new trade in trades
-
         String fieldsNames = "tbl_trades("
                 + TblFields.enumDict.get("tradeFields").get(0) + ", "
                 + TblFields.enumDict.get("tradeFields").get(1) + ", "
@@ -352,5 +269,35 @@ public class LogedInController {
                 + ") VALUES(?,?,?,?,?)";
         String[] data = {MyVacId+askedVacId,loged.getUsername(), askedVac.get_ownerID(), MyVacId, askedVacId};
         sqlModel.insertRecordToTable(fieldsNames,data);
+    }
+
+    public void CreatePaymentAndUpdateVacation(String aprovedRequestId){
+
+    }
+
+    public Vacation CreateVacation(String reqId){
+        //get request
+        String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
+        requestFields[0] = reqId;
+        String request = sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields);
+        Request myRequest = new Request(request);
+
+        //get trade
+        String[] fieldsOfTrade = {"", myRequest.getR_buyerID(), loged.getUsername(), "", myRequest.getVacation().get_vacationID()};
+        String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fieldsOfTrade);
+        String [] splittedTrade = trade.split("\n")[0].split(", ");
+
+        String[] fieldsOfVacation = new String[TblFields.enumDict.get("vacationFields").size()];
+        fieldsOfVacation[0] = splittedTrade[3];
+
+        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fieldsOfVacation).split("\n");
+
+        Vacation vac = new Vacation(allVacationsStr[0]);
+
+        return vac;
+    }
+
+    public String getUserNameFromUserAsStripAndCleanString(){
+        return this.loged.getUsername();
     }
 }

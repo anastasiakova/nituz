@@ -78,29 +78,29 @@ public class CreateVacationC implements Initializable {
                 ticketNum.getText().equals("") || ticketTypeCombo.getValue() == null ||
                 roundTripCombo.getValue() == null || baggageCombo.getValue() == null ||
                 sleepCombo.getValue() == null) {
-            alert.setContentText("Please enter all the required fields (marked in *)");
+            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nPlease enter all the required fields (marked in *)");
             alert.show();
         }else if(!formatter.parse(startString).after(Calendar.getInstance().getTime())||
                 !formatter.parse(endString).after(Calendar.getInstance().getTime())){
-            alert.setContentText("Please enter a future dates");
+            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() +"\nPlease enter a future dates");
             alert.show();
         }
         else if (formatter.parse(startString).after(formatter.parse(endString))) {
             //date & time:
-            alert.setContentText("Please enter valid dates");
+            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nPlease enter valid dates");
             alert.show();
         } else if (!ticketNum.getText().matches("\\d*") ||
                 (Integer.parseInt(sDD.getText()) > 31 && Integer.parseInt(sDD.getText()) <= 0) ||
                 (Integer.parseInt(eDD.getText()) > 31 && Integer.parseInt(eDD.getText()) <= 0) ||
                 (Integer.parseInt(sMM.getText()) > 12 && Integer.parseInt(sMM.getText()) <= 0) ||
                 (Integer.parseInt(eMM.getText()) > 12 && Integer.parseInt(eMM.getText()) <= 0)) {
-            alert.setContentText("Please enter only number in the number of tickets");
+            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nPlease enter only number in the number of tickets");
             alert.show();
         } else if ((Integer.parseInt(sHH.getText()) < 0 && Integer.parseInt(sHH.getText()) > 23) ||
                 (Integer.parseInt(sMIN.getText()) < 0 && Integer.parseInt(sMIN.getText()) >= 60) ||
                 (Integer.parseInt(eHH.getText()) < 0 && Integer.parseInt(eHH.getText()) > 23) ||
                 (Integer.parseInt(eMIN.getText()) < 0 && Integer.parseInt(eMIN.getText()) >= 60)) {
-            alert.setContentText("Please enter valid times");
+            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nPlease enter valid times");
             alert.show();
         } else {
             //string fields:
@@ -108,7 +108,7 @@ public class CreateVacationC implements Initializable {
             try {
                 ticketNumber = Integer.parseInt(ticketNum.getText());
             } catch (Exception e) {
-                alert.setContentText("Please enter only number in the number of tickets");
+                alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nPlease enter only number in the number of tickets");
                 alert.show();
             }
             String ticketType = ticketTypeCombo.getValue();

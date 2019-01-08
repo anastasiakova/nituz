@@ -38,6 +38,7 @@ public class SearchController {
             }
         }
     }
+
     public ObservableList<Vacation> getAllAvailableVacations(){
         String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
         fields[10] = Vacation.VacationStatus.FOR_SALE.name().toLowerCase();
@@ -48,6 +49,19 @@ public class SearchController {
             vacations.add(new Vacation(allVacationsStr[i]));
         }
         return FXCollections.observableList(vacations);
+    }
+
+    public boolean isLoginValid(String username,String pwd){
+
+        String[] fields = new String[TblFields.enumDict.get("userFields").size()];
+        fields[0] = username;
+        fields[1] = pwd;
+        String user = sqlModel.selectFromTable(Tables.TBL_USERS, fields);
+        if(user.equals("")){
+            return false;
+        }
+
+        return true;
     }
 
 }

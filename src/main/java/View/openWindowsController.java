@@ -231,7 +231,7 @@ public class openWindowsController {
         this.t2.setVisible(true);
         this.t3.setVisible(true);
         this.t4.setVisible(true);
-        this.logedInController.LogOut();
+        this.logedInController.deleteUser();
         this.userModeOn=false;
 //        loginButtonsMaker();
         initialize();
