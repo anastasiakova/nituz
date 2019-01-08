@@ -33,10 +33,11 @@ public class MyRequests {
     public MyRequests(){}
 //first tab
     public javafx.scene.control.TableView<VactaionAndRequest> reqTable;
-    public javafx.scene.control.TableColumn<VactaionAndRequest,String> destination;//vecation
+
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> startDate;//vecation
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> endDate;//vecation
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> sallerUserName;//vecation
+    public javafx.scene.control.TableColumn<VactaionAndRequest,String> destination;//vecation
     public javafx.scene.control.TableColumn<VactaionAndRequest,String> answer;//request
 
     public javafx.scene.control.TableView<VactaionAndRequest> reqForMeTable;

@@ -4,10 +4,14 @@ import Controller.LogedInController;
 import Controller.SearchController;
 import Model.Vacation;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+
+import java.util.concurrent.TimeUnit;
 
 public class SwitchWindowController {
 
@@ -43,6 +47,8 @@ public class SwitchWindowController {
         ObservableList<Vacation> data=null;
         data = logedInController.getAllAvailableVacations();
         myVacTable.setItems(data);
+        if(myVacTable.getItems().size() ==0)
+            switchButton.setDisable(true);
         //initButtons();
         startDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("__startDate"));
         endDate.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_endDate"));
@@ -59,23 +65,31 @@ public class SwitchWindowController {
     }
 
     //the button goes here
-    public void SetSwitchRequest(){
+    public void SetSwitchRequest() throws InterruptedException {
         //check if choose is vac
         //if dosnt have vacation open create vac trow the "SwitchVacation" function inside
-        if(myVacTable.getItems().size()==0){
-            //alert you dont have vacations
-        }
+//        if(myVacTable.getItems().size()==0){
+//            //alert you dont have vacations
+//        }
 
-        else if(!myVacTable.getSelectionModel().getSelectedCells().isEmpty()) {
+        if(!myVacTable.getSelectionModel().getSelectedCells().isEmpty()) {
             TablePosition pos = myVacTable.getSelectionModel().getSelectedCells().get(0);
             int row = pos.getRow();
 // Item here is the table view type:
             Vacation item = myVacTable.getItems().get(row);
-
             this.logedInController.CreateSwitchVacation(this.vacID, item.get_vacationID());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("A switch request has sent! ");
+            alert.show();
+            TimeUnit.SECONDS.sleep(3);
+            Stage stage = (Stage) switchButton.getScene().getWindow();
+            stage.close();
+
         }
         else {
-            //alert choose vacation
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("You need to peek vacation of your own first");
+            alert.show();
         }
     }
 

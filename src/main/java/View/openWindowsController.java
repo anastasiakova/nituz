@@ -270,9 +270,11 @@ public class openWindowsController {
             MyRequests creatView = fxmlLoader.getController();
             creatView.SetController(this.logedInController);
             creatView.updateTextFields(userName,password);
+
             Scene scene = new Scene(root);
             Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             window.setScene(scene);
+            window.getScene().getStylesheets().add("/regPages.css");
             creatView.init();
 //            stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes
             window.show();
