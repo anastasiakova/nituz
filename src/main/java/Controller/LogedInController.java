@@ -228,47 +228,58 @@ public class LogedInController {
 //    }
 
     public void UpdateSwitchVacation(String status, String reqID){
-//        //update my req for me and other user vacation
-//        this.UpdateRequest(status,reqID);
-//        List<Request> myRequests = loged.getRequestsForMe();
-//
-//        //get request
-//        String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
-//        requestFields[0] = reqID;
-//        String request = sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields);
-//        Request myRequest = new Request(request);
-//
-//        //get other user
-//        String[] otherUserFields = new String[TblFields.enumDict.get("userFields").size()];
-//        otherUserFields[0] = myRequest.getR_buyerID() ;
-//        String user = sqlModel.selectFromTable(Tables.TBL_USERS, otherUserFields);
-//        String[] valid = user.split("\n");
-//        User otherUser = new User(valid[0]);
-//
-//        //update other user req and my vacation
-//        List<Request> myRequests = otherUser.getRequestsForMe();
-//        for (Request req: myRequests) {
-//            if(req.getR_ID().equals(reqID)){
-//                req.setR_answer(status);
-//                if(status.equals("rejected")) {
-//                    Vacation vac = req.getVacation();
-//                    vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
-//                    sqlModel.updateRecord(vac);
-//                }
-//                if(status.equals("confirmed")) {
-//                    Vacation vac = req.getVacation();
-//                    vac.set_vacationStatus(Vacation.VacationStatus.SOLD);
-//                    sqlModel.updateRecord(vac);
-//                }
-//                sqlModel.updateRecord(req);
-//            }
-//        }
-//
-//        //update trade(delete)
-//        if( !status.equals("waiting_for_payment")){
-//            String[] data = {otherUser.getId(), loged.getId(), myRequest.getVacation().get_vacationID(), askedVacId};
-//            sqlModel.deleteRecordFromTable("tbl_trades", TblFields.enumDict.get("tradeFields"), );
-//        }
+        //update my req for me and other user vacation
+        this.UpdateRequest(status,reqID);
+
+        //get request
+        String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
+        requestFields[0] = reqID;
+        String request = sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields);
+        Request myRequest = new Request(request);
+
+        //get trade
+        String[] fields = { myRequest.getR_buyerID()+loged.getId(), myRequest.getR_buyerID(), loged.getId(), "", myRequest.getVacation().get_vacationID()};
+        String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fields);
+
+        //get other user vacation
+        String[] otherUserVac = new String[TblFields.enumDict.get("vacationFields").size()];
+        otherUserVac[0] = trade.split("\n")[0].split(",")[3];
+        String selectedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, otherUserVac);
+        String[] selectedVacSplited = selectedVac.split("\n");
+        Vacation otherUserVacation = new Vacation(selectedVacSplited[0]);
+
+
+        //get other user
+        String[] otherUserFields = new String[TblFields.enumDict.get("userFields").size()];
+        otherUserFields[0] = otherUserVacation.get_ownerID() ;
+        String user = sqlModel.selectFromTable(Tables.TBL_USERS, otherUserFields);
+        String[] valid = user.split("\n");
+        User otherUser = new User(valid[0]);
+
+        //update other user req and my vacation
+        List<Request> myRequests = otherUser.getRequestsForMe();
+        for (Request req: myRequests) {
+            if(req.getVacation().get_vacationID().equals(otherUserVacation.get_vacationID())){
+                req.setR_answer(status);
+                if(status.equals("rejected")) {
+                    Vacation vac = req.getVacation();
+                    vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
+                    sqlModel.updateRecord(vac);
+                }
+                if(status.equals("confirmed")) {
+                    Vacation vac = req.getVacation();
+                    vac.set_vacationStatus(Vacation.VacationStatus.SOLD);
+                    sqlModel.updateRecord(vac);
+                }
+                sqlModel.updateRecord(req);
+            }
+        }
+
+        //update trade(delete)
+        if( !status.equals("waiting_for_payment")){
+            String[] data = {"",otherUser.getId(), loged.getId(),otherUserVacation.get_vacationID() , myRequest.getVacation().get_vacationID()};
+            sqlModel.deleteRecordFromTable("tbl_trades", TblFields.enumDict.get("tradeFields"),data );
+        }
     }
 
     public void CreateSwitchVacation(String askedVacId, String MyVacId){

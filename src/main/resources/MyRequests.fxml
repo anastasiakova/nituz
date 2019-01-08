@@ -88,7 +88,7 @@
                            <columns>
                               <TableColumn fx:id="myAskedVecStartDate" prefWidth="102.0" text="start date " />
                               <TableColumn fx:id="myAskedVecEndDate" prefWidth="125.0" text="end date " />
-                              <TableColumn fx:id="initilizeUserName" prefWidth="119.0" text="initilize request username " />
+                              <TableColumn fx:id="initilizeUserName" prefWidth="119.0" text="initializer request username " />
                               <TableColumn fx:id="myAskedVecDestination" prefWidth="113.0" text="destination " />
                               <TableColumn fx:id="myAnswerToSwitch" minWidth="0.0" prefWidth="118.0" text="answer " />
                            </columns>

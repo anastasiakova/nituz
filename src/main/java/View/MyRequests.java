@@ -128,66 +128,128 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
     }
 
     public void reject(ActionEvent actionEvent) {
-        if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()){
-            TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
-            int row = pos.getRow();
-// Item here is the table view type:
-            VactaionAndRequest item = reqForMeTable.getItems().get(row);
-            TableColumn col = pos.getTableColumn();
-// this gives the value in the selected cell:
-            //String data = (String) col.getCellObservableValue(item).getValue();
-            logedInController.UpdateRequest("rejected",item.getReqID());
-            init();
+        String button = ((Button)actionEvent.getTarget()).getId();
+        switch (button) {
+            case "reject":
+                if (!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
+                    TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
+                    int row = pos.getRow();
+                    // Item here is the table view type:
+                    VactaionAndRequest item = reqForMeTable.getItems().get(row);
+                    TableColumn col = pos.getTableColumn();
+                    // this gives the value in the selected cell:
+                    //String data = (String) col.getCellObservableValue(item).getValue();
+                    logedInController.UpdateRequest("rejected", item.getReqID());
+                    init();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("You need to peek vacation first");
+                }
+            case "rejectSwitch":
+                if (!tradeReqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
+                    TablePosition pos = tradeReqForMeTable.getSelectionModel().getSelectedCells().get(0);
+                    int row = pos.getRow();
+                    // Item here is the table view type:
+                    VactaionAndRequest item = tradeReqForMeTable.getItems().get(row);
+                    TableColumn col = pos.getTableColumn();
+                    // this gives the value in the selected cell:
+                    //String data = (String) col.getCellObservableValue(item).getValue();
+                    logedInController.UpdateSwitchVacation("rejected", item.getReqID());
+                    init();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("You need to peek vacation first");
+                }
         }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("You need to peek vacation first");
-        }
-
     }
 
     public void approve(ActionEvent actionEvent) {
-        if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
-            TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
-            int row = pos.getRow();
-// Item here is the table view type:
-            VactaionAndRequest item = reqForMeTable.getItems().get(row);
-            TableColumn col = pos.getTableColumn();
-// this gives the value in the selected cell:
-            //String data = (String) col.getCellObservableValue(item).getValue();
-            logedInController.UpdateRequest("waiting_for_payment", item.getReqID());
-            init();
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("You need to peek vacation first");
-            alert.show();
-        }
+        String button = ((Button)actionEvent.getTarget()).getId();
+            switch (button) {
+                case "approve":
+                    if (!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
+                        TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
+                        int row = pos.getRow();
+                        // Item here is the table view type:
+                        VactaionAndRequest item = reqForMeTable.getItems().get(row);
+                        TableColumn col = pos.getTableColumn();
+                        // this gives the value in the selected cell:
+                        //String data = (String) col.getCellObservableValue(item).getValue();
+                        logedInController.UpdateRequest("waiting_for_payment", item.getReqID());
+                        init();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("You need to peek vacation first");
+                        alert.show();
+                    }
+                case "approveSwitch":
+                    if (!tradeReqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
+                        TablePosition pos = tradeReqForMeTable.getSelectionModel().getSelectedCells().get(0);
+                        int row = pos.getRow();
+                        // Item here is the table view type:
+                        VactaionAndRequest item = tradeReqForMeTable.getItems().get(row);
+                        TableColumn col = pos.getTableColumn();
+                        // this gives the value in the selected cell:
+                        //String data = (String) col.getCellObservableValue(item).getValue();
+                        logedInController.UpdateSwitchVacation("waiting_for_payment", item.getReqID());
+                        init();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("You need to peek vacation first");
+                        alert.show();
+                    }
+            }
     }
 
     public void tryBuy(ActionEvent actionEvent) {
-        if(!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
-            TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
-            int row = pos.getRow();
+        String button = ((Button)actionEvent.getTarget()).getId();
+        switch (button) {
+            case "markAsPaidButton":
+                if (!reqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
+                    TablePosition pos = reqForMeTable.getSelectionModel().getSelectedCells().get(0);
+                    int row = pos.getRow();
 // Item here is the table view type:
 
-            VactaionAndRequest item = reqForMeTable.getItems().get(row);
-            if (!item.getAnswer().equals("approve")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("You must approve this request first!");
-                alert.show();
-            } else {
-                TableColumn col = pos.getTableColumn();
+                    VactaionAndRequest item = reqForMeTable.getItems().get(row);
+                    if (!item.getAnswer().equals("waiting_for_payment")) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("You must approve this request first!");
+                        alert.show();
+                    } else {
+                        TableColumn col = pos.getTableColumn();
 // this gives the value in the selected cell:
-                //String data = (String) col.getCellObservableValue(item).getValue();
-                logedInController.UpdateRequest("waiting_for_payment", item.getReqID());
-                init();
-            }
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("You need to peek vacation first");
-            alert.show();
+                        //String data = (String) col.getCellObservableValue(item).getValue();
+                        logedInController.UpdateRequest("confirmed", item.getReqID());
+                        init();
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("You need to peek vacation first");
+                    alert.show();
+                }
+            case "markAsPaidSwitch":
+                if (!tradeReqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
+                    TablePosition pos = tradeReqForMeTable.getSelectionModel().getSelectedCells().get(0);
+                    int row = pos.getRow();
+// Item here is the table view type:
+
+                    VactaionAndRequest item = tradeReqForMeTable.getItems().get(row);
+                    if (!item.getAnswer().equals("waiting_for_payment")) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("You must approve this request first!");
+                        alert.show();
+                    } else {
+                        TableColumn col = pos.getTableColumn();
+// this gives the value in the selected cell:
+                        //String data = (String) col.getCellObservableValue(item).getValue();
+                        logedInController.UpdateSwitchVacation("confirmed", item.getReqID());
+                        init();
+                    }
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setContentText("You need to peek vacation first");
+                    alert.show();
+                }
         }
     }
 
