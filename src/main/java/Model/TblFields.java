@@ -18,8 +18,10 @@ public class TblFields {
                 "num_of_tickets", "ticket_type", "baggage", "round_trip", "vacation_type",
                 "vacation_status", "sleeping_arrangements", "owner_id");
         enumDict.put("vacationFields", enumList);
-        enumList = Arrays.asList("payment_id", "request_id", "timestamp", "status");
-        enumDict.put("paymentsTblFields", enumList);
+        enumList = Arrays.asList("t_id", "initializerID", "askedId", "initializerVacationId", "askedVacationId");
+        enumDict.put("tradeFields", enumList);
+//        enumList = Arrays.asList("payment_id", "request_id", "timestamp", "status");
+//        enumDict.put("paymentsTblFields", enumList);
     }
 
 //    static enum userFields {

@@ -3,7 +3,6 @@ package Controller;
 import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -35,7 +34,7 @@ public class LogedInController {
         return true;
     }
 
-    public ObservableList<VactaionAndRequest> getMyRequests(){
+    public ObservableList<VactaionAndRequest> getMyRequests(boolean isSwitch){
 //        String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
 //        fields[1] = logedInUsername;
 //        String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
@@ -46,29 +45,65 @@ public class LogedInController {
             Vacation vac = req.getVacation();
             DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
             Date d;
+            String[] fields = {"", loged.getId(), req.getR_seller(), "", req.getVacation().get_vacationID()};
+            String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fields);
             try {
                  d = formatter.parse(vac.get__startDate());
                 if (d.after(new Date())) {
-                    vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
-                            vac.get_destination(), vac.get_ownerID(), req.getR_answer(),req.getR_ID()));
+                    if(isSwitch){
+
+                        if(trade != "") {
+//                            String[] myVacFields = new String[TblFields.enumDict.get("vacationFields").size()];
+//                            myVacFields[0] = trade.split("\n")[0].split(",")[2];
+//                            String selectedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, myVacFields);
+//                            String[] selectedVacSplited = selectedVac.split("\n");
+//                            Vacation myVac = new Vacation(selectedVacSplited[0]);
+
+                            vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
+                                    vac.get_destination(), vac.get_ownerID(), req.getR_answer(), req.getR_ID()));
+                        }
+                    }
+                    else{
+                        if(trade == "") {
+                            vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
+                                    vac.get_destination(), vac.get_ownerID(), req.getR_answer(), req.getR_ID()));
+                        }
+                    }
+
                 }
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+
 
         }
         return FXCollections.observableList(vactaionAndRequests);
     }
 
-    public ObservableList<VactaionAndRequest> getToAnswerRequests(){
+    public ObservableList<VactaionAndRequest> getToAnswerRequests(boolean isSwitch){
         ArrayList<Request> allRequests = loged.getRequestsForMe();
         List<VactaionAndRequest> vactaionAndRequests = new ArrayList<>();
         for (int i = 0; i < allRequests.size(); i++) {
             Request req = allRequests.get(i);
             if(!allRequests.get(i).getR_answer().equals("confirmed") && !allRequests.get(i).getR_answer().equals("rejected")){
                 Vacation vac = req.getVacation();
-                vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
-                        vac.get_destination(), req.getR_buyerID(), req.getR_answer(),req.getR_ID()));
+                String[] fields = {"", loged.getId(), req.getR_seller(), "", req.getVacation().get_vacationID()};
+                String trade = sqlModel.selectFromTable(Tables.TBL_TRADES, fields);
+                if(isSwitch){
+
+                    if(trade != "") {
+                        vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
+                                vac.get_destination(), req.getR_buyerID(), req.getR_answer(), req.getR_ID()));
+                    }
+                }
+                else{
+                    if(trade == "") {
+                        vactaionAndRequests.add(new VactaionAndRequest(vac.get__startDate(), vac.get_endDate(),
+                                vac.get_destination(), req.getR_buyerID(), req.getR_answer(),req.getR_ID()));
+                    }
+                }
+
             }
         }
         return FXCollections.observableList(vactaionAndRequests);
@@ -107,32 +142,32 @@ public class LogedInController {
         sqlModel.updateRecord(newRequest.getVacation());
     }
 
-    public void CreatePaymentAndUpdateVacation(String aprovedRequestId){
-        Payments newPayment = new Payments(aprovedRequestId);
-        newPayment.ChangeStatus(false);
-        newPayment.get_Request().setPayment(newPayment);
-        loged.UpdateMyRequsts(newPayment.get_Request());
-        sqlModel.updateRecord(newPayment.get_Request());
-        newPayment.get_Request().getVacation().set_vacationStatus(Vacation.VacationStatus.SOLD);
-        sqlModel.updateRecord(newPayment.get_Request().getVacation());
-        //Insert Payment to DB
-        sqlModel.insertRecordToTable(Tables.TBL_PAYMENTS.name().toLowerCase(), newPayment);
-
-        //Set request as approved:
-        //String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
-        //String approvedReqId = newPayment.get_aprovedRequest();
-        //requestFields[0] = approvedReqId;
-        //approvedRequest.setPayment(newPayment);
-        //Request approvedRequest = new Request(sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields));
-        //approvedRequest.setR_answer("Approved");
-        //Set vacation as sold:
-//        String[] vacationFields = new String[TblFields.enumDict.get("vacationFields").size()];
-//        String vacationId = approvedRequest.getVacationID();
-//        vacationFields[0] = vacationId;
-
-        //Vacation vacation = new Vacation(sqlModel.selectFromTable(Tables.TBL_VACATIONS, vacationFields));
-        // vacation.set_vacationStatus(Vacation.VacationStatus.SOLD);
-    }
+//    public void CreatePaymentAndUpdateVacation(String aprovedRequestId){
+//        Payments newPayment = new Payments(aprovedRequestId);
+//        newPayment.ChangeStatus(false);
+//        newPayment.get_Request().setPayment(newPayment);
+//        loged.UpdateMyRequsts(newPayment.get_Request());
+//        sqlModel.updateRecord(newPayment.get_Request());
+//        newPayment.get_Request().getVacation().set_vacationStatus(Vacation.VacationStatus.SOLD);
+//        sqlModel.updateRecord(newPayment.get_Request().getVacation());
+//        //Insert Payment to DB
+//        sqlModel.insertRecordToTable(Tables.TBL_PAYMENTS.name().toLowerCase(), newPayment);
+//
+//        //Set request as approved:
+//        //String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
+//        //String approvedReqId = newPayment.get_aprovedRequest();
+//        //requestFields[0] = approvedReqId;
+//        //approvedRequest.setPayment(newPayment);
+//        //Request approvedRequest = new Request(sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields));
+//        //approvedRequest.setR_answer("Approved");
+//        //Set vacation as sold:
+////        String[] vacationFields = new String[TblFields.enumDict.get("vacationFields").size()];
+////        String vacationId = approvedRequest.getVacationID();
+////        vacationFields[0] = vacationId;
+//
+//        //Vacation vacation = new Vacation(sqlModel.selectFromTable(Tables.TBL_VACATIONS, vacationFields));
+//        // vacation.set_vacationStatus(Vacation.VacationStatus.SOLD);
+//    }
 
     public ObservableList<Vacation> getAllAvailableVacations(){
         String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
@@ -142,7 +177,9 @@ public class LogedInController {
         List<Vacation> vacations = new ArrayList<Vacation>();
         for (int i = 0; i < allVacationsStr.length & !allVacationsStr[0].equals(""); i++) {
             Vacation vac = new Vacation(allVacationsStr[i]);
-            vacations.add(vac);
+            if(vac.get_ownerID().equals(loged.getUsername())){
+                vacations.add(vac);
+            }
         }
         return FXCollections.observableList(vacations);
     }
@@ -155,6 +192,11 @@ public class LogedInController {
                 if(status.equals("rejected")) {
                     Vacation vac = req.getVacation();
                     vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
+                    sqlModel.updateRecord(vac);
+                }
+                if(status.equals("confirmed")) {
+                    Vacation vac = req.getVacation();
+                    vac.set_vacationStatus(Vacation.VacationStatus.SOLD);
                     sqlModel.updateRecord(vac);
                 }
                 sqlModel.updateRecord(req);
@@ -181,20 +223,80 @@ public class LogedInController {
         return this.loged.getUsername();
     }
 
-    public ObservableList<Vacation> CreateSwitchVacation(){
-        String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
-        fields[10] = Vacation.VacationStatus.FOR_SALE.name().toLowerCase();
+//    public ObservableList<Vacation> CreateSwitchVacation(){
+//
+//    }
 
-        String[] allVacationsStr = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
-        List<Vacation> vacations = new ArrayList<Vacation>();
-        for (int i = 0; i < allVacationsStr.length & !allVacationsStr[0].equals(""); i++) {
-            Vacation vac = new Vacation(allVacationsStr[i]);
-            if(vac.get_ownerID().equals(loged.getUsername())){
-                vacations.add(vac);
-            }
-        }
-        return FXCollections.observableList(vacations);
+    public void UpdateSwitchVacation(String status, String reqID){
+//        //update my req for me and other user vacation
+//        this.UpdateRequest(status,reqID);
+//        List<Request> myRequests = loged.getRequestsForMe();
+//
+//        //get request
+//        String[] requestFields = new String[TblFields.enumDict.get("requestTblFields").size()];
+//        requestFields[0] = reqID;
+//        String request = sqlModel.selectFromTable(Tables.TBL_REQUESTS, requestFields);
+//        Request myRequest = new Request(request);
+//
+//        //get other user
+//        String[] otherUserFields = new String[TblFields.enumDict.get("userFields").size()];
+//        otherUserFields[0] = myRequest.getR_buyerID() ;
+//        String user = sqlModel.selectFromTable(Tables.TBL_USERS, otherUserFields);
+//        String[] valid = user.split("\n");
+//        User otherUser = new User(valid[0]);
+//
+//        //update other user req and my vacation
+//        List<Request> myRequests = otherUser.getRequestsForMe();
+//        for (Request req: myRequests) {
+//            if(req.getR_ID().equals(reqID)){
+//                req.setR_answer(status);
+//                if(status.equals("rejected")) {
+//                    Vacation vac = req.getVacation();
+//                    vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
+//                    sqlModel.updateRecord(vac);
+//                }
+//                if(status.equals("confirmed")) {
+//                    Vacation vac = req.getVacation();
+//                    vac.set_vacationStatus(Vacation.VacationStatus.SOLD);
+//                    sqlModel.updateRecord(vac);
+//                }
+//                sqlModel.updateRecord(req);
+//            }
+//        }
+//
+//        //update trade(delete)
+//        if( !status.equals("waiting_for_payment")){
+//            String[] data = {otherUser.getId(), loged.getId(), myRequest.getVacation().get_vacationID(), askedVacId};
+//            sqlModel.deleteRecordFromTable("tbl_trades", TblFields.enumDict.get("tradeFields"), );
+//        }
     }
 
+    public void CreateSwitchVacation(String askedVacId, String MyVacId){
 
+        String[] fields = new String[TblFields.enumDict.get("vacationFields").size()];
+        fields[0] = askedVacId;
+       // String[] askedVac = sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n");
+        Vacation askedVac = new Vacation( sqlModel.selectFromTable(Tables.TBL_VACATIONS, fields).split("\n")[0]);
+
+        //create requests
+        this.CreateRequestAndUpdateVacation(askedVac.get_ownerID(),askedVac.get_vacationID());//updates asked vac
+
+        Request newRequest = new Request(askedVac.get_ownerID(), loged.getUsername(), askedVac.get_vacationID());
+        sqlModel.insertRecordToTable(Tables.TBL_REQUESTS.name().toLowerCase(),newRequest);
+        //update vacation
+        newRequest.getVacation().set_vacationStatus(Vacation.VacationStatus.IN_PROGRESS);
+        sqlModel.updateRecord(newRequest.getVacation()); //updates my vac
+
+        //put new trade in trades
+
+        String fieldsNames = "tbl_trades("
+                + TblFields.enumDict.get("tradeFields").get(0) + ", "
+                + TblFields.enumDict.get("tradeFields").get(1) + ", "
+                + TblFields.enumDict.get("tradeFields").get(2) + ", "
+                + TblFields.enumDict.get("tradeFields").get(3) + ", "
+                + TblFields.enumDict.get("tradeFields").get(4)
+                + ") VALUES(?,?,?,?,?)";
+        String[] data = {MyVacId+askedVacId ,loged.getId(), askedVac.get_ownerID(), MyVacId, askedVacId};
+        sqlModel.insertRecordToTable(fieldsNames,data);
+    }
 }

@@ -113,9 +113,9 @@ public class openWindowsController {
         //ownerID.setCellValueFactory(new PropertyValueFactory<Vacation, String>("_ownerID"));
         SearchController listOfVactions = new SearchController();
         ObservableList<Vacation> data=null;
-        if(userModeOn)
-            data = logedInController.getAllAvailableVacations();
-        else
+//        if(userModeOn)
+//            data = logedInController.getAllAvailableVacations();
+//        else
             data = listOfVactions.getAllAvailableVacations();
         vacTable.setItems(data);
 
@@ -344,7 +344,7 @@ public class openWindowsController {
                     Parent root = fxmlLoader.load(getClass().getResource("/SwitchWindow.fxml").openStream());
                     SwitchWindowController creatView = fxmlLoader.getController();
                     creatView.setController(this.logedInController);
-                    creatView.updateTable(VactionToSwitchDetalis);
+                    creatView.SwitchVacation(VactionToSwitchDetalis,item.get_vacationID());
                     Scene scene = new Scene(root, 820, 450);
                     stage.setScene(scene);
                     stage.initModality(Modality.APPLICATION_MODAL); //Lock the window until it closes

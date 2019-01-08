@@ -30,7 +30,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Button layoutX="360.0" layoutY="361.0" mnemonicParsing="false" text="Send Switch Request!" />
+      <Button fx:id="switchButton" layoutX="360.0" layoutY="361.0" mnemonicParsing="false" text="Send Switch Request!" onAction="#SetSwitchRequest" />
       <Label fx:id="pickedVac" layoutX="242.0" layoutY="63.0" text="&lt;Detalis&gt;" />
       <Label layoutX="129.0" layoutY="63.0" text="Trade for vacation:" />
     </children>

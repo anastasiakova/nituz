@@ -15,15 +15,15 @@ public class Request implements ISQLable {
     private String r_seller;
     private String r_answer;
 
-    private Payments payment;
+    //private Payments payment;
     //private String vacationID;
     private Vacation vacation;
     private String primaryKeyName = "r_ID";
     private String tableName = "tbl_requests";
 
-    public void setPayment(Payments payment) {
-        this.payment = payment;
-    }
+//    public void setPayment(Payments payment) {
+//        this.payment = payment;
+//    }
 
     public static int getMyMaxCounter() {
         Path currentPath = Paths.get("");
@@ -96,7 +96,7 @@ public class Request implements ISQLable {
         this.r_seller = r_seller;
         this.r_answer = ansStatus.pending.toString();
         setVacation(vacationID);
-        payment = null;
+       // payment = null;
     }
 
     public Request(String[] searchedRequest) {
@@ -105,31 +105,31 @@ public class Request implements ISQLable {
         this.r_seller = searchedRequest[2];
         this.r_answer = searchedRequest[4];
         setVacation(searchedRequest[3]);
-        if(r_answer == ansStatus.confirmed.name()){
-            trySetPayment(r_ID,r_buyerID,r_seller);
-        }
-        else{
-            payment = null;
-        }
+//        if(r_answer == ansStatus.confirmed.name()){
+//          //  trySetPayment(r_ID,r_buyerID,r_seller);
+//        }
+//        else{
+//            payment = null;
+//        }
     }
 
     public Request(String request){
        this(request.split(", "));
     }
 
-    public void upateAnswer(boolean isConfirmed) {
-        if (isConfirmed) {
-            this.r_answer = ansStatus.confirmed.toString();
-            trySetPayment(this.r_ID, this.r_buyerID, this.r_seller);
-        }
-        else {
-            this.r_answer = ansStatus.rejected.toString();
-        }
-    }
+//    public void upateAnswer(boolean isConfirmed) {
+//        if (isConfirmed) {
+//            this.r_answer = ansStatus.confirmed.toString();
+//           // trySetPayment(this.r_ID, this.r_buyerID, this.r_seller);
+//        }
+//        else {
+//            this.r_answer = ansStatus.rejected.toString();
+//        }
+//    }
 
-    public Payments getPayment() {
-        return payment;
-    }
+//    public Payments getPayment() {
+//        return payment;
+//    }
 
     public Vacation getVacation() {
         return vacation;
@@ -219,19 +219,19 @@ public class Request implements ISQLable {
         this.vacation = new Vacation(allRequests[0]);
     }
 
-    private void trySetPayment(String r_id, String r_buyerID, String r_seller) {
-        String[] fields = new String[TblFields.enumDict.get("paymentsTblFields").size()];
-        fields[1] = r_id;
-        fields[2] = r_buyerID;
-        fields[3] = r_seller;
-        String allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_PAYMENTS, fields);
-        if(allRequests != "") {
-            this.payment = new Payments(allRequests.split("\n")[0]);
-        }
-        else {
-            this.payment = null;
-        }
-    }
+//    private void trySetPayment(String r_id, String r_buyerID, String r_seller) {
+//        String[] fields = new String[TblFields.enumDict.get("paymentsTblFields").size()];
+//        fields[1] = r_id;
+//        fields[2] = r_buyerID;
+//        fields[3] = r_seller;
+//        String allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_PAYMENTS, fields);
+//        if(allRequests != "") {
+//            this.payment = new Payments(allRequests.split("\n")[0]);
+//        }
+//        else {
+//            this.payment = null;
+//        }
+//    }
 
     @Override
     public boolean equals(Object o) {

@@ -3,6 +3,7 @@ package Model;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
+import java.util.List;
 
 public class SQLModel {
 
@@ -27,8 +28,23 @@ public class SQLModel {
         createUsersTable();
         createRequestsTable();
         createVactionsTable();
-        createPaymentsTable();
-    }
+        //createPaymentsTable();
+        //create trade table
+        String trade =   "CREATE TABLE IF NOT EXISTS tbl_trades (\n" +
+                TblFields.enumDict.get("tradeFields").get(0) + " text NOT NULL PRIMARY KEY,\n" +
+                TblFields.enumDict.get("tradeFields").get(1) + " text NOT NULL,\n" +
+                TblFields.enumDict.get("tradeFields").get(2) + " text NOT NULL,\n" +
+                TblFields.enumDict.get("tradeFields").get(3) + " text NOT NULL,\n" +
+                TblFields.enumDict.get("tradeFields").get(4) + " text NOT NULL\n" +
+                ");";
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt = conn.createStatement()) {
+             stmt.execute(trade);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        }
 
     public static SQLModel GetInstance() {
         if(_singaleDB != null){
@@ -94,26 +110,48 @@ public class SQLModel {
         }
     }
 
+    public void insertRecordToTable(String fieldsForConection, String[] fieldsData){
+        String sql = "INSERT INTO " + fieldsForConection;
+
+        try (Connection conn = DriverManager.getConnection(_path);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            try {
+                pstmt.setString(1, fieldsData[0]);
+                pstmt.setString(2,  fieldsData[1]);
+                pstmt.setString(3,  fieldsData[2]);
+                pstmt.setString(4,  fieldsData[3]);
+                pstmt.setString(5,  fieldsData[4]);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public String selectFromTable(Tables table, String[] fields){
         boolean shouldGetAll = false;
         return selectFromTable(table, fields, shouldGetAll);
     }
 
-    public String selecetAllFromTable(Tables table){
-        boolean shouldGetAll = true;
-        switch (table) {
-            case TBL_USERS:
-                return selectFromTbl("TBL_USERS", null, "userFields", shouldGetAll);
-            case TBL_REQUESTS:
-                return selectFromTbl("TBL_REQUESTS", null, "requestTblFields", shouldGetAll);
-            case TBL_VACATIONS:
-                return selectFromTbl("TBL_VACATIONS", null, "vacationFields", shouldGetAll);
-            case TBL_PAYMENTS:
-                return selectFromTbl("TBL_PAYMENTS", null, "paymentsTblFields", shouldGetAll);
-            default:
-                return "";
-        }
-    }
+//    public String selecetAllFromTable(Tables table){
+//        boolean shouldGetAll = true;
+//        switch (table) {
+//            case TBL_USERS:
+//                return selectFromTbl("TBL_USERS", null, "userFields", shouldGetAll);
+//            case TBL_REQUESTS:
+//                return selectFromTbl("TBL_REQUESTS", null, "requestTblFields", shouldGetAll);
+//            case TBL_VACATIONS:
+//                return selectFromTbl("TBL_VACATIONS", null, "vacationFields", shouldGetAll);
+//            case TBL_TRADES:
+//                return selectFromTbl("TBL_TRADES", null, "tradeFields", shouldGetAll);
+////            case TBL_PAYMENTS:
+////                return selectFromTbl("TBL_PAYMENTS", null, "paymentsTblFields", shouldGetAll);
+//            default:
+//                return "";
+//        }
+//    }
 
     public String selectFromTable(Tables table, String[] fields, boolean shouldGetAll){
         switch (table) {
@@ -123,8 +161,10 @@ public class SQLModel {
                 return selectFromTbl("TBL_REQUESTS", fields, "requestTblFields", shouldGetAll);
             case TBL_VACATIONS:
                 return selectFromTbl("TBL_VACATIONS", fields, "vacationFields", shouldGetAll);
-            case TBL_PAYMENTS:
-                return selectFromTbl("TBL_PAYMENTS", fields, "paymentsTblFields", shouldGetAll);
+            case TBL_TRADES:
+                return selectFromTbl("TBL_TRADES", fields, "tradeFields", shouldGetAll);
+//            case TBL_PAYMENTS:
+//                return selectFromTbl("TBL_PAYMENTS", fields, "paymentsTblFields", shouldGetAll);
             default:
                 return "";
         }
@@ -170,6 +210,28 @@ public class SQLModel {
         String sql = "DELETE FROM " + isqLable.getTableName() + "\n";
         sql += "WHERE " + isqLable.getPrimaryKeyName() + " = '" + isqLable.getPrimaryKey() /*getPrimaryKey*/ + "';\n";
 
+        try (Connection conn = DriverManager.getConnection(_path);
+             Statement stmt  = conn.createStatement()){
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteRecordFromTable(String tblName, List<String> tblFields , String[] fieldsData ){
+        String sql = "DELETE FROM " + tblName + "\n WHERE";
+        //sql += "WHERE " + isqLable.getPrimaryKeyName() + " = '" + isqLable.getPrimaryKey() /*getPrimaryKey*/ + "';\n";
+        sql += "WHERE ";
+        boolean notFirst = false;
+        for (int i = 0; i < TblFields.enumDict.get(tblFields).size(); i++) {
+            if (fieldsData[i] != "" && fieldsData[i] != null) {
+                if (notFirst) {
+                    sql += " AND ";
+                }
+                notFirst = true;
+                sql += TblFields.enumDict.get(tblFields).get(i) + "='" + fieldsData[i] + "'";
+            }
+        }
         try (Connection conn = DriverManager.getConnection(_path);
              Statement stmt  = conn.createStatement()){
             stmt.executeUpdate(sql);
