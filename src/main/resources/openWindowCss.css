@@ -1,5 +1,6 @@
 .root {
-    -fx-background-image:url("/backgroundDefault1.jpg");
+    -fx-background-image:url("/backgroundDefault3.jpg");
+    -fx-background-size: cover;
 }
 
 .button {
