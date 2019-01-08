@@ -17,9 +17,6 @@ public class SQLModel {
         try (Connection conn = DriverManager.getConnection(this._path)) {
             if (conn != null) {
                 DatabaseMetaData meta = conn.getMetaData();
-                // for check
-//                System.out.println("The driver name is " + meta.getDriverName());
-//                System.out.println("A new database has been created.");
             }
 
         } catch (SQLException e) {
@@ -62,7 +59,6 @@ public class SQLModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-//        System.out.println("Succesfully added tbl_users!");
     }
 
     private void createRequestsTable() {
@@ -73,7 +69,6 @@ public class SQLModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-//        System.out.println("Succesfully added tbl_requests!");
     }
 
     private void createVactionsTable() {
@@ -84,19 +79,18 @@ public class SQLModel {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-//        System.out.println("Succesfully added tbl_vacations!");
     }
 
-    private void createPaymentsTable() {
-        try (Connection conn = DriverManager.getConnection(_path);
-             Statement stmt = conn.createStatement()) {
-            // create new Users table
-            stmt.execute(Payments.createPaymentsTableSQL());
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        //System.out.println("Succesfully added tbl_payments!");
-    }
+//    private void createPaymentsTable() {
+//        try (Connection conn = DriverManager.getConnection(_path);
+//             Statement stmt = conn.createStatement()) {
+//            // create new Users table
+//            stmt.execute(Payments.createPaymentsTableSQL());
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        //System.out.println("Succesfully added tbl_payments!");
+//    }
 
     public void insertRecordToTable(String table, ISQLable isqLable){
         String sql = "INSERT INTO " + isqLable.getTableFields();
@@ -135,23 +129,6 @@ public class SQLModel {
         return selectFromTable(table, fields, shouldGetAll);
     }
 
-//    public String selecetAllFromTable(Tables table){
-//        boolean shouldGetAll = true;
-//        switch (table) {
-//            case TBL_USERS:
-//                return selectFromTbl("TBL_USERS", null, "userFields", shouldGetAll);
-//            case TBL_REQUESTS:
-//                return selectFromTbl("TBL_REQUESTS", null, "requestTblFields", shouldGetAll);
-//            case TBL_VACATIONS:
-//                return selectFromTbl("TBL_VACATIONS", null, "vacationFields", shouldGetAll);
-//            case TBL_TRADES:
-//                return selectFromTbl("TBL_TRADES", null, "tradeFields", shouldGetAll);
-////            case TBL_PAYMENTS:
-////                return selectFromTbl("TBL_PAYMENTS", null, "paymentsTblFields", shouldGetAll);
-//            default:
-//                return "";
-//        }
-//    }
 
     public String selectFromTable(Tables table, String[] fields, boolean shouldGetAll){
         switch (table) {
@@ -187,7 +164,6 @@ public class SQLModel {
             }
         }
         sql += ";";
-        //System.out.println(sql);
         String res = "";
         try (Connection conn = DriverManager.getConnection(_path);
              Statement stmt  = conn.createStatement();

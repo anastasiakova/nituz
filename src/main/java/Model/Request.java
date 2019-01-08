@@ -1,13 +1,10 @@
 package Model;
 
-import javafx.collections.transformation.SortedList;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.*;
 
-// we need to check for equal request- the same buyer, seller and vecID !!!!
 public class Request implements ISQLable {
     private static int counter = getMyMaxCounter();
     private String r_ID;
@@ -52,7 +49,7 @@ public class Request implements ISQLable {
     private enum ansStatus {
         confirmed,
         pending,
-        waiting_for_payment,
+        set_meeting,
         rejected
     }
 
@@ -96,7 +93,7 @@ public class Request implements ISQLable {
         this.r_seller = r_seller;
         this.r_answer = ansStatus.pending.toString();
         setVacation(vacationID);
-       // payment = null;
+
     }
 
     public Request(String[] searchedRequest) {
@@ -105,31 +102,11 @@ public class Request implements ISQLable {
         this.r_seller = searchedRequest[2];
         this.r_answer = searchedRequest[4];
         setVacation(searchedRequest[3]);
-//        if(r_answer == ansStatus.confirmed.name()){
-//          //  trySetPayment(r_ID,r_buyerID,r_seller);
-//        }
-//        else{
-//            payment = null;
-//        }
     }
 
     public Request(String request){
        this(request.split(", "));
     }
-
-//    public void upateAnswer(boolean isConfirmed) {
-//        if (isConfirmed) {
-//            this.r_answer = ansStatus.confirmed.toString();
-//           // trySetPayment(this.r_ID, this.r_buyerID, this.r_seller);
-//        }
-//        else {
-//            this.r_answer = ansStatus.rejected.toString();
-//        }
-//    }
-
-//    public Payments getPayment() {
-//        return payment;
-//    }
 
     public Vacation getVacation() {
         return vacation;

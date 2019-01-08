@@ -127,7 +127,6 @@ public class openWindowsController {
         //validate user name & password
         boolean loginSuccessful = false;
         if (userName != "" && password != "") {
-            //System.out.println(userText.getText());
             //controller search
             this.logedInController = new LogedInController();
 //            loginSuccessful = searchController.isLoginValid(userText.getText(), passText.getText());
@@ -220,10 +219,10 @@ public class openWindowsController {
         this.passLabel.setVisible(true);
         this.logOutButton.setVisible(false);
         this.welcomeLabel.setVisible(false);
-        //if(vacTable.getItems().size() == 0) {
+
             this.buyThisVacaionButton.setDisable(true);
             this.switchThisVacaionButton.setDisable(true);
-        //}
+
         this.addVactionButton.setVisible(false);
         this.allMyRequestButton.setVisible(false);
         this.updateDetalisButton.setVisible(false);
@@ -233,15 +232,15 @@ public class openWindowsController {
         this.t4.setVisible(true);
         this.logedInController.deleteUser();
         this.userModeOn=false;
-//        loginButtonsMaker();
+
         initialize();
     }
 
-    public void unVisibleButtons(ActionEvent event){
-        if(userModeOn){
-            createUserButton.setVisible(false);
-        }
-    }
+//    public void unVisibleButtons(ActionEvent event){
+//        if(userModeOn){
+//            createUserButton.setVisible(false);
+//        }
+//    }
 
     public void createUserWindow(ActionEvent actionEvent) {
         try {

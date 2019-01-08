@@ -215,7 +215,7 @@ public class LogedInController {
         //update other user req and my vacation
         List<Request> myRequests = otherUser.getRequestsForMe();
         for (Request req: myRequests) {
-            if(req.getVacation().get_vacationID().equals(splittedTrade[3])){//otherUserVacation.get_vacationID()
+            if(req.getVacation().get_vacationID().equals(splittedTrade[3])){
                 if(status.equals("rejected")) {
                     Vacation vac = req.getVacation();
                     vac.set_vacationStatus(Vacation.VacationStatus.FOR_SALE);
@@ -234,7 +234,7 @@ public class LogedInController {
         }
 
         //update trade(delete)
-        if( !status.equals("waiting_for_payment")){
+        if( !status.equals("set_meeting")){
             String[] data = {"", otherUser.getUsername(), loged.getUsername(),splittedTrade[3] , myRequest.getVacation().get_vacationID()};
             sqlModel.deleteRecordFromTable("tbl_trades", TblFields.enumDict.get("tradeFields"),data );
             String[] newLogedIn = {loged.getUsername(),loged.getPwd(),loged.getBirthday(),loged.getPrivateName(),loged.getLastName(),loged.getCity(),loged.getId()};

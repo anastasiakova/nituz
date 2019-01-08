@@ -1,6 +1,5 @@
 package Model;
 
-import javafx.beans.property.SimpleStringProperty;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

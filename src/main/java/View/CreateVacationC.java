@@ -43,9 +43,7 @@ public class CreateVacationC implements Initializable {
     public TextField destination;
     public TextField company;
     public TextField ticketNum;
-    Date start = null, end = null;
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy-HH:mm");
-    Calendar calendar = Calendar.getInstance();
 
     public CreateVacationC() {}
 
@@ -125,9 +123,6 @@ public class CreateVacationC implements Initializable {
             String sleeping = sleepCombo.getValue();
             logedInController.CreateVacation(startString, endString, destination.getText(), company.getText(), ticketNumber,
                     ticketType, isBaggage, isRoundTrip, vacationType, sleeping);
-            // ########## vac constructor - need to move to the big controller ##########
-//            Vacation newVac = new Vacation(start, end, destination.getText(), company.getText(), ticketNumber, ticketType, isBaggage,
-//                    isRoundTrip, vacationType, sleeping, ownerID);
 
             Stage stage = (Stage) addButton.getScene().getWindow();
             stage.close();

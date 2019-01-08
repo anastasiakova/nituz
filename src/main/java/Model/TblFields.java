@@ -9,7 +9,7 @@ public class TblFields {
     public static void init() {
         List<String> enumList = new ArrayList<String>();
         enumList = Arrays.asList("username", "pwd", "birthday", "privatename",
-                "lastname","city","id");
+                "lastname", "city", "id");
         enumDict.put("userFields", enumList);
         enumList = Arrays.asList("r_id", "r_buyerid", "r_sellerid", "vacationid",
                 "r_answer");
@@ -23,45 +23,4 @@ public class TblFields {
 //        enumList = Arrays.asList("payment_id", "request_id", "timestamp", "status");
 //        enumDict.put("paymentsTblFields", enumList);
     }
-
-//    static enum userFields {
-//        USERNAME,
-//        PWD,
-//        BIRTHDAY,
-//        PRIVATENAME,
-//        LASTNAME,
-//        CITY,
-//    }
-//
-//    static enum requestTblFields {
-//        r_ID,
-//        r_buyerID,
-//        r_sellerID,
-//        r_answer,
-//        vacationID,
-//    }
-//
-//    static enum vacationFields {
-//        VACATION_ID,
-//        START_DATE,
-//        END_DATE,
-//        DESTINATION,
-//        AVIATION_COMPANY,
-//        NUM_OF_TICKETS,
-//        TICKET_TYPE,
-//        BAGGAGE,
-//        ROUND_TRIP,
-//        VACATION_TYPE,
-//        VACATION_STATUS,
-//        SLEEPING_ARRANGEMENTS
-//    }
-//
-//    static enum paymentsTblFields {
-//        PAYMENT_ID,
-//        REQUEST_ID,
-//        TIMESTAMP,
-//        STATUS
-//    }
-
 }
-

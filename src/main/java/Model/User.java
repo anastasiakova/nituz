@@ -1,9 +1,5 @@
 package Model;
 
-import View.MyRequests;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -11,7 +7,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -118,17 +113,10 @@ public class User implements ISQLable {
         return pwd;
     }
 
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
 
     public String getBirthday() {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(birthday);
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
     }
 
     public String getPrivateName() {
@@ -143,24 +131,14 @@ public class User implements ISQLable {
         return requestsForMe;
     }
 
-    public void setPrivateName(String privateName) {
-        this.privateName = privateName;
-    }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getId() {
@@ -250,12 +228,6 @@ public class User implements ISQLable {
         myRequests.add(newRequest);
     }
 
-    public void UpdateRequstsForMe(Request newRequest) {
-        if (requestsForMe.contains(newRequest)) {
-            requestsForMe.remove(newRequest);
-        }
-        requestsForMe.add(newRequest);
-    }
 
     private void setMyRequests(String username) {
         myRequests = new ArrayList<>();
@@ -271,7 +243,6 @@ public class User implements ISQLable {
         requestsForMe = new ArrayList<>();
         String[] fields = new String[TblFields.enumDict.get("requestTblFields").size()];
         fields[2] = username;
-        //fields[4] = "pending";
         String[] allRequests = SQLModel.GetInstance().selectFromTable(Tables.TBL_REQUESTS, fields).split("\n");
         for (int i = 0; i < allRequests.length & allRequests[0] != ""; i++) {
             requestsForMe.add(new Request(allRequests[i]));
