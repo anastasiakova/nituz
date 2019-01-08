@@ -219,17 +219,16 @@ public class SQLModel {
     }
 
     public void deleteRecordFromTable(String tblName, List<String> tblFields , String[] fieldsData ){
-        String sql = "DELETE FROM " + tblName + "\n WHERE";
-        //sql += "WHERE " + isqLable.getPrimaryKeyName() + " = '" + isqLable.getPrimaryKey() /*getPrimaryKey*/ + "';\n";
-        sql += "WHERE ";
+        String sql = "DELETE FROM " + tblName + "\n WHERE ";
+
         boolean notFirst = false;
-        for (int i = 0; i < TblFields.enumDict.get(tblFields).size(); i++) {
+        for (int i = 0; i < tblFields.size(); i++) {
             if (fieldsData[i] != "" && fieldsData[i] != null) {
                 if (notFirst) {
                     sql += " AND ";
                 }
                 notFirst = true;
-                sql += TblFields.enumDict.get(tblFields).get(i) + "='" + fieldsData[i] + "'";
+                sql += tblFields.get(i) + "='" + fieldsData[i] + "'";
             }
         }
         try (Connection conn = DriverManager.getConnection(_path);
