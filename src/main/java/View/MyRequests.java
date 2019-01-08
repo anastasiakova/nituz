@@ -202,7 +202,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                         TableColumn col = pos.getTableColumn();
                         // this gives the value in the selected cell:
                         //String data = (String) col.getCellObservableValue(item).getValue();
-                        logedInController.UpdateRequest("waiting_for_payment", item.getReqID());
+                        logedInController.UpdateRequest("set_meeting", item.getReqID());
                         init();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -215,10 +215,10 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                         int row = pos.getRow();
                         // Item here is the table view type:
                         VactaionAndRequest item = tradeReqForMeTable.getItems().get(row);
-                        TableColumn col = pos.getTableColumn();
+                       // TableColumn col = pos.getTableColumn();
                         // this gives the value in the selected cell:
                         //String data = (String) col.getCellObservableValue(item).getValue();
-                        logedInController.UpdateSwitchVacation("waiting_for_payment", item.getReqID());
+                        logedInController.UpdateSwitchVacation("set_meeting", item.getReqID());
                         init();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -238,7 +238,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
 // Item here is the table view type:
 
                     VactaionAndRequest item = reqForMeTable.getItems().get(row);
-                    if (!item.getAnswer().equals("waiting_for_payment")) {
+                    if (!item.getAnswer().equals("set_meeting")) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou must approve this request first!");
                         alert.show();
@@ -261,7 +261,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
 // Item here is the table view type:
 
                     VactaionAndRequest item = tradeReqForMeTable.getItems().get(row);
-                    if (!item.getAnswer().equals("waiting_for_payment")) {
+                    if (!item.getAnswer().equals("set_meeting")) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou must approve this request first!");
                         alert.show();
