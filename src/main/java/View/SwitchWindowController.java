@@ -83,16 +83,15 @@ public class SwitchWindowController {
             Vacation item = myVacTable.getItems().get(row);
             this.logedInController.CreateSwitchVacation(this.vacID, item.get_vacationID());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\n A trade request has sent! ");
+            alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + ",\nA trade request has been sent! ");
             alert.show();
-            TimeUnit.SECONDS.sleep(3);
             Stage stage = (Stage) switchButton.getScene().getWindow();
             stage.close();
 
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText( "Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "You need to peek vacation of your own first");
+            alert.setContentText( "Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + ",\nYou need to peek vacation of your own first");
             alert.show();
         }
     }
