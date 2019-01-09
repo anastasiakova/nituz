@@ -170,7 +170,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                     init();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
+                    alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
                 }
             case "rejectSwitch":
                 if (!tradeReqForMeTable.getSelectionModel().getSelectedCells().isEmpty()) {
@@ -185,7 +185,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                     init();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
+                    alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
                 }
         }
     }
@@ -206,7 +206,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                         init();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
+                        alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
                         alert.show();
                     }
                 case "approveSwitch":
@@ -222,7 +222,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                         init();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
+                        alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
                         alert.show();
                     }
             }
@@ -240,7 +240,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                     VactaionAndRequest item = reqForMeTable.getItems().get(row);
                     if (!item.getAnswer().equals("set_meeting")) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou must approve this request first!");
+                        alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou must approve this request first!");
                         alert.show();
                     } else {
                         TableColumn col = pos.getTableColumn();
@@ -251,7 +251,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                     }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
+                    alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
                     alert.show();
                 }
             case "markAsPaidSwitch":
@@ -263,7 +263,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                     VactaionAndRequest item = tradeReqForMeTable.getItems().get(row);
                     if (!item.getAnswer().equals("set_meeting")) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou must approve this request first!");
+                        alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou must approve this request first!");
                         alert.show();
                     } else {
                         TableColumn col = pos.getTableColumn();
@@ -274,7 +274,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                     }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
+                    alert.setContentText("Hi " + logedInController.getUserNameFromUserAsStripAndCleanString() + "\nYou need to peek vacation first");
                     alert.show();
                 }
         }
