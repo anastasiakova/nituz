@@ -35,8 +35,8 @@
                                  <children>
                                     <AnchorPane prefHeight="211.0" prefWidth="124.0">
                                        <children>
-                                          <Button fx:id="loginButton" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#logINButtonAction" text="log in" />
-                                          <Button fx:id="createUserButton" layoutX="75.0" layoutY="2.0" mnemonicParsing="false" onAction="#createUserWindow" text="sign up" />
+                                          <Button fx:id="loginButton" layoutX="1.0" layoutY="2.0" mnemonicParsing="false" onAction="#logINButtonAction" text="Log In" />
+                                          <Button fx:id="createUserButton" layoutX="75.0" layoutY="2.0" mnemonicParsing="false" onAction="#createUserWindow" text="Sign Up" />
                                           <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="2.0" layoutY="43.0" prefHeight="26.0" prefWidth="147.0" text="welcome!">
                                              <font>
                                                 <Font name="System Bold" size="19.0" />
@@ -54,7 +54,7 @@
                         </StackPane>
                      </children>
                   </VBox>
-                  <Label layoutX="14.0" layoutY="168.0" text="Avaliable vacations:">
+                  <Label layoutX="14.0" layoutY="168.0" text="Available vacations:">
                      <font>
                         <Font name="System Bold Italic" size="29.0" />
                      </font>
@@ -102,22 +102,22 @@
                         <Font name="Calibri Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Label fx:id="t1" layoutX="820.0" layoutY="47.0" text="To buy selected">
+                  <Label fx:id="t1" layoutX="820.0" layoutY="90.0" text="To buy selected">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="t2" layoutX="847.0" layoutY="73.0" text="vacation">
+                  <Label fx:id="t2" layoutX="847.0" layoutY="116.0" text="vacation">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="t3" layoutX="844.0" layoutY="99.0" text="you must">
+                  <Label fx:id="t3" layoutX="844.0" layoutY="142.0" text="you must">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="t4" layoutX="857.0" layoutY="122.0" text="log in">
+                  <Label fx:id="t4" layoutX="857.0" layoutY="165.0" text="log in">
                      <font>
                         <Font size="17.0" />
                      </font>
