@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ScrollPane?>
 <AnchorPane prefHeight="620.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.openWindowsController">
    <children>
       <VBox prefHeight="620.0" prefWidth="950.0">
@@ -63,6 +64,7 @@
             <AnchorPane prefHeight="411.0" prefWidth="953.0">
                <children>
                   <TableView fx:id="vacTable" layoutX="10.0" prefHeight="244.0" prefWidth="799.0">
+                     <ScrollPane fx:id="yourScrollPane" hbarPolicy="ALWAYS"></ScrollPane>
                     <columns>
                       <TableColumn fx:id="startDate" prefWidth="75.0" text="Start Date " />
                       <TableColumn fx:id="endDate" prefWidth="75.0" text="End Date " />
@@ -76,7 +78,9 @@
                         
                         <TableColumn fx:id="vacationSleepingArrangements" prefWidth="38.0" text="Vacation Sleeping Arrangements " />
 
+
                     </columns>
+
                   </TableView>
                   <Button fx:id="allMyRequestButton" layoutX="681.0" layoutY="267.0" mnemonicParsing="false" onAction="#myRequestWindow" prefHeight="37.0" prefWidth="169.0" text="All my requests" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
