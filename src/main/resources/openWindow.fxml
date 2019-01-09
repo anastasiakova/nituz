@@ -17,7 +17,7 @@
          <children>
             <AnchorPane prefHeight="212.0" prefWidth="324.0">
                <children>
-                  <Label fx:id="vaca4u" layoutX="14.0" layoutY="14.0" text="Every Vacation4U">
+                  <Label fx:id="vaca4u" layoutX="14.0" layoutY="14.0" text="EveryVaction4U">
                      <font>
                         <Font name="Calibri Bold" size="76.0" />
                      </font>
@@ -64,17 +64,17 @@
                <children>
                   <TableView fx:id="vacTable" layoutX="10.0" prefHeight="244.0" prefWidth="799.0">
                     <columns>
-                      <TableColumn fx:id="startDate" prefWidth="75.0" text="start Date " />
-                      <TableColumn fx:id="endDate" prefWidth="75.0" text="end Date " />
-                        <TableColumn fx:id="destination" prefWidth="75.0" text="destination " />
-                        <TableColumn fx:id="aviationCompany" prefWidth="112.0" text="aviationCompany " />
-                        <TableColumn fx:id="numOfTickets" prefWidth="96.0" text="numOfTickets " />
-                        <TableColumn fx:id="ticketType" prefWidth="72.0" text="ticketType " />
-                        <TableColumn fx:id="isBaggageIncluded" prefWidth="127.0" text="isBaggageIncluded " />
-                        <TableColumn fx:id="isRoundTrip" minWidth="9.0" prefWidth="84.0" text="isRoundTrip " />
-                        <TableColumn fx:id="vacationType" prefWidth="28.0" text="vacationType " />
+                      <TableColumn fx:id="startDate" prefWidth="75.0" text="Start Date " />
+                      <TableColumn fx:id="endDate" prefWidth="75.0" text="End Date " />
+                        <TableColumn fx:id="destination" prefWidth="75.0" text="Destination " />
+                        <TableColumn fx:id="aviationCompany" prefWidth="112.0" text="Aviation Company " />
+                        <TableColumn fx:id="numOfTickets" prefWidth="96.0" text="# Tickets" />
+                        <TableColumn fx:id="ticketType" prefWidth="72.0" text="Ticket Type " />
+                        <TableColumn fx:id="isBaggageIncluded" prefWidth="127.0" text="Is Baggage Included " />
+                        <TableColumn fx:id="isRoundTrip" minWidth="9.0" prefWidth="84.0" text="Is Round Trip " />
+                        <TableColumn fx:id="vacationType" prefWidth="28.0" text="Vacation Type " />
                         
-                        <TableColumn fx:id="vacationSleepingArrangements" prefWidth="38.0" text="vacationSleepingArrangements " />
+                        <TableColumn fx:id="vacationSleepingArrangements" prefWidth="38.0" text="Vacation Sleeping Arrangements " />
 
                     </columns>
                   </TableView>
