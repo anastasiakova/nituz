@@ -78,12 +78,12 @@
 
                     </columns>
                   </TableView>
-                  <Button fx:id="allMyRequestButton" layoutX="661.0" layoutY="267.0" mnemonicParsing="false" onAction="#myRequestWindow" prefHeight="37.0" prefWidth="169.0" text="All my requests" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="allMyRequestButton" layoutX="681.0" layoutY="267.0" mnemonicParsing="false" onAction="#myRequestWindow" prefHeight="37.0" prefWidth="169.0" text="All my requests" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
                         <Font name="Calibri Bold" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="updateDetalisButton" layoutX="475.0" layoutY="268.0" mnemonicParsing="false" onAction="#updateWindow" prefHeight="37.0" prefWidth="156.0" text="Update detalis" textAlignment="JUSTIFY" textFill="#3f1f8a">
+                  <Button fx:id="updateDetalisButton" layoutX="475.0" layoutY="268.0" mnemonicParsing="false" onAction="#updateWindow" prefHeight="37.0" prefWidth="186.0" text="Update User details" textAlignment="JUSTIFY" textFill="#3f1f8a">
                      <font>
                         <Font name="Calibri Bold" size="20.0" />
                      </font>
