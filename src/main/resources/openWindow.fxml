@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -11,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ScrollPane?>
 <AnchorPane prefHeight="620.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.openWindowsController">
    <children>
       <VBox prefHeight="620.0" prefWidth="950.0">
@@ -64,19 +64,19 @@
             <AnchorPane prefHeight="411.0" prefWidth="953.0">
                <children>
                   <TableView fx:id="vacTable" layoutX="10.0" prefHeight="244.0" prefWidth="799.0">
-                     <ScrollPane fx:id="yourScrollPane" hbarPolicy="ALWAYS"></ScrollPane>
+                     <ScrollPane fx:id="yourScrollPane" hbarPolicy="ALWAYS" />
                     <columns>
-                      <TableColumn fx:id="startDate" prefWidth="75.0" text="Start Date " />
-                      <TableColumn fx:id="endDate" prefWidth="75.0" text="End Date " />
-                        <TableColumn fx:id="destination" prefWidth="75.0" text="Destination " />
-                        <TableColumn fx:id="aviationCompany" prefWidth="112.0" text="Aviation Company " />
-                        <TableColumn fx:id="numOfTickets" prefWidth="96.0" text="# Tickets" />
-                        <TableColumn fx:id="ticketType" prefWidth="72.0" text="Ticket Type " />
-                        <TableColumn fx:id="isBaggageIncluded" prefWidth="127.0" text="Is Baggage Included " />
-                        <TableColumn fx:id="isRoundTrip" minWidth="9.0" prefWidth="84.0" text="Is Round Trip " />
-                        <TableColumn fx:id="vacationType" prefWidth="28.0" text="Vacation Type " />
+                      <TableColumn fx:id="startDate" prefWidth="80" text="Start Date " />
+                      <TableColumn fx:id="endDate" prefWidth="80" text="End Date " />
+                        <TableColumn fx:id="destination" prefWidth="85" text="Destination " />
+                        <TableColumn fx:id="aviationCompany" prefWidth="120.0" text="Aviation Company " />
+                        <TableColumn fx:id="numOfTickets" prefWidth="63.0" text="# Tickets" />
+                        <TableColumn fx:id="ticketType" prefWidth="75.0" text="Ticket Type " />
+                        <TableColumn fx:id="isBaggageIncluded" prefWidth="130.0" text="Baggage Included " />
+                        <TableColumn fx:id="isRoundTrip" minWidth="9.0" prefWidth="80.0" text="Round Trip " />
+                        <TableColumn fx:id="vacationType" prefWidth="100.0" text="Vacation Type " />
                         
-                        <TableColumn fx:id="vacationSleepingArrangements" prefWidth="38.0" text="Vacation Sleeping Arrangements " />
+                        <TableColumn fx:id="vacationSleepingArrangements" prefWidth="201.0" text="Vacation Sleeping Arrangements " />
 
 
                     </columns>
