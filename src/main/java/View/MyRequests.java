@@ -246,6 +246,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
                         TableColumn col = pos.getTableColumn();
 // this gives the value in the selected cell:
                         //String data = (String) col.getCellObservableValue(item).getValue();
+
                         logedInController.UpdateRequest("confirmed", item.getReqID());
                         init();
                     }
