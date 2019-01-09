@@ -76,31 +76,31 @@
                         </Label>
                         <TableView fx:id="tradeReqTable" layoutX="1.0" layoutY="89.0" prefHeight="212.0" prefWidth="728.0">
                            <columns>
-                              <TableColumn fx:id="wantedVacDestination" prefWidth="116.0" text="destination " />
-                              <TableColumn fx:id="wantedVacstartDate" prefWidth="106.0" text="start date " />
-                              <TableColumn fx:id="wantedVacSallerUserName" prefWidth="130.0" text="saller username " />
-                              <TableColumn fx:id="wantedVacAnswer" minWidth="0.0" prefWidth="118.0" text="answer " />
-                              <TableColumn fx:id="wantedVacendDate" prefWidth="129.0" text="end date " />
+                              <TableColumn fx:id="wantedVacDestination" prefWidth="116.0" text="Destination " />
+                              <TableColumn fx:id="wantedVacstartDate" prefWidth="106.0" text="Start Date " />
+                              <TableColumn fx:id="wantedVacSallerUserName" prefWidth="130.0" text="Seller's Username " />
+                              <TableColumn fx:id="wantedVacAnswer" minWidth="0.0" prefWidth="118.0" text="Status" />
+                              <TableColumn fx:id="wantedVacendDate" prefWidth="129.0" text="End Date " />
                            </columns>
                         </TableView>
-                        <Button fx:id="markAsPaidSwitch" layoutX="138.0" layoutY="565.0" mnemonicParsing="false" onAction="#tryBuy" text="Confirmed Trade" />
+                        <Button fx:id="markAsPaidSwitch" layoutX="138.0" layoutY="565.0" mnemonicParsing="false" onAction="#tryBuy" text="Confirm Trade" />
                         <TableView fx:id="tradeReqForMeTable" layoutX="6.0" layoutY="328.0" prefHeight="231.0" prefWidth="717.0">
                            <columns>
-                              <TableColumn fx:id="myAskedVecStartDate" prefWidth="102.0" text="start date " />
-                              <TableColumn fx:id="myAskedVecEndDate" prefWidth="125.0" text="end date " />
-                              <TableColumn fx:id="initilizeUserName" prefWidth="119.0" text="initializer request username " />
-                              <TableColumn fx:id="myAskedVecDestination" prefWidth="113.0" text="destination " />
-                              <TableColumn fx:id="myAnswerToSwitch" minWidth="0.0" prefWidth="118.0" text="answer " />
+                              <TableColumn fx:id="myAskedVecStartDate" prefWidth="102.0" text="Start Date" />
+                              <TableColumn fx:id="myAskedVecEndDate" prefWidth="125.0" text="End Date" />
+                              <TableColumn fx:id="initilizeUserName" prefWidth="119.0" text="Initiator's Username" />
+                              <TableColumn fx:id="myAskedVecDestination" prefWidth="113.0" text="Destination" />
+                              <TableColumn fx:id="myAnswerToSwitch" minWidth="0.0" prefWidth="118.0" text="Status" />
                            </columns>
                         </TableView>
-                        <Label layoutX="8.0" layoutY="301.0" prefHeight="27.0" prefWidth="233.0" text="Swtich requests for my vacations">
+                        <Label layoutX="8.0" layoutY="301.0" prefHeight="27.0" prefWidth="233.0" text="Trade requests for my vacations">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
                         <Button fx:id="rejectSwitch" layoutX="8.0" layoutY="565.0" mnemonicParsing="false" onAction="#reject" text="Reject" />
                         <Button fx:id="approveSwitch" layoutX="64.0" layoutY="565.0" mnemonicParsing="false" onAction="#approve" text="Approve" />
-                        <Label layoutX="8.0" layoutY="64.0" prefHeight="36.0" prefWidth="607.0" text="Answers for my swtich requests">
+                        <Label layoutX="8.0" layoutY="64.0" prefHeight="36.0" prefWidth="607.0" text="Answers for my trade requests">
                            <font>
                               <Font size="14.0" />
                            </font>
