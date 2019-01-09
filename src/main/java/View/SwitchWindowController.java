@@ -83,7 +83,7 @@ public class SwitchWindowController {
             Vacation item = myVacTable.getItems().get(row);
             this.logedInController.CreateSwitchVacation(this.vacID, item.get_vacationID());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\n A switch request has sent! ");
+            alert.setContentText("Hi" + logedInController.getUserNameFromUserAsStripAndCleanString() + "\n A trade request has sent! ");
             alert.show();
             TimeUnit.SECONDS.sleep(3);
             Stage stage = (Stage) switchButton.getScene().getWindow();

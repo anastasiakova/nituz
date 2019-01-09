@@ -91,15 +91,15 @@ public class UpdateForm {
                     alert.show();
 
                 }*/
-        System.out.println(dd.getText());
-        System.out.println(mm.getText());
-        System.out.println(yyyy.getText());
-        //System.out.println(userText.getText());
-        System.out.println(passText.getText());
-        System.out.println(fNameText.getText());
-        System.out.println(lNameText.getText());
-        System.out.println(cityText.getText());
-        System.out.println(idNumber.getText());
+//        System.out.println(dd.getText());
+//        System.out.println(mm.getText());
+//        System.out.println(yyyy.getText());
+//        //System.out.println(userText.getText());
+//        System.out.println(passText.getText());
+//        System.out.println(fNameText.getText());
+//        System.out.println(lNameText.getText());
+//        System.out.println(cityText.getText());
+//        System.out.println(idNumber.getText());
         String bDay = dd.getText() + "/" + mm.getText() + "/" + yyyy.getText();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.YEAR, -18);

@@ -89,7 +89,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
 
         ObservableList<VactaionAndRequest> myRequests = logedInController.getMyRequests(false);  // UP!!!!
         reqTable.setItems(myRequests);
-        System.out.println(myRequests);
+        //System.out.println(myRequests);
         ObservableList<VactaionAndRequest> requestsForMe = logedInController.getToAnswerRequests(false); // DOWN!!!
         reqForMeTable.setItems(requestsForMe);
 
@@ -114,7 +114,7 @@ public javafx.scene.control.TableView<VactaionAndRequest> tradeReqTable;
 
         ObservableList<VactaionAndRequest> mySwitchRequests = logedInController.getMyRequests(true);  // UP!!!!
         tradeReqTable.setItems(mySwitchRequests);
-        System.out.println(myRequests);
+        //System.out.println(myRequests);
         ObservableList<VactaionAndRequest> switchRequestsForMe = logedInController.getToAnswerRequests(true); // DOWN!!!
         tradeReqForMeTable.setItems(switchRequestsForMe);
 

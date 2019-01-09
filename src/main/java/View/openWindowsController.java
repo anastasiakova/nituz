@@ -340,7 +340,7 @@ public class openWindowsController {
                     VactionToSwitchDetalis = "Owner ID: " + item.get_ownerID() + " | " + "Destination: " + item.get_destination() + " | " + "Start: " + item.get__startDate() + " | " +
                             "End: " + item.get_endDate();
                     Stage stage = new Stage();
-                    stage.setTitle("Switch User");
+                    stage.setTitle("Trade Vacation");
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     Parent root = fxmlLoader.load(getClass().getResource("/SwitchWindow.fxml").openStream());
                     SwitchWindowController creatView = fxmlLoader.getController();

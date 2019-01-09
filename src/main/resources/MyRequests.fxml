@@ -62,11 +62,11 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Switch requests">
+            <Tab text="trade requests">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="-52.0" layoutY="12.0" prefHeight="71.0" prefWidth="728.0" text="Switch Requests:" textAlignment="CENTER">
+                        <Label layoutX="-52.0" layoutY="12.0" prefHeight="71.0" prefWidth="728.0" text="Trade Requests:" textAlignment="CENTER">
                            <font>
                               <Font size="49.0" />
                            </font>
@@ -83,7 +83,7 @@
                               <TableColumn fx:id="wantedVacendDate" prefWidth="129.0" text="end date " />
                            </columns>
                         </TableView>
-                        <Button fx:id="markAsPaidSwitch" layoutX="138.0" layoutY="565.0" mnemonicParsing="false" onAction="#tryBuy" text="Mark As Paid" />
+                        <Button fx:id="markAsPaidSwitch" layoutX="138.0" layoutY="565.0" mnemonicParsing="false" onAction="#tryBuy" text="Confirmed Trade" />
                         <TableView fx:id="tradeReqForMeTable" layoutX="6.0" layoutY="328.0" prefHeight="231.0" prefWidth="717.0">
                            <columns>
                               <TableColumn fx:id="myAskedVecStartDate" prefWidth="102.0" text="start date " />

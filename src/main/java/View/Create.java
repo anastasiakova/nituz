@@ -55,7 +55,7 @@ public class Create {
         calendar.add(Calendar.YEAR, -18);
         Date d1 = calendar.getTime();
         Date date = null;
-        System.out.println(Calendar.getInstance().get(Calendar.YEAR));
+        //System.out.println(Calendar.getInstance().get(Calendar.YEAR));
 
         if (dd == null || dd.getText().equals("") ||
                 mm == null || mm.getText().equals("") ||

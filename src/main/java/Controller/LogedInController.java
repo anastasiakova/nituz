@@ -23,8 +23,14 @@ public class LogedInController {
     public boolean tryLogIn(String username,String pwd){
        SearchController search = new SearchController();
        boolean ans = search.isLoginValid(username,pwd);
+
        if (ans){
-           loged = new User(username);
+           String[] fields = new String[TblFields.enumDict.get("userFields").size()];
+           fields[0] = username;
+           fields[1] = pwd;
+           String user = sqlModel.selectFromTable(Tables.TBL_USERS, fields);
+           String[] valid = user.split("\n");
+           loged = new User(valid[0]);
        }
        return ans;
     }
@@ -272,7 +278,7 @@ public class LogedInController {
     }
 
     public void CreatePaymentAndUpdateVacation(String aprovedRequestId){
-
+        //FOR FUTURE
     }
 
     public Vacation CreateVacation(String reqId){
